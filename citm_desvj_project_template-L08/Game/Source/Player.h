@@ -31,7 +31,8 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	// L07 TODO 5: Add physics to the player - declare a Physics body
+	// L07 DONE 5: Add physics to the player - declare a Physics body
+	PhysBody* pbody;
 
 };
 
