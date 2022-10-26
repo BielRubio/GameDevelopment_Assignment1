@@ -33,7 +33,7 @@ bool Menu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Menu::Start()
 {
-	MENUD = app->tex->Load("Assets/Textures/Menu.png");
+	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
 	return true;
 }
 
@@ -50,17 +50,16 @@ bool Menu::Update(float dt)
 	if (fadeIn == true) {
 		if (fading >= 1) { fading--; };
 	}
-	if (fadeIn == false) {
-		if (fading <= 254) { fading++; };
-	}
-	app->render->DrawTexture(MENUD, 400, 300);
+	//if (fadeIn == false) {
+	//	if (fading <= 254) { fading++; };
+	//}
+	app->render->DrawTexture(MENUD, -120, 0);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	//Fade out
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && fading == 0) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && fading == 0) {
 		fadeIn = false;
 	}
-	if (fadeIn == false && fading == 255) {
-		app->scene->active = true;
+	if (fadeIn == false ) {
 		app->entityManager->active = true;
 		app->physics->active = true;
 		app->menu->active = false;

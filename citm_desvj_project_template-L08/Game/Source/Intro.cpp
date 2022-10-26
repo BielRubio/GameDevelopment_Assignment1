@@ -54,7 +54,7 @@ bool Intro::Update(float dt)
 	if (fadeIn == false) {
 		if (fading <= 254) { fading++; };
 	}
-	app->render->DrawTexture(INTROD, 400, 300);
+	app->render->DrawTexture(INTROD, 0, 0);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	counter++;
 	//Fade out
@@ -63,6 +63,7 @@ bool Intro::Update(float dt)
 	}
 	//Scene transition to menu
 	if (fadeIn == false && fading == 255 && counter > 750) {
+		app->scene->active = true;
 		app->menu->active = true;
 		app->intro->active = false;
 	}
