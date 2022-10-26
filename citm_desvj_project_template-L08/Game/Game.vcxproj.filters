@@ -20,6 +20,8 @@
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
+    <ClCompile Include="Source\Intro.cpp" />
+    <ClCompile Include="Source\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -63,6 +65,8 @@
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Physics.h" />
+    <ClInclude Include="Source\Intro.h" />
+    <ClInclude Include="Source\Menu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
