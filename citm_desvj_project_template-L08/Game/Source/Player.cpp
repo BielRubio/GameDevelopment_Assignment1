@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Window.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -25,8 +26,8 @@ bool Player::Awake() {
 	//texturePath = "Assets/Textures/player/idle1.png";
 
 	//L02: DONE 5: Get Player parameters from XML
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
+	position.x = parameters.attribute("x").as_int()/ app->win->GetScale();
+	position.y = parameters.attribute("y").as_int() / app->win->GetScale();
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
@@ -38,7 +39,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x+4, position.y+4, 4, bodyType::DYNAMIC);
 	return true;
 }
 
@@ -70,8 +71,8 @@ bool Player::Update()
 	pbody->body->SetLinearVelocity(vel);
 
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 4;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 4;
 
 	app->render->DrawTexture(texture, position.x , position.y);
 
