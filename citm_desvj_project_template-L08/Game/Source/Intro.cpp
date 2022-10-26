@@ -6,6 +6,9 @@
 #include "Window.h"
 #include "Intro.h"
 #include "Menu.h"
+#include "Entitymanager.h"
+#include "Scene.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -61,6 +64,13 @@ bool Intro::Update(float dt)
 	//Scene transition to menu
 	if (fadeIn == false && fading == 255 && counter > 750) {
 		app->menu->active = true;
+		app->intro->active = false;
+	}
+	//Debug
+	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		app->scene->active = true;
+		app->entityManager->active = true;
+		app->physics->active = true;
 		app->intro->active = false;
 	}
 
