@@ -107,6 +107,20 @@ struct MapData
 	List<MapLayer*> maplayers;
 };
 
+enum ColTypes {
+
+	TERRAIN = 0,
+	TRIGGER
+};
+struct ColData
+{
+	int x;
+	int	y;
+	int width;
+	int	height;
+	ColTypes type;
+};
+
 class Map : public Module
 {
 public:
@@ -139,6 +153,9 @@ private:
 	bool LoadTileSet(pugi::xml_node mapFile);
 
 	// L05
+	bool LoadColliders(pugi::xml_node& node);
+	void CreateColliders(ColData colliders);
+
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
 
