@@ -9,7 +9,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="5"/>
+    <resolution width="1280" height="720" scale="4"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -23,7 +23,7 @@
 
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="300" y="152" texturepath="Assets/Textures/charecter.png"/>
+    <player x="104" y="152" width="12" height="10" texturepath="Assets/Textures/charecter2.png"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>

@@ -21,13 +21,10 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	//L02: DONE 1: Initialize Player parameters
-	//pos = position;
-	//texturePath = "Assets/Textures/player/idle1.png";
-
-	//L02: DONE 5: Get Player parameters from XML
-	position.x = parameters.attribute("x").as_int()/ app->win->GetScale();
-	position.y = parameters.attribute("y").as_int() / app->win->GetScale();
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	width = parameters.attribute("width").as_int();
+	height = parameters.attribute("height").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	return true;
@@ -38,8 +35,8 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x+4, position.y+4, 4, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width, height, bodyType::DYNAMIC);
+	pbody->body->SetFixedRotation(true);
 	return true;
 }
 
@@ -48,7 +45,7 @@ bool Player::Update()
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
-	int speed = 10; 
+	float speed = 7; 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
@@ -71,8 +68,8 @@ bool Player::Update()
 	pbody->body->SetLinearVelocity(vel);
 
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 4;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 4;
+	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width/2);
+	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height/2);
 
 	app->render->DrawTexture(texture, position.x , position.y);
 

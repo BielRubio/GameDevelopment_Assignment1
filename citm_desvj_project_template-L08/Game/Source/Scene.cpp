@@ -50,7 +50,7 @@ bool Scene::Start()
 	// L03: DONE: Load map
 	app->map->Load();
 	app->render->camera.x = 0;
-	app->render->camera.y = -320;
+	app->render->camera.y = 0;
 	// L04: DONE 7: Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->mapData.width,
@@ -96,6 +96,10 @@ bool Scene::Update(float dt)
 
 	// Draw map
 	app->map->Draw();
+
+	//Camera on player
+	app->render->camera.x = -(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
+	app->render->camera.y = -(player->position.y*app->win->GetScale() - app->render->camera.h / 2);
 
 	return true;
 }
