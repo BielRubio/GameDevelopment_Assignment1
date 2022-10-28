@@ -49,7 +49,8 @@ bool Scene::Start()
 	
 	// L03: DONE: Load map
 	app->map->Load();
-
+	app->render->camera.x = 0;
+	app->render->camera.y = -320;
 	// L04: DONE 7: Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->mapData.width,

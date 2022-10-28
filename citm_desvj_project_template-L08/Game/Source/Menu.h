@@ -39,6 +39,8 @@ private:
 	int fading = 255, counter = 0;
 	bool fadeIn = true;
 	SDL_Texture* MENUD;
+	SDL_Texture* PLAYW;
+	SDL_Texture* PLAYG;
 };
 
 #endif // __MENU_H__
