@@ -34,6 +34,8 @@ bool Menu::Awake(pugi::xml_node& config)
 bool Menu::Start()
 {
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
+	PLAYW = app->tex->Load("Assets/Textures/PlayWS.png");
+	PLAYG = app->tex->Load("Assets/Textures/ExitGS.png");
 	return true;
 }
 
@@ -54,6 +56,8 @@ bool Menu::Update(float dt)
 	//	if (fading <= 254) { fading++; };
 	//}
 	app->render->DrawTexture(MENUD, -120, 0);
+	app->render->DrawTexture(PLAYW, 2, 80);
+	app->render->DrawTexture(PLAYG, 0, 110);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	//Fade out
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && fading == 0) {
