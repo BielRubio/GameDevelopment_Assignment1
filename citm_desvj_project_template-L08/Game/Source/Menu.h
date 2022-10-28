@@ -37,10 +37,12 @@ public:
 
 private:
 	int fading = 255, counter = 0;
-	bool fadeIn = true;
+	bool fadeIn = true, Play = true;
 	SDL_Texture* MENUD;
 	SDL_Texture* PLAYW;
 	SDL_Texture* PLAYG;
+	SDL_Texture* EXITW;
+	SDL_Texture* EXITG;
 };
 
 #endif // __MENU_H__

@@ -35,7 +35,9 @@ bool Menu::Start()
 {
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
 	PLAYW = app->tex->Load("Assets/Textures/PlayWS.png");
-	PLAYG = app->tex->Load("Assets/Textures/ExitGS.png");
+	PLAYG = app->tex->Load("Assets/Textures/PlayGS.png");
+	EXITW = app->tex->Load("Assets/Textures/ExitWS.png");
+	EXITG = app->tex->Load("Assets/Textures/ExitGS.png");
 	return true;
 }
 
@@ -48,20 +50,35 @@ bool Menu::PreUpdate()
 // Called each loop iteration
 bool Menu::Update(float dt)
 {
-	//Initial fade in
+	bool ret = true;
+	//Initial fade in and textures drawing
 	if (fadeIn == true) {
 		if (fading >= 1) { fading--; };
 	}
-	//if (fadeIn == false) {
-	//	if (fading <= 254) { fading++; };
-	//}
 	app->render->DrawTexture(MENUD, -120, 0);
-	app->render->DrawTexture(PLAYW, 2, 80);
-	app->render->DrawTexture(PLAYG, 0, 110);
+	if (Play == true) {
+		app->render->DrawTexture(PLAYW, 2, 80);
+		app->render->DrawTexture(EXITG, 0, 110);
+	}
+	if (Play == false) {
+		app->render->DrawTexture(PLAYG, 2, 80);
+		app->render->DrawTexture(EXITW, 0, 110);
+	}
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
-	//Fade out
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && fading == 0) {
-		fadeIn = false;
+	//Fade out and exit
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		if (Play == true) {
+			fadeIn = false;
+		}
+		if (Play == false) {
+			ret = false;
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		Play = true;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		Play = false;
 	}
 	if (fadeIn == false ) {
 		app->entityManager->active = true;
@@ -69,7 +86,7 @@ bool Menu::Update(float dt)
 		app->menu->active = false;
 	}
 
-	return true;
+	return ret;
 }
 
 // Called each loop iteration
