@@ -194,9 +194,15 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
-    app->physics->CreateRectangle((224 + 128) / app->win->GetScale(), (543 + 32) / app->win->GetScale(), 256 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
-    app->physics->CreateRectangle((352 + 64) / app->win->GetScale(), (384 + 32) / app->win->GetScale(), 128 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
-    app->physics->CreateRectangle(256 / app->win->GetScale(), (704 + 32) / app->win->GetScale(), 576 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
+
+    if (ret == true)
+    {
+        ret = LoadColliders(mapFileXML.child("map"));
+    }
+
+    //app->physics->CreateRectangle((224 + 128) / app->win->GetScale(), (543 + 32) / app->win->GetScale(), 256 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
+    //app->physics->CreateRectangle((352 + 64) / app->win->GetScale(), (384 + 32) / app->win->GetScale(), 128 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
+    //app->physics->CreateRectangle(256 / app->win->GetScale(), (704 + 32) / app->win->GetScale(), 576 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
 
     if(ret == true)
     {
@@ -289,6 +295,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
     return ret;
 }
 
+
 // L05: DONE 3: Implement a function that loads a single layer layer
 bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
@@ -372,4 +379,30 @@ Properties::Property* Properties::GetProperty(const char* name)
     return p;
 }
 
+
+bool Map::LoadColliders(pugi::xml_node& node) {
+
+    bool ret = true;
+
+    for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode; colNode = colNode.next_sibling("object")) {
+
+        ColData col;
+
+        col.x = colNode.attribute("x").as_int();
+        col.y = colNode.attribute("y").as_int();
+        col.width = colNode.attribute("width").as_int();
+        col.height = colNode.attribute("height").as_int();
+        col.type = (ColTypes)colNode.child("properties").child("property").attribute("value").as_int();
+
+        CreateColliders(col);
+    }
+
+    return ret;
+}
+
+void Map::CreateColliders(ColData c) {
+
+    app->physics->CreateRectangle(c.x + c.width/2, c.y + c.height/2, c.width, c.height, bodyType::STATIC);
+
+}
 
