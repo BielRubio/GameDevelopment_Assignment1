@@ -33,6 +33,8 @@ bool Menu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Menu::Start()
 {
+	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
+	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
 	PLAYW = app->tex->Load("Assets/Textures/PlayWS.png");
 	PLAYG = app->tex->Load("Assets/Textures/PlayGS.png");
@@ -55,29 +57,54 @@ bool Menu::Update(float dt)
 	if (fadeIn == true) {
 		if (fading >= 1) { fading--; };
 	}
-	app->render->DrawTexture(MENUD, -120, 0);
-	if (Play == true) {
+	app->render->DrawTexture(MENUD, x, 0);
+	if (Play == true && fontFading <= 230) {
 		app->render->DrawTexture(PLAYW, 2, 80);
 		app->render->DrawTexture(EXITG, 0, 110);
 	}
-	if (Play == false) {
+	if (Play == false && fontFading <= 230) {
 		app->render->DrawTexture(PLAYG, 2, 80);
 		app->render->DrawTexture(EXITW, 0, 110);
 	}
+	if (PlaySelected == true) {
+		if (fontFading <= 254) { fontFading+=4; };
+	}
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
+	if (fontFading <= 254) {
+		app->render->DrawRectangle({ -20,90,80,80 }, 0, 0, 0, fontFading);
+	}
+	// Menu animation
+	if (fontFading >= 255) {
+		counter++;
+		if (counter >= 3) {
+			counter = 0;
+			x -= 2;
+			if (x <= -240) {
+				fadeIn = false;
+			}
+		}
+	}
 	//Fade out and exit
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (Play == true) {
-			fadeIn = false;
+			app->audio->PlayFx(select);
+			PlaySelected = true;
+			//fadeIn = false;
 		}
 		if (Play == false) {
 			ret = false;
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (Play == false) {
+			app->audio->PlayFx(change);
+		}
 		Play = true;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+		if (Play == true) {
+			app->audio->PlayFx(change);
+		}
 		Play = false;
 	}
 	if (fadeIn == false ) {
