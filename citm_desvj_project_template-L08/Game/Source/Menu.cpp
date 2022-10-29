@@ -76,10 +76,10 @@ bool Menu::Update(float dt)
 	// Menu animation
 	if (fontFading >= 255) {
 		counter++;
-		if (counter >= 3) {
+		if (counter >= 2) {
 			counter = 0;
 			x -= 2;
-			if (x <= -240) {
+			if (x <= -300) {
 				fadeIn = false;
 			}
 		}

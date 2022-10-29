@@ -48,6 +48,7 @@ bool Scene::Start()
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 	
 	// L03: DONE: Load map
+	MapAdjustment = app->tex->Load("Assets/Textures/MapAdjustment.png");
 	app->map->Load();
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -79,7 +80,7 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
-
+	app->render->DrawTexture(MapAdjustment, -100, 0);
 	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 10;
 
