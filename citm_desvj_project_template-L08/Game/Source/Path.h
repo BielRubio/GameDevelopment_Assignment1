@@ -1,10 +1,10 @@
 #ifndef __PATH_H__
 #define __PATH_H__
 
-#include "p2Point.h"
+#include "Point.h"
 
 #define MAX_STEPS 25
-typedef unsigned int uint;
+
 class Animation;
 struct Step
 {

@@ -3,7 +3,7 @@
 
 #include "SDL/include/SDL_rect.h"
 #define MAX_FRAMES 128
-typedef unsigned int uint;
+
 class Animation
 {
 public:

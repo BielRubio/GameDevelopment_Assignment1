@@ -61,6 +61,8 @@ bool Scene::Start()
 		app->map->mapData.tilesets.Count());
 
 	app->win->SetTitle(title.GetString());
+	//Animations
+
 
 	return true;
 }

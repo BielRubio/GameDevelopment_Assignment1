@@ -73,9 +73,6 @@
     <ClInclude Include="Source\Animation.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Source\p2Point.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Path.h">
       <Filter>Utils</Filter>
     </ClInclude>

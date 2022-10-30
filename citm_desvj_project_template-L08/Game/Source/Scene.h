@@ -6,7 +6,7 @@
 #include "Item.h"
 #include "Animation.h"
 #include "Path.h"
-#include "p2Point.h"
+#include "Point.h"
 
 struct SDL_Texture;
 
@@ -45,7 +45,7 @@ public:
 private:
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
-
+	Animation* PlayerAnim;
 };
 
 #endif // __SCENE_H__
