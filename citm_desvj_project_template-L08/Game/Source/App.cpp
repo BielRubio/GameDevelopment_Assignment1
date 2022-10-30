@@ -29,8 +29,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	intro = new Intro();
 	menu = new Menu();
-	physics = new Physics();
 	scene = new Scene();
+	physics = new Physics();
 	entityManager = new EntityManager();
 	map = new Map();
 
@@ -46,6 +46,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(menu);
 	AddModule(entityManager);
 	AddModule(map);
+
 	menu->active = false;
 	entityManager->active = false;
 	physics->active = false;

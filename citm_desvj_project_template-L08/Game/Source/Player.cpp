@@ -39,13 +39,9 @@ bool Player::Start() {
 	pbody->body->SetFixedRotation(true);
 	//Animations
 	PlayerRight2.PushBack({ 2,0,12,10 });
-	PlayerRight2.loop = false;
-	PlayerRight2.speed = 0.2f;
 	PlayerRight = &PlayerRight2;
 
 	PlayerLeft2.PushBack({ 2,10,12,10 });
-	PlayerLeft2.loop = false;
-	PlayerLeft2.speed = 0.2f;
 	PlayerLeft = &PlayerLeft2;
 
 	PlayerRightRunning2.PushBack({ 2,20,13,10 });
@@ -59,7 +55,7 @@ bool Player::Start() {
 	PlayerLeftRunning2.PushBack({ 17,30,13,10 });
 	PlayerLeftRunning2.PushBack({ 33,30,13,10 });
 	PlayerLeftRunning2.loop = true;
-	PlayerLeftRunning2.speed = 0.12f;
+	PlayerLeftRunning2.speed = 0.09f;
 	PlayerLeftRunning = &PlayerLeftRunning2;
 
 	return true;
@@ -101,29 +97,30 @@ bool Player::Update()
 	pbody->body->SetLinearVelocity(vel);
 
 	//Update player position in pixels
-	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width/2);
-	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height/2);
+	
 
 	//Player Animations
 
+	SDL_Rect rect;
+
 	if (right == true && running == false) {
-		SDL_Rect rect = PlayerRight->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y,&rect);
+		rect = PlayerRight->GetCurrentFrame();
 	}
 	if (right == false && running == false) {
-		SDL_Rect rect = PlayerLeft->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		rect = PlayerLeft->GetCurrentFrame();
 	}
 	if (right == true && running == true) {
-		SDL_Rect rect = PlayerRightRunning->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		rect = PlayerRightRunning->GetCurrentFrame();
 		PlayerRightRunning->Update();
 	}
 	if (right == false && running == true) {
-		SDL_Rect rect = PlayerLeftRunning->GetCurrentFrame();
-		app->render->DrawTexture(texture, position.x, position.y, &rect);
+		rect = PlayerLeftRunning->GetCurrentFrame();
 		PlayerLeftRunning->Update();
 	}
+
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
+	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
 	return true;
 }
