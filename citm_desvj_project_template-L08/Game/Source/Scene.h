@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
+#include "Animation.h"
+#include "Path.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
 
