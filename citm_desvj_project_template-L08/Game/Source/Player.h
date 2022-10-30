@@ -38,8 +38,17 @@ private:
 	PhysBody* pbody;
 	//Player state
 	bool right = true, running = false;
-	Animation* PlayerAnim;
 
+	Animation* PlayerRight;
+	Animation* PlayerLeft;
+	Animation* PlayerRightRunning;
+	Animation* PlayerLeftRunning;
+
+	Animation PlayerRight2;
+	Animation PlayerLeft2;
+	Animation PlayerRightRunning2;
+	Animation PlayerLeftRunning2;
+	
 };
 
 #endif // __PLAYER_H__
