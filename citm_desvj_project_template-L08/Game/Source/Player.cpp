@@ -13,6 +13,7 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+
 }
 
 Player::~Player() {
@@ -35,28 +36,26 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width, height, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+
 	//Animations
-	PlayerRight2.PushBack({ 2,0,12,10 });
-	PlayerRight = &PlayerRight2;
+	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
+	playerIdleL.PushBack({ 0 * width,1 * height,width,height });
+	
+	for (int i = 0; i < 3; i++) {
+		playerRunR.PushBack({ i * width,2 * height,width,height });
+	}
+	playerRunR.loop = true;
+	playerRunR.speed = 0.3f;
+	
+	for (int i = 0; i < 3; i++) {
+		playerRunL.PushBack({ i * width,3 * height,width,height });
+	}
+	playerRunL.loop = true;
+	playerRunL.speed = 0.3f;
 
-	PlayerLeft2.PushBack({ 2,10,12,10 });
-	PlayerLeft = &PlayerLeft2;
-
-	PlayerRightRunning2.PushBack({ 2,20,13,10 });
-	PlayerRightRunning2.PushBack({ 18,20,13,10 });
-	PlayerRightRunning2.PushBack({ 34,20,13,10 });
-	PlayerRightRunning2.loop = true;
-	PlayerRightRunning2.speed = 0.12f;
-	PlayerRightRunning = &PlayerRightRunning2;
-
-	PlayerLeftRunning2.PushBack({ 1,30,13,10 });
-	PlayerLeftRunning2.PushBack({ 17,30,13,10 });
-	PlayerLeftRunning2.PushBack({ 33,30,13,10 });
-	PlayerLeftRunning2.loop = true;
-	PlayerLeftRunning2.speed = 0.09f;
-	PlayerLeftRunning = &PlayerLeftRunning2;
+	currentAnim = &playerIdleR;
 
 	return true;
 }
@@ -64,30 +63,17 @@ bool Player::Start() {
 bool Player::Update()
 {
 
-	// L07 DONE 5: Add physics to the player - updated player position using physics
-
 	float speed = 3; 
-	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y); 
-	running = false;
+	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
-	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		//
-	}
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		//
-	}
-		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
-		right = false;
-		running = true;
+		facing = DIRECTION::LEFT;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
-		right = true;
-		running = true;
+		facing = DIRECTION::RIGHT;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
@@ -96,27 +82,21 @@ bool Player::Update()
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
 
-	//Update player position in pixels
-	
+	if (facing == DIRECTION::RIGHT && vel.x == 0) {
+		currentAnim = &playerIdleR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x == 0) {
+		currentAnim = &playerIdleL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.x != 0) {
+		currentAnim = &playerRunR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x != 0) {
+		currentAnim = &playerRunL;
+	}
 
-	//Player Animations
-
-	SDL_Rect rect;
-
-	if (right == true && running == false) {
-		rect = PlayerRight->GetCurrentFrame();
-	}
-	if (right == false && running == false) {
-		rect = PlayerLeft->GetCurrentFrame();
-	}
-	if (right == true && running == true) {
-		rect = PlayerRightRunning->GetCurrentFrame();
-		PlayerRightRunning->Update();
-	}
-	if (right == false && running == true) {
-		rect = PlayerLeftRunning->GetCurrentFrame();
-		PlayerLeftRunning->Update();
-	}
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
+	currentAnim->Update();
 
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);

@@ -36,18 +36,20 @@ private:
 	int height;
 
 	PhysBody* pbody;
-	//Player state
-	bool right = true, running = false;
 
-	Animation* PlayerRight;
-	Animation* PlayerLeft;
-	Animation* PlayerRightRunning;
-	Animation* PlayerLeftRunning;
+	enum class DIRECTION {
+		RIGHT = 1,
+		LEFT
+	};
 
-	Animation PlayerRight2;
-	Animation PlayerLeft2;
-	Animation PlayerRightRunning2;
-	Animation PlayerLeftRunning2;
+	DIRECTION facing = DIRECTION::RIGHT;
+
+	Animation* currentAnim = nullptr;
+
+	Animation playerIdleR;
+	Animation playerIdleL;
+	Animation playerRunR;
+	Animation playerRunL;
 	
 };
 
