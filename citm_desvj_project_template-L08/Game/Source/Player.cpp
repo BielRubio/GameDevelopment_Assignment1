@@ -98,7 +98,7 @@ bool Player::Update()
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	app->render->DrawTexture(texture, position.x, position.y+1, &rect);
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
