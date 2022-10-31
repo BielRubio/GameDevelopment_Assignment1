@@ -43,9 +43,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(intro);
 	AddModule(physics);
 	AddModule(scene);
-	AddModule(menu);
 	AddModule(entityManager);
 	AddModule(map);
+	AddModule(menu);
 
 	menu->active = false;
 	entityManager->active = false;

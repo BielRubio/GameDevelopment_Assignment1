@@ -66,16 +66,16 @@ bool Player::Update()
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::LEFT;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::RIGHT;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true) {
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
 	}
 

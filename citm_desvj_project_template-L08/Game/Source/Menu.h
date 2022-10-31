@@ -36,7 +36,8 @@ public:
 public:
 
 private:
-	int fading = 255, fontFading = 0, counter = 0, change, select, x = -120;
+	//int counter = 0;
+	int fading = 255, fontFading = 0, change, select, x = -120;
 	bool fadeIn = true, Play = true, PlaySelected = false;
 	SDL_Texture* MENUD;
 	SDL_Texture* PLAYW;

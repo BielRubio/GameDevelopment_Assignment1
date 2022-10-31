@@ -59,12 +59,12 @@ bool Menu::Update(float dt)
 	}
 	app->render->DrawTexture(MENUD, x, 0);
 	if (Play == true && fontFading <= 230) {
-		app->render->DrawTexture(PLAYW, 2, 80);
-		app->render->DrawTexture(EXITG, 0, 110);
+		app->render->DrawTexture(PLAYW, -8, 80);
+		app->render->DrawTexture(EXITG, -10, 120);
 	}
 	if (Play == false && fontFading <= 230) {
-		app->render->DrawTexture(PLAYG, 2, 80);
-		app->render->DrawTexture(EXITW, 0, 110);
+		app->render->DrawTexture(PLAYG, -8, 80);
+		app->render->DrawTexture(EXITW, -10, 120);
 	}
 	if (PlaySelected == true) {
 		if (fontFading <= 254) { fontFading+=4; };
@@ -75,14 +75,18 @@ bool Menu::Update(float dt)
 	}
 	// Menu animation
 	if (fontFading >= 255) {
-		counter++;
-		if (counter >= 2) {
-			counter = 0;
-			x -= 2;
-			if (x <= -300) {
-				fadeIn = false;
-			}
+		x -= 2;
+		if (x <= -300) {
+			fadeIn = false;
 		}
+		//counter++;
+		//if (counter >= 2) {
+		//	counter = 0;
+		//	x -= 4;
+		//	if (x <= -300) {
+		//		fadeIn = false;
+		//	}
+		//}
 	}
 	//Fade out and exit
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
@@ -108,8 +112,9 @@ bool Menu::Update(float dt)
 		Play = false;
 	}
 	if (fadeIn == false ) {
-		app->entityManager->active = true;
-		app->physics->active = true;
+		//app->entityManager->active = true;
+		//app->physics->active = true;
+		app->scene->CanPlayerMove = true;
 		app->menu->active = false;
 	}
 

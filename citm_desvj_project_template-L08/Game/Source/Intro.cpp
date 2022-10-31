@@ -65,6 +65,8 @@ bool Intro::Update(float dt)
 	if (fadeIn == false && fading == 255 && counter > 750) {
 		app->scene->active = true;
 		app->menu->active = true;
+		app->entityManager->active = true;
+		app->physics->active = true;
 		app->intro->active = false;
 	}
 	//Debug
