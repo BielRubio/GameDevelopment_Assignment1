@@ -383,19 +383,25 @@ Properties::Property* Properties::GetProperty(const char* name)
 bool Map::LoadColliders(pugi::xml_node& node) {
 
     bool ret = true;
+    
+    for (pugi::xml_node colLayerNode = node.child("objectgroup"); colLayerNode; colLayerNode = colLayerNode.next_sibling("objectgroup")) {
 
-    for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode; colNode = colNode.next_sibling("object")) {
+        for (pugi::xml_node colNode = colLayerNode.child("object"); colNode; colNode = colNode.next_sibling("object")) {
 
-        ColData col;
+            ColData col;
 
-        col.x = colNode.attribute("x").as_int();
-        col.y = colNode.attribute("y").as_int();
-        col.width = colNode.attribute("width").as_int();
-        col.height = colNode.attribute("height").as_int();
-        col.type = (ColTypes)colNode.child("properties").child("property").attribute("value").as_int();
+            col.x = colNode.attribute("x").as_int();
+            col.y = colNode.attribute("y").as_int();
+            col.width = colNode.attribute("width").as_int()-1;
+            col.height = colNode.attribute("height").as_int()-1;
+            col.type = (ColTypes)colNode.child("properties").child("property").attribute("value").as_int();
 
-        CreateColliders(col);
+
+            CreateColliders(col);
+
+        }
     }
+   
 
     return ret;
 }

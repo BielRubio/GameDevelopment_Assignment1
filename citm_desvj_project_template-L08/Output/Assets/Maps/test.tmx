@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="50">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="53">
  <tileset firstgid="1" name="GD-tileset" tilewidth="8" tileheight="8" tilecount="78" columns="13">
   <image source="GD-tileset.png" width="104" height="48"/>
  </tileset>
@@ -1981,7 +1981,7 @@
    <tile gid="15"/>
    <tile gid="15"/>
    <tile gid="15"/>
-   <tile gid="15"/>
+   <tile gid="64"/>
    <tile gid="14"/>
    <tile gid="15"/>
    <tile gid="15"/>
@@ -2078,9 +2078,9 @@
    <tile gid="15"/>
    <tile gid="39"/>
    <tile gid="15"/>
-   <tile gid="15"/>
-   <tile gid="15"/>
-   <tile gid="15"/>
+   <tile gid="64"/>
+   <tile gid="64"/>
+   <tile gid="64"/>
    <tile gid="1"/>
    <tile gid="32"/>
    <tile gid="15"/>
@@ -2172,10 +2172,10 @@
    <tile gid="15"/>
    <tile gid="30"/>
    <tile gid="3"/>
-   <tile gid="15"/>
-   <tile gid="15"/>
-   <tile gid="15"/>
-   <tile gid="15"/>
+   <tile gid="64"/>
+   <tile gid="64"/>
+   <tile gid="64"/>
+   <tile gid="64"/>
    <tile gid="7"/>
    <tile gid="9"/>
    <tile gid="2"/>
@@ -3010,7 +3010,7 @@
    <tile gid="15"/>
   </data>
  </layer>
- <layer id="3" name="Decoration" width="100" height="30">
+ <layer id="3" name="decoration" width="100" height="30">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -4945,7 +4945,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="62"/>
+   <tile gid="76"/>
    <tile gid="63"/>
    <tile/>
    <tile/>
@@ -6017,7 +6017,7 @@
    <tile/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="2" name="collsions" visible="0">
+ <objectgroup color="#ff0000" id="2" name="terrain">
   <properties>
    <property name="Type" type="int" value="0"/>
   </properties>
@@ -6157,5 +6157,10 @@
     <property name="Type" type="int" value="0"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup color="#ffff00" id="4" name="damage">
+  <object id="50" x="512" y="171" width="32" height="5"/>
+  <object id="51" x="560" y="162.875" width="24" height="5"/>
+  <object id="52" x="584" y="155.125" width="8" height="5"/>
  </objectgroup>
 </map>
