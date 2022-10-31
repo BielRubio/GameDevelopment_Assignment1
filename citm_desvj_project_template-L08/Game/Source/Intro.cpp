@@ -74,6 +74,7 @@ bool Intro::Update(float dt)
 		app->scene->active = true;
 		app->entityManager->active = true;
 		app->physics->active = true;
+		app->scene->CanPlayerMove = true;
 		app->intro->active = false;
 	}
 
