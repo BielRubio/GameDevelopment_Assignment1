@@ -40,6 +40,7 @@ public:
 	Player* player;
 
 private:
+	bool Music = false;
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
 };

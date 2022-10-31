@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "EntityManager.h"
 #include "Map.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -75,6 +76,10 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	if (Music == false) {
+		app->audio->PlayMusic("Assets/Sounds/Music1.wav");
+		Music = true;
+	}
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
@@ -82,6 +87,14 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 	app->render->DrawTexture(MapAdjustment, -100, 0);
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		if (app->physics->debug == true) {
+			app->physics->debug = false;
+		}
+		else if (app->physics->debug == false) {
+			app->physics->debug = true;
+		}
+	}
 	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 10;
 
