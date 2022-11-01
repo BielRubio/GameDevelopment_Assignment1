@@ -34,6 +34,8 @@ bool Physics::Start()
 	LOG("Creating Physics 2D environment");
 
 	world = new b2World(b2Vec2(GRAVITY_X, -GRAVITY_Y));
+
+	world->SetContactListener(this);
 	
 	return true;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "Entity.h"
 
 #include "Box2D/Box2D/Box2D.h"
 
@@ -25,12 +26,21 @@ enum bodyType {
 	KINEMATIC
 };
 
+enum class ColliderType {
+	PLAYER,
+	ITEM,
+	PLATFORM,
+	UNKNOWN
+};
+
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
 public:
-	PhysBody() : listener(NULL), body(NULL)
+	PhysBody() : listener(NULL), body(NULL), ctype(ColliderType::UNKNOWN)
 	{}
+
+	~PhysBody() {}
 
 	void GetPosition(int& x, int& y) const;
 	float GetRotation() const;
@@ -40,7 +50,8 @@ public:
 public:
 	int width, height;
 	b2Body* body;
-	Module* listener;
+	Entity* listener;
+	ColliderType ctype; 
 };
 
 // Module --------------------------------------

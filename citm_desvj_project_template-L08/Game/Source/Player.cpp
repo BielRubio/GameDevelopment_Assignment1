@@ -38,6 +38,12 @@ bool Player::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
+	
+	pbody->listener = this; 
+
+	pbody->ctype = ColliderType::PLAYER; 
+
+	landed = true; 
 
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
@@ -80,9 +86,10 @@ bool Player::Update()
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::RIGHT;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && landed == true) {
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
 		app->audio->PlayFxWithVolume(Jump1, 0, 30);
+		landed = false;
 	}
 
 	//Fx
@@ -127,4 +134,23 @@ bool Player::CleanUp()
 {
 
 	return true;
+}
+
+void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	switch (physB->ctype)
+	{
+	case ColliderType::ITEM:
+		LOG("Collision ITEM");
+
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		landed = true; 
+		break;
+	}
+
 }

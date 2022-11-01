@@ -25,6 +25,8 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
 private:
@@ -37,6 +39,7 @@ private:
 
 	int width;
 	int height;
+	int landed; 
 
 	PhysBody* pbody;
 
