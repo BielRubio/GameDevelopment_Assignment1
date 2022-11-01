@@ -169,10 +169,24 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	if(!active)
 		return false;
-
 	if(id > 0 && id <= fx.Count())
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
+	}
+
+	return ret;
+}
+
+bool Audio::PlayFxWithVolume(unsigned int id, int repeat, int volume)
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+	if (id > 0 && id <= fx.Count())
+	{
+		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_Volume(-1, volume);
 	}
 
 	return ret;

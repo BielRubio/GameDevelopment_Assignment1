@@ -32,6 +32,9 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	//Fx
+	int Step1, Step2, Jump1, aux = -1;
+
 	int width;
 	int height;
 

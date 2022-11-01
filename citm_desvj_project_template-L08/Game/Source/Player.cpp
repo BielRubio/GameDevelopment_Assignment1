@@ -39,6 +39,11 @@ bool Player::Start() {
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 
+	//Sounds
+	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
+	Step2 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel2.wav");
+	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
+
 	//Animations
 	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
 	playerIdleL.PushBack({ 0 * width,1 * height,width,height });
@@ -77,8 +82,21 @@ bool Player::Update()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true) {
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
+		app->audio->PlayFxWithVolume(Jump1, 0, 30);
 	}
 
+	//Fx
+	if (vel.x != 0 && vel.y == 0) {
+		aux++;
+		if (aux == 0) {
+			app->audio->PlayFxWithVolume(Step1,0,25);
+		}
+		if (aux == 10) {
+			app->audio->PlayFxWithVolume(Step2,0,25);
+			aux = -10;
+		}
+	}
+	
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
 
