@@ -392,8 +392,8 @@ bool Map::LoadColliders(pugi::xml_node& node) {
 
             col.x = colNode.attribute("x").as_int();
             col.y = colNode.attribute("y").as_int();
-            col.width = colNode.attribute("width").as_int()-1;
-            col.height = colNode.attribute("height").as_int()-1;
+            col.width = colNode.attribute("width").as_int();
+            col.height = colNode.attribute("height").as_int();
             col.type = (ColTypes)colNode.child("properties").child("property").attribute("value").as_int();
 
 
