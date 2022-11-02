@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Intro.h"
 #include "Menu.h"
+#include "ModuleFonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -26,6 +27,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	win = new Window();
 	render = new Render();
 	tex = new Textures();
+	font = new ModuleFonts();
 	audio = new Audio();
 	//intro = new Intro();
 	menu = new Menu();
@@ -46,11 +48,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(map);
 	AddModule(menu);
-
-	menu->active = true;
-	entityManager->active = true;
-	physics->active = true;
-	scene->active = true;
+	AddModule(font);
+	
+	menu->active = false;
+	entityManager->active = false;
+	physics->active = false;
+	scene->active = false;
 
 	// Render last to swap buffer
 	AddModule(render);

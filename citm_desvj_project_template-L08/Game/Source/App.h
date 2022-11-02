@@ -20,7 +20,7 @@ class EntityManager;
 class Map;
 class Intro;
 class Menu;
-//L07 DONE 2: Add Physics module
+class ModuleFonts;
 class Physics;
 
 class App
@@ -93,7 +93,7 @@ public:
 	Map* map;
 	Intro* intro;
 	Menu* menu;
-	//L07 DONE 2: Add Physics module
+	ModuleFonts* font;
 	Physics* physics;
 
 private:

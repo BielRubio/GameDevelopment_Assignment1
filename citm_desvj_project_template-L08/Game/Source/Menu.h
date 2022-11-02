@@ -44,6 +44,10 @@ private:
 	SDL_Texture* PLAYG;
 	SDL_Texture* EXITW;
 	SDL_Texture* EXITG;
+	int WF, GF;
+	char WhiteFontText[10] = { "\0" };
+	char GreyFontText[10] = { "\0" };
+
 };
 
 #endif // __MENU_H__
