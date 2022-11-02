@@ -87,10 +87,8 @@ bool Player::Update()
 		facing = DIRECTION::RIGHT;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < 2) {
-		if (jumpCounter == 1) {
-			vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
-			pbody->body->SetLinearVelocity(vel);
-		}
+		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
+		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
 		app->audio->PlayFxWithVolume(Jump1, 0, 30);
 		jumpCounter++;
