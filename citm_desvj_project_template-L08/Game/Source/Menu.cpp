@@ -40,10 +40,6 @@ bool Menu::Start()
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
-	PLAYW = app->tex->Load("Assets/Textures/PlayWS.png");
-	PLAYG = app->tex->Load("Assets/Textures/PlayGS.png");
-	EXITW = app->tex->Load("Assets/Textures/ExitWS.png");
-	EXITG = app->tex->Load("Assets/Textures/ExitGS.png");
 	return true;
 }
 
@@ -63,12 +59,12 @@ bool Menu::Update(float dt)
 	}
 	app->render->DrawTexture(MENUD, x, 0);
 	if (Play == true && fontFading <= 230) {
-		app->render->DrawTexture(PLAYW, -8, 80);
-		app->render->DrawTexture(EXITG, -10, 120);
+		app->font->BlitText(80, 60, WF, "play");
+		app->font->BlitText(80, 100, GF, "exit");
 	}
 	if (Play == false && fontFading <= 230) {
-		app->render->DrawTexture(PLAYG, -8, 80);
-		app->render->DrawTexture(EXITW, -10, 120);
+		app->font->BlitText(80, 60, GF, "play");
+		app->font->BlitText(80, 100, WF, "exit");
 	}
 	if (PlaySelected == true) {
 		if (fontFading <= 254) { fontFading+=4; };
@@ -121,7 +117,6 @@ bool Menu::Update(float dt)
 		app->scene->CanPlayerMove = true;
 		app->menu->active = false;
 	}
-
 	return ret;
 }
 

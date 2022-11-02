@@ -40,13 +40,7 @@ private:
 	int fading = 255, fontFading = 0, change, select, x = -120;
 	bool fadeIn = true, Play = true, PlaySelected = false;
 	SDL_Texture* MENUD;
-	SDL_Texture* PLAYW;
-	SDL_Texture* PLAYG;
-	SDL_Texture* EXITW;
-	SDL_Texture* EXITG;
 	int WF, GF;
-	char WhiteFontText[10] = { "\0" };
-	char GreyFontText[10] = { "\0" };
 
 };
 
