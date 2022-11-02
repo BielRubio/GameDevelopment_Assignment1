@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\MainMenu.cpp" />
+    <ClCompile Include="Source\Saw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -80,6 +81,7 @@
     </ClInclude>
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\MainMenu.h" />
+    <ClInclude Include="Source\Saw.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

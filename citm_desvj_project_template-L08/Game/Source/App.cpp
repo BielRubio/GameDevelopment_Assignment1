@@ -53,10 +53,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(menu);
 	AddModule(font);
 	mainmenu->active = false;
-	menu->active = true;
-	entityManager->active = true;
-	physics->active = true;
-	scene->active = true;
+	menu->active = false;
+	entityManager->active = false;
+	physics->active = false;
+	scene->active = false;
 
 	// Render last to swap buffer
 	AddModule(render);

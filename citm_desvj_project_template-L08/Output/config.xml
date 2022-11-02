@@ -24,7 +24,9 @@
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
     <player x="104" y="150" width="16" height="10" texturepath="Assets/Textures/charecter2.png"/>
-    <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
+	<saw x1="150" y1="120" x2="104" y2="150" static="true" speed="5" texturepath="Assets/Textures/saw.png"/>
+    <saw x1="200" y1="120" x2="104" y2="150" static="true" speed="5" texturepath="Assets/Textures/saw.png"/>
+    <item x="104" y="150" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
