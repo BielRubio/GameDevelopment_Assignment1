@@ -27,7 +27,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	intro = new Intro();
+	//intro = new Intro();
 	menu = new Menu();
 	scene = new Scene();
 	physics = new Physics();
@@ -40,17 +40,17 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(intro);
+	//AddModule(intro);
 	AddModule(physics);
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(map);
 	AddModule(menu);
 
-	menu->active = false;
-	entityManager->active = false;
-	physics->active = false;
-	scene->active = false;
+	menu->active = true;
+	entityManager->active = true;
+	physics->active = true;
+	scene->active = true;
 
 	// Render last to swap buffer
 	AddModule(render);

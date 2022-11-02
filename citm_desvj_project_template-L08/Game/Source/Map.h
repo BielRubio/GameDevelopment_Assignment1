@@ -110,6 +110,7 @@ struct MapData
 enum ColTypes {
 
 	TERRAIN = 0,
+	DAMAGE,
 	TRIGGER
 };
 struct ColData

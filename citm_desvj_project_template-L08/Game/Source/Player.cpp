@@ -146,10 +146,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		landed = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
-		landed = true; 
 		break;
 	}
 
