@@ -113,6 +113,7 @@ enum ColTypes {
 	DAMAGE,
 	TRIGGER
 };
+
 struct ColData
 {
 	int x;

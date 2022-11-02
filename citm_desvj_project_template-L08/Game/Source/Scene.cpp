@@ -113,8 +113,8 @@ bool Scene::Update(float dt)
 	app->map->Draw();
 
 	//Camera on player
-	app->render->camera.x = -1*(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
-	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);
+	/*app->render->camera.x = -1*(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
+	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);*/
 
 	return true;
 }
