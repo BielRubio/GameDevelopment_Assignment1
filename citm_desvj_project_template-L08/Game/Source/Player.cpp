@@ -43,7 +43,7 @@ bool Player::Start() {
 
 	pbody->ctype = ColliderType::PLAYER; 
 
-	landed = true; 
+	jumpCounter = 0; 
 
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
@@ -86,10 +86,12 @@ bool Player::Update()
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::RIGHT;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && landed == true) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < 2) {
+		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
+		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
 		app->audio->PlayFxWithVolume(Jump1, 0, 30);
-		landed = false;
+		jumpCounter++;
 	}
 
 	//Fx
@@ -151,7 +153,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		landed = true;
+		jumpCounter = 0; 
+		break;
+	case ColliderType::SPIKES:
+		LOG("Collision SPIKES");
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

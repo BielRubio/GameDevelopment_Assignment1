@@ -409,7 +409,12 @@ bool Map::LoadColliders(pugi::xml_node& node) {
 void Map::CreateColliders(ColData c) {
 
     PhysBody* collider1 = app->physics->CreateRectangle(c.x + c.width/2, c.y + c.height/2, c.width, c.height, bodyType::STATIC);
-    collider1->ctype = ColliderType::PLATFORM;
+    if (c.type == 0) {
+        collider1->ctype = ColliderType::PLATFORM;
+    }
+    else if (c.type == 1) {
+        collider1->ctype = ColliderType::SPIKES; 
+    }
 
 }
 
