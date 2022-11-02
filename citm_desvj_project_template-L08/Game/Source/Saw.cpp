@@ -38,8 +38,7 @@ bool Saw::Start() {
 	texture = app->tex->Load(texturePath);
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
-	pbody = app->physics->CreateCircle(position.x +12, position.y + 12, 12, bodyType::STATIC);
-	//pbody = app->physics->CreateRectangle(position.x + 12, position.y + 12, 18,18, bodyType::STATIC);
+	pbody = app->physics->CreateCircle(position.x + 12, position.y + 12, 10, bodyType::STATIC);
 	pbody->body->SetFixedRotation(true);
 
 	pbody->ctype = ColliderType::SPIKES; 
@@ -60,6 +59,8 @@ bool Saw::Update()
 {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
+
+
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 12;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 12;

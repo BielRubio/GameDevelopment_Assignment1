@@ -16,6 +16,13 @@ enum class EntityType
 	UNKNOWN
 };
 
+enum class DIRECTION {
+	RIGHT = 1,
+	LEFT,
+	UP,
+	DOWN
+};
+
 class Entity
 {
 public:

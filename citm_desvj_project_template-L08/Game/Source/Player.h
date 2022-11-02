@@ -44,11 +44,6 @@ private:
 
 	PhysBody* pbody;
 
-	enum class DIRECTION {
-		RIGHT = 1,
-		LEFT
-	};
-
 	DIRECTION facing = DIRECTION::RIGHT;
 
 	Animation* currentAnim = nullptr;
