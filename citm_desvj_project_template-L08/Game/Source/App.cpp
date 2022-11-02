@@ -29,7 +29,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	font = new ModuleFonts();
 	audio = new Audio();
-	intro = new Intro();
+	//intro = new Intro();
 	menu = new Menu();
 	scene = new Scene();
 	physics = new Physics();
@@ -42,7 +42,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(intro);
+	//AddModule(intro);
 	AddModule(physics);
 	AddModule(scene);
 	AddModule(entityManager);
@@ -50,10 +50,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(menu);
 	AddModule(font);
 	
-	menu->active = false;
-	entityManager->active = false;
-	physics->active = false;
-	scene->active = false;
+	menu->active = true;
+	entityManager->active = true;
+	physics->active = true;
+	scene->active = true;
 
 	// Render last to swap buffer
 	AddModule(render);

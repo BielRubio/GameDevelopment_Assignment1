@@ -40,6 +40,7 @@ private:
 	int width;
 	int height;
 	int landed; 
+	int jumpCounter; 
 
 	PhysBody* pbody;
 
