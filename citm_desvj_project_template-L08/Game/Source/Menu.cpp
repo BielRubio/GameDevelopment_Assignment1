@@ -130,7 +130,7 @@ bool Menu::PostUpdate()
 // Called before quitting
 bool Menu::CleanUp()
 {
-	LOG("Freeing intro");
+	LOG("Freeing menu");
 
 	return true;
 }

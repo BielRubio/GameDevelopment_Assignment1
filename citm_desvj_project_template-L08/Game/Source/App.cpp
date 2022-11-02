@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Intro.h"
 #include "Menu.h"
+#include "MainMenu.h"
 #include "ModuleFonts.h"
 
 #include "Defs.h"
@@ -31,6 +32,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	intro = new Intro();
 	menu = new Menu();
+	mainmenu = new MainMenu();
 	scene = new Scene();
 	physics = new Physics();
 	entityManager = new EntityManager();
@@ -38,6 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
+	AddModule(mainmenu);
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
@@ -49,7 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(menu);
 	AddModule(font);
-	
+	mainmenu->active = false;
 	menu->active = true;
 	entityManager->active = true;
 	physics->active = true;
