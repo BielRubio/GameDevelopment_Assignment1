@@ -8,6 +8,7 @@
 #include "Entitymanager.h"
 #include "Scene.h"
 #include "Physics.h"
+#include "ModuleFonts.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -33,6 +34,9 @@ bool Menu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Menu::Start()
 {
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz" };
+	WF = app->font->Load("Assets/Fonts/FontWhite.png", lookupTable, 1);
+	GF = app->font->Load("Assets/Fonts/FontGrey.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
