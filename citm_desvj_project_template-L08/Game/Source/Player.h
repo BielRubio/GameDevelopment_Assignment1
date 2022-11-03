@@ -57,6 +57,9 @@ private:
 	Animation playerIdleL;
 	Animation playerRunR;
 	Animation playerRunL;
+	Animation playerJumpR;
+	Animation playerJumpL;
+
 	
 };
 

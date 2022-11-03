@@ -36,7 +36,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	
 	pbody->listener = this; 
@@ -54,6 +54,9 @@ bool Player::Start() {
 	//Animations
 	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
 	playerIdleL.PushBack({ 0 * width,1 * height,width,height });
+
+	playerJumpR.PushBack({ 0 * width,4 * height,width,height });
+	playerJumpL.PushBack({ 0 * width,5 * height,width,height });
 	
 	for (int i = 0; i < 3; i++) {
 		playerRunR.PushBack({ i * width,2 * height,width,height });
@@ -90,7 +93,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < 2) {
 		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
 		pbody->body->SetLinearVelocity(vel);
-		pbody->body->ApplyForce(b2Vec2(0,-50), pbody->body->GetPosition(),true);
+		pbody->body->ApplyForce(b2Vec2(0,-40), pbody->body->GetPosition(),true);
 		app->audio->PlayFxWithVolume(Jump1, 0, 30);
 		jumpCounter++;
 	}
@@ -121,6 +124,12 @@ bool Player::Update()
 	}
 	if (facing == DIRECTION::LEFT && vel.x != 0) {
 		currentAnim = &playerRunL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.y != 0) {
+		currentAnim = &playerJumpR;
+	}
+	if (facing == DIRECTION::LEFT && vel.y != 0) {
+		currentAnim = &playerJumpL;
 	}
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
