@@ -16,7 +16,7 @@
 
 MainMenu::MainMenu() : Module()
 {
-	name.Create("main menu");
+	name.Create("mainmenu");
 }
 
 // Destructor

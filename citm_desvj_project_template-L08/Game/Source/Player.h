@@ -27,6 +27,10 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	bool IsAlive(); 
+
+
+
 public:
 
 private:
@@ -39,8 +43,9 @@ private:
 
 	int width;
 	int height;
-	int landed; 
 	int jumpCounter; 
+
+	bool alive; 
 
 	PhysBody* pbody;
 

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <save_state>
+	<mainmenu />
 	<input />
 	<window />
 	<textures />
@@ -7,10 +8,14 @@
 	<intro />
 	<:anonymous />
 	<scene />
-	<menu />
-	<entitymanager />
+	<entitymanager>
+		<player />
+		<saw />
+	</entitymanager>
 	<map />
+	<menu />
+	<:anonymous />
 	<renderer>
-		<camera x="132" y="-236" />
+		<camera x="224" y="-236" />
 	</renderer>
 </save_state>

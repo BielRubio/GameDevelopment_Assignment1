@@ -8,6 +8,8 @@
 #include "EntityManager.h"
 #include "Map.h"
 #include "Physics.h"
+#include "MainMenu.h"
+#include "Intro.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -122,6 +124,12 @@ bool Scene::Update(float dt)
 	//Camera on player
 	/*app->render->camera.x = -1*(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);*/
+
+
+	//Restart
+	if (player->IsAlive() == false) {
+			
+	}
 
 	return true;
 }

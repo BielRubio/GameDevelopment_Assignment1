@@ -45,6 +45,7 @@ bool Player::Start() {
 
 	jumpCounter = 0; 
 
+	alive = true; 
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
 	Step2 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel2.wav");
@@ -133,7 +134,6 @@ bool Player::Update()
 
 	app->render->DrawTexture(texture, position.x, position.y+1, &rect);
 
-
 	return true;
 }
 
@@ -157,10 +157,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::SPIKES:
 		LOG("Collision SPIKES");
+		alive = false; 
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
 	}
 
+}
+
+bool Player::IsAlive() {
+	return alive; 
 }
