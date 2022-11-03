@@ -64,6 +64,10 @@ bool MainMenu::Update(float dt)
 			option = SELECTED::OPTIONS;
 			app->audio->PlayFx(change);
 		}
+		if (option == SELECTED::BACK) {
+			option = SELECTED::MUSIC;
+			app->audio->PlayFx(change);
+		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
@@ -74,6 +78,10 @@ bool MainMenu::Update(float dt)
 			option = SELECTED::OPTIONS;
 			app->audio->PlayFx(change);
 		}
+		if (option == SELECTED::MUSIC) {
+			option = SELECTED::BACK;
+			app->audio->PlayFx(change);
+		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (option == SELECTED::PLAY && fadeOut == false) {
@@ -82,6 +90,13 @@ bool MainMenu::Update(float dt)
 		}
 		if (option == SELECTED::OPTIONS) {
 			app->audio->PlayFx(select);
+			option = SELECTED::MUSIC;
+			options = true;
+		}
+		if (option == SELECTED::BACK) {
+			app->audio->PlayFx(select);
+			option = SELECTED::OPTIONS;
+			options = false;
 		}
 		if (option == SELECTED::EXIT) {
 			ret = false;
@@ -102,20 +117,28 @@ bool MainMenu::Update(float dt)
 		app->physics->active = true;
 		app->mainmenu->active = false;
 	}
-	if (option == SELECTED::PLAY) {
+	if (option == SELECTED::PLAY && options == false) {
 		app->font->BlitText(145, 40, WF, "play");
 		app->font->BlitText(137, 80, GF, "options");
 		app->font->BlitText(145, 120, GF, "exit");
 	}
-	if (option == SELECTED::OPTIONS) {
+	if (option == SELECTED::OPTIONS && options == false) {
 		app->font->BlitText(145, 40, GF, "play");
 		app->font->BlitText(137, 80, WF, "options");
 		app->font->BlitText(145, 120, GF, "exit");
 	}
-	if (option == SELECTED::EXIT) {
+	if (option == SELECTED::EXIT && options == false) {
 		app->font->BlitText(145, 40, GF, "play");
 		app->font->BlitText(137, 80, GF, "options");
 		app->font->BlitText(145, 120, WF, "exit");
+	}
+	if (option == SELECTED::MUSIC && options == true) {
+		app->font->BlitText(142, 60, WF, "music");
+		app->font->BlitText(145, 100, GF, "back");
+	}
+	if (option == SELECTED::BACK && options == true) {
+		app->font->BlitText(142, 60, GF, "music");
+		app->font->BlitText(145, 100, WF, "back");
 	}
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading2);
