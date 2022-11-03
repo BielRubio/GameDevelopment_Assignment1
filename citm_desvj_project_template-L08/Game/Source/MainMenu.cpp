@@ -35,9 +35,9 @@ bool MainMenu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool MainMenu::Start()
 {
-	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz" };
-	WF = app->font->Load("Assets/Fonts/FontWhite.png", lookupTable, 1);
-	GF = app->font->Load("Assets/Fonts/FontGrey.png", lookupTable, 1);
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789" };
+	WF = app->font->Load("Assets/Fonts/FontWhiteDef.png", lookupTable, 1);
+	GF = app->font->Load("Assets/Fonts/FontGreyDef.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 
