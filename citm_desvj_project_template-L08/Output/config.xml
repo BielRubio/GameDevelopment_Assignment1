@@ -23,7 +23,7 @@
 
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="104" y="150" width="16" height="10" texturepath="Assets/Textures/charecter2.png"/>
+    <player x="104" y="150" width="16" height="12" texturepath="Assets/Textures/charecter2.png"/>
 	<saw x1="536" y1="136" x2="200" y2="120" static="true" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x1="536" y1="104" x2="104" y2="150" static="true" speed="5" texturepath="Assets/Textures/saw.png"/>
     <item x="104" y="150" texturepath="Assets/Textures/goldCoin.png"/>
