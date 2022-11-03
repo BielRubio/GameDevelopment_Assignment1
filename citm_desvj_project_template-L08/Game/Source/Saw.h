@@ -24,6 +24,8 @@ public:
 
 	bool CleanUp();
 
+	bool Path(iPoint p);
+
 public:
 
 
@@ -36,6 +38,8 @@ private:
 
 	iPoint p1;
 	iPoint p2;
+
+	iPoint currentPoint = p2;
 
 	bool noMove;
 
