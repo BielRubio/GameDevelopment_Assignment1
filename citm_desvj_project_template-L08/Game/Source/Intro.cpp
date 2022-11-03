@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Intro.h"
 #include "Menu.h"
+#include "MainMenu.h"
 #include "Entitymanager.h"
 #include "Scene.h"
 #include "Physics.h"
@@ -63,10 +64,11 @@ bool Intro::Update(float dt)
 	}
 	//Scene transition to menu
 	if (fadeIn == false && fading == 255 && counter > 750) {
-		app->scene->active = true;
-		app->menu->active = true;
-		app->entityManager->active = true;
-		app->physics->active = true;
+		//app->scene->active = true;
+		//app->menu->active = true;
+		//app->entityManager->active = true;
+		//app->physics->active = true;
+		app->mainmenu->active = true;
 		app->intro->active = false;
 	}
 	//Debug

@@ -36,8 +36,16 @@ public:
 public:
 
 private:
-	int WF, GF;
+	enum class SELECTED {
+		PLAY = 1,
+		OPTIONS,
+		EXIT
+	};
 
+	SELECTED option = SELECTED::PLAY;
+	int WF, GF, change, select, fading = 255, fading2 = 0;
+	bool fadeIn = true, fadeOut = false;
+	
 };
 
 #endif // __MAINMENU_H__
