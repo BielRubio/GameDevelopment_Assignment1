@@ -9,13 +9,13 @@
 	<:anonymous />
 	<scene />
 	<entitymanager>
-		<player />
-		<saw />
+		<player positionX="1109" positionY="165" />
+		<saw positionX="856" positionY="144" positionX="1000" positionY="192" positionX="1000" positionY="144" positionX="1324" positionY="176" positionX="1610" positionY="176" positionX="1744" positionY="232" positionX="1768" positionY="256" positionX="1791" positionY="280" positionX="1815" positionY="304" positionX="1839" positionY="328" positionX="1826" positionY="352" positionX="1812" positionY="376" />
 	</entitymanager>
 	<map />
 	<menu />
 	<:anonymous />
 	<renderer>
-		<camera x="224" y="-236" />
+		<camera x="-3796" y="-300" />
 	</renderer>
 </save_state>
