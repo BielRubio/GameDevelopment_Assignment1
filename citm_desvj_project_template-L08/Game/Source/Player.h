@@ -59,8 +59,8 @@ private:
 	Animation playerRunL;
 	Animation playerJumpR;
 	Animation playerJumpL;
+	Animation playerDie;
 
-	
 };
 
 #endif // __PLAYER_H__
