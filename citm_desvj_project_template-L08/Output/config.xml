@@ -22,7 +22,7 @@
   </audio>
 
   <scene>
-    <player x="112" y="224" width="16" height="12" texturepath="Assets/Textures/charecter2.png"/>
+    <player x="112" y="224" width="16" height="12" texturepath="Assets/Textures/charecter.png"/>
 	<saw x="856" y="144" x1="856" y1="144" x2="856" y2="144" noMove="true" speed="2" texturepath="Assets/Textures/saw.png"/>
     <saw x="1000" y="192" x1="1000" y1="192" x2="1000" y2="192" noMove="true" speed="2" texturepath="Assets/Textures/saw.png"/>
 	<saw x="1000" y="144" x1="1000" y1="144" x2="1000" y2="144" noMove="true" speed="2" texturepath="Assets/Textures/saw.png"/>

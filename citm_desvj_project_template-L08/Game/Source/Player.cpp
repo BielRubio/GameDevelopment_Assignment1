@@ -70,6 +70,12 @@ bool Player::Start() {
 	playerRunL.loop = true;
 	playerRunL.speed = 0.3f;
 
+	for (int i = 0; i < 4; i++) {
+		playerDie.PushBack({ i * width,6 * height,width,height });
+	}
+	playerDie.loop = false;
+	playerDie.speed = 0.3f;
+
 	currentAnim = &playerIdleR;
 
 	return true;
@@ -80,6 +86,10 @@ bool Player::Update()
 
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
+
+	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+		alive = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
@@ -130,6 +140,15 @@ bool Player::Update()
 	}
 	if (facing == DIRECTION::LEFT && vel.y != 0) {
 		currentAnim = &playerJumpL;
+	}
+
+	//Death
+	if (alive != true) {
+		pbody->body->SetActive(false);
+		currentAnim = &playerDie;
+		if (currentAnim->HasFinished()) {
+			this->Disable();
+		}
 	}
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
