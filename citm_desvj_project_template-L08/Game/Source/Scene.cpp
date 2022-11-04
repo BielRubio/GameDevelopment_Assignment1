@@ -152,3 +152,11 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+bool Scene::LoadState(pugi::xml_node& data) {
+	return true; 
+}
+
+bool Scene::SaveState(pugi::xml_node& data) {
+	return true; 
+}

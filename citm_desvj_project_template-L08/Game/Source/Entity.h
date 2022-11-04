@@ -38,7 +38,7 @@ public:
 	{
 		return true;
 	}
-
+	
 	virtual bool Update()
 	{
 		return true;
@@ -92,6 +92,7 @@ public:
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
 	bool renderable = true;
+	bool deleteEntity;
 };
 
 #endif // __ENTITY_H__
