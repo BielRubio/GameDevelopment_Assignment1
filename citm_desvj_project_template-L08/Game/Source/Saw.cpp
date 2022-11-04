@@ -111,3 +111,33 @@ bool Saw::Path(iPoint p) {
 
 	return ret;
 }
+
+bool Saw::LoadState(pugi::xml_node& data) {
+	texturePath = data.child("saw_stats").attribute("texturePath").as_string();
+	position.x = data.child("saw_stats").attribute("position_x").as_int();
+	position.y = data.child("saw_stats").attribute("position_y").as_int();
+	p1.x = data.child("saw_stats").attribute("x1").as_int();
+	p1.y = data.child("saw_stats").attribute("y1").as_int();
+	p2.x = data.child("saw_stats").attribute("x2").as_int();
+	p2.y = data.child("saw_stats").attribute("y2").as_int();
+	speed =  data.child("saw_stats").attribute("speed").as_int();
+	noMove = data.child("saw_stats").attribute("noMove").as_bool();
+	
+	return true; 
+}
+
+bool Saw::SaveState(pugi::xml_node& data) {
+
+	pugi::xml_node saw_stats = data.append_child("saw_stats");	
+	saw_stats.append_attribute("position_x") = position.x;
+	saw_stats.append_attribute("position_y") = position.y;
+	saw_stats.append_attribute("x1") = p1.x;
+	saw_stats.append_attribute("y1") = p1.y;
+	saw_stats.append_attribute("x2") = p2.x;
+	saw_stats.append_attribute("y2") = p2.y;
+	saw_stats.append_attribute("noMove") = noMove; 
+	saw_stats.append_attribute("speed") = speed;
+	saw_stats.append_attribute("texturePath") = texturePath;
+	
+	return true; 
+}

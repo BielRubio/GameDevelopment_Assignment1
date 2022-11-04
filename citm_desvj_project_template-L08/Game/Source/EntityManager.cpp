@@ -141,41 +141,23 @@ bool EntityManager::Update(float dt)
 
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
-	ListItem<Entity*>* item;
-	for (item = entities.start; item != NULL; item = item->next)
-	{
-		if (item->data->type == EntityType::PLAYER) {
-			item->data->position.x = data.child("player").attribute("positionX").as_int();
-			item->data->position.y = data.child("player").attribute("positionY").as_int();
-		}
-
-		if (item->data->type == EntityType::SAW) {
-			item->data->position.x = data.child("saw").attribute("positionX").as_int();
-			item->data->position.y = data.child("saw").attribute("positionY").as_int();
-		}
-	}
-	return true;
+	bool ret = true; 
+	pugi::xml_node saw_stats;
+	app->scene->player->LoadState(data);
+	
+	return ret;
 }
 
 
 bool EntityManager::SaveState(pugi::xml_node& data)
 {
-	pugi::xml_node player = data.append_child("player");
-	pugi::xml_node saw = data.append_child("saw");
-	
+	bool ret = true;
 	ListItem<Entity*>* item;
-
-	for (item = entities.start; item != NULL; item = item->next)
+	
+	for (item = entities.start; item != nullptr; item = item->next)
 	{
-		if (item->data->type == EntityType::PLAYER) {
-			player.append_attribute("positionX") = item->data->position.x;
-			player.append_attribute("positionY") = item->data->position.y;
-		}
-
-		if (item->data->type == EntityType::SAW) {
-			saw.append_attribute("positionX") = item->data->position.x;
-			saw.append_attribute("positionY") = item->data->position.y;
-		}
+		if (item != nullptr)
+			item->data->SaveState(data);
 	}
 
 	return true;

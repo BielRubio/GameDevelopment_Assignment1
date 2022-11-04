@@ -197,3 +197,22 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 bool Player::IsAlive() {
 	return alive; 
 }
+
+bool Player::LoadState(pugi::xml_node& data) {
+
+	position.x = data.child("position").attribute("x").as_int();
+	position.y = data.child("position").attribute("y").as_int();
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+
+	return true;
+}
+
+bool Player::SaveState(pugi::xml_node& data) {
+
+	data.append_child("position").append_attribute("x") = position.x;
+	data.child("position").append_attribute("y") = position.y;
+	data.append_child("texturePath").append_attribute("path") = texturePath;
+
+	return true; 
+}

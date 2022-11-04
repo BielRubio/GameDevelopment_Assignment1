@@ -19,7 +19,6 @@ public:
 
 	// Called after Awake
 	bool Start();
-
 	// Called every frame
 	bool Update(float dt);
 
