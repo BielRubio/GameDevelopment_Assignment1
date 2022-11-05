@@ -87,6 +87,12 @@ bool Player::Update()
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		position.x = parameters.attribute("x").as_int();
+		position.y = parameters.attribute("y").as_int();
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		alive = false;
 	}
