@@ -9,25 +9,24 @@
 	<:anonymous />
 	<scene />
 	<entitymanager>
-		<saw_stats position_x="856" position_y="144" x1="856" y1="144" x2="856" y2="144" noMove="true" speed="2" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1000" position_y="192" x1="1000" y1="192" x2="1000" y2="192" noMove="true" speed="2" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1000" position_y="144" x1="1000" y1="144" x2="1000" y2="144" noMove="true" speed="2" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1279" position_y="176" x1="1216" y1="176" x2="1400" y2="176" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1518" position_y="176" x1="1472" y1="176" x2="1728" y2="176" noMove="false" speed="4" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1709" position_y="232" x1="1688" y1="232" x2="1864" y2="232" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1701" position_y="256" x1="1688" y1="256" x2="1864" y2="256" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1725" position_y="280" x1="1688" y1="280" x2="1864" y2="280" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1749" position_y="304" x1="1688" y1="304" x2="1864" y2="304" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1773" position_y="328" x1="1688" y1="328" x2="1864" y2="328" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1797" position_y="352" x1="1688" y1="352" x2="1864" y2="352" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<saw_stats position_x="1697" position_y="376" x1="1688" y1="376" x2="1864" y2="376" noMove="false" speed="5" texturePath="Assets/Textures/saw.png" />
-		<position x="1185" y="165" />
-		<texturePath path="Assets/Textures/charecter2.png" />
+		<saw_stats position_x="856" position_y="144" x1="856" y1="144" x2="856" y2="144" noMove="true" speed="2" />
+		<saw_stats position_x="1000" position_y="192" x1="1000" y1="192" x2="1000" y2="192" noMove="true" speed="2" />
+		<saw_stats position_x="1000" position_y="144" x1="1000" y1="144" x2="1000" y2="144" noMove="true" speed="2" />
+		<saw_stats position_x="1324" position_y="176" x1="1216" y1="176" x2="1400" y2="176" noMove="false" speed="5" />
+		<saw_stats position_x="1567" position_y="176" x1="1472" y1="176" x2="1728" y2="176" noMove="false" speed="4" />
+		<saw_stats position_x="1722" position_y="232" x1="1688" y1="232" x2="1864" y2="232" noMove="false" speed="5" />
+		<saw_stats position_x="1746" position_y="256" x1="1688" y1="256" x2="1864" y2="256" noMove="false" speed="5" />
+		<saw_stats position_x="1770" position_y="280" x1="1688" y1="280" x2="1864" y2="280" noMove="false" speed="5" />
+		<saw_stats position_x="1794" position_y="304" x1="1688" y1="304" x2="1864" y2="304" noMove="false" speed="5" />
+		<saw_stats position_x="1818" position_y="328" x1="1688" y1="328" x2="1864" y2="328" noMove="false" speed="5" />
+		<saw_stats position_x="1842" position_y="352" x1="1688" y1="352" x2="1864" y2="352" noMove="false" speed="5" />
+		<saw_stats position_x="1844" position_y="376" x1="1688" y1="376" x2="1864" y2="376" noMove="false" speed="5" />
+		<player_stats position_x="203" position_y="168" jumpCounter="2" />
 	</entitymanager>
 	<map />
 	<menu />
 	<:anonymous />
 	<renderer>
-		<camera x="-4100" y="-300" />
+		<camera x="-172" y="-312" />
 	</renderer>
 </save_state>
