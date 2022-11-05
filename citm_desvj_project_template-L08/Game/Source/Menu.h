@@ -34,10 +34,15 @@ public:
 	bool CleanUp();
 
 public:
+	enum class SELECTED {
+		FIRST = 1,
+		SECOND,
+		THIRD
+	};
 
 private:
-	//int counter = 0;
-	int fading = 255, fontFading = 0, change, select, x = -120;
+	SELECTED option = SELECTED::FIRST;
+	int fading = 255, fontFading = 0, change, select;
 	bool fadeIn = true, Play = true, PlaySelected = false;
 	SDL_Texture* MENUD;
 	int WF, GF;

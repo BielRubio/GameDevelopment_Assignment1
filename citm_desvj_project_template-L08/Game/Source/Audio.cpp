@@ -28,6 +28,8 @@ bool Audio::Awake(pugi::xml_node& config)
 	LOG("Loading Audio Mixer");
 	bool ret = true;
 	SDL_Init(0);
+	volume = config.child("music").attribute("volume").as_int();
+
 
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
@@ -108,7 +110,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	}
 
 	music = Mix_LoadMUS(path);
-	Mix_VolumeMusic(30);
+	Mix_VolumeMusic(volume);
 
 	if(music == NULL)
 	{

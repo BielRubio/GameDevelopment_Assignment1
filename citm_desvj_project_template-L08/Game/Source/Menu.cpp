@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "Physics.h"
 #include "ModuleFonts.h"
+#include "Entity.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -53,70 +54,36 @@ bool Menu::PreUpdate()
 bool Menu::Update(float dt)
 {
 	bool ret = true;
-	//Initial fade in and textures drawing
+	//Fade out and exit
 	if (fadeIn == true) {
 		if (fading >= 1) { fading--; };
+		if (fading == 0) { fadeIn = false; };
 	}
-	app->render->DrawTexture(MENUD, x, 0);
-	if (Play == true && fontFading <= 230) {
-		app->font->BlitText(80, 60, WF, "play");
-		app->font->BlitText(80, 100, GF, "exit");
-	}
-	if (Play == false && fontFading <= 230) {
-		app->font->BlitText(80, 60, GF, "play");
-		app->font->BlitText(80, 100, WF, "exit");
-	}
-	if (PlaySelected == true) {
-		if (fontFading <= 254) { fontFading+=4; };
-	}
-	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
-	if (fontFading <= 254) {
-		app->render->DrawRectangle({ -20,90,80,80 }, 0, 0, 0, fontFading);
-	}
-	// Menu animation
-	if (fontFading >= 255) {
-		x -= 2;
-		if (x <= -300) {
-			fadeIn = false;
-		}
-		//counter++;
-		//if (counter >= 2) {
-		//	counter = 0;
-		//	x -= 4;
-		//	if (x <= -300) {
-		//		fadeIn = false;
-		//	}
-		//}
-	}
-	//Fade out and exit
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		if (Play == true) {
-			app->audio->PlayFx(select);
-			PlaySelected = true;
-			//fadeIn = false;
-		}
-		if (Play == false) {
-			ret = false;
-		}
+
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
-		if (Play == false) {
-			app->audio->PlayFx(change);
-		}
-		Play = true;
+
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
-		if (Play == true) {
-			app->audio->PlayFx(change);
+
+	}
+	if (option == SELECTED::FIRST) {
+		app->font->BlitText(140, 40, WF, "empty");
+		app->font->BlitText(140, 60, GF, "empty");
+		app->font->BlitText(140, 80, GF, "empty");
 		}
-		Play = false;
+	if (option == SELECTED::SECOND) {
+		app->font->BlitText(140, 40, GF, "empty");
+		app->font->BlitText(140, 60, WF, "empty");
+		app->font->BlitText(140, 80, GF, "empty");
 	}
-	if (fadeIn == false ) {
-		//app->entityManager->active = true;
-		//app->physics->active = true;
-		app->scene->CanPlayerMove = true;
-		app->menu->active = false;
+	if (option == SELECTED::THIRD) {
+		app->font->BlitText(140, 40, GF, "empty");
+		app->font->BlitText(140, 60, GF, "empty");
+		app->font->BlitText(140, 80, WF, "empty");
 	}
+	app->render->DrawRectangle({ app->scene->player->positionX,  app->scene->player->positionX,1100,800 }, 0, 0, 0, fading);
 	return ret;
 }
 
