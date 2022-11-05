@@ -28,8 +28,10 @@ bool Menu::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
-	x = config.child("player").attribute("x").as_int();
-	y = config.child("player").attribute("y").as_int();
+	//x = config.child("player").attribute("x").as_int();
+	//y = config.child("player").attribute("y").as_int();
+	x = app->render->camera.x;
+	y = app->render->camera.y;
 
 	return ret;
 }
@@ -62,31 +64,65 @@ bool Menu::Update(float dt)
 		if (fading == 0) { fadeIn = false; };
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		app->audio->PlayFx(select);
+		PlaySelected = true;
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+		if (option == SELECTED::SECOND) {
+			option = SELECTED::FIRST;
+			app->audio->PlayFx(change);
+		}
+		if (option == SELECTED::THIRD) {
+			option = SELECTED::SECOND;
+			app->audio->PlayFx(change);
+		}
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
-
-	}
-	app->render->DrawTexture(MENUD, x, y);
-	if (option == SELECTED::FIRST) {
-		app->font->BlitText(x + 140, y + 40, WF, "empty");
-		app->font->BlitText(x + 140, y + 60, GF, "empty");
-		app->font->BlitText(x + 140, y + 80, GF, "empty");
+		if (option == SELECTED::FIRST) {
+			option = SELECTED::SECOND;
+			app->audio->PlayFx(change);
 		}
-	if (option == SELECTED::SECOND) {
-		app->font->BlitText(x + 140, y + 40, GF, "empty");
-		app->font->BlitText(x + 140, y + 60, WF, "empty");
-		app->font->BlitText(x + 140, y + 80, GF, "empty");
+		if (option == SELECTED::SECOND) {
+			option = SELECTED::THIRD;
+			app->audio->PlayFx(change);
+		}
 	}
-	if (option == SELECTED::THIRD) {
-		app->font->BlitText(x + 140, y + 40, GF, "empty");
-		app->font->BlitText(x + 140, y + 60, GF, "empty");
-		app->font->BlitText(x + 140, y + 80, WF, "empty");
+	tempX = -1*x;
+	app->render->DrawTexture(MENUD, tempX - 120, (-1 * y));
+	if (option == SELECTED::FIRST && fontFading != 255) {
+		app->font->BlitText(x + 65, y + 40, WF, "empty");
+		app->font->BlitText(x + 65, y + 80, GF, "empty");
+		app->font->BlitText(x + 65, y + 120, GF, "empty");
+	}
+	if (option == SELECTED::SECOND && fontFading != 255) {
+		app->font->BlitText(x + 65, y + 40, GF, "empty");
+		app->font->BlitText(x + 65, y + 80, WF, "empty");
+		app->font->BlitText(x + 65, y + 120, GF, "empty");
+	}
+	if (option == SELECTED::THIRD && fontFading != 255) {
+		app->font->BlitText(x + 65, y + 40, GF, "empty");
+		app->font->BlitText(x + 65, y + 80, GF, "empty");
+		app->font->BlitText(x + 65, y + 120, WF, "empty");
+	}
+	if (PlaySelected == true) {
+		if (fontFading <= 254) {
+			fontFading++;
+		}
+		else if (fontFading == 255) {
+			Play = true;
+		}
+	}
+	if (Play == true) {
+		app->scene->CanPlayerMove = true;
+		app->menu->active = false;
 	}
 	app->render->DrawRectangle({ -1000,-1000,10000,2000 }, 0, 0, 0, fading);
+	
+	if (PlaySelected == true && Play == false) {
+		app->render->DrawRectangle({ x - 40,y + 120,100,200 }, 0, 0, 0, fontFading);
+	}
 	return ret;
 }
 

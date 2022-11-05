@@ -95,7 +95,7 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
-	app->render->DrawTexture(MapAdjustment, -100, 0);
+	app->render->DrawTexture(MapAdjustment, -100, 100);
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		if (app->physics->debug == true) {
 			app->physics->debug = false;

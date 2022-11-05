@@ -124,10 +124,9 @@ bool MainMenu::Update(float dt)
 	}
 	if (fading2 == 255) {
 		app->scene->active = true;
-		app->scene->CanPlayerMove = true;
 		app->entityManager->active = true;
 		app->physics->active = true;
-		//app->menu->active = true;
+		app->menu->active = true;
 		app->mainmenu->active = false;
 	}
 	if (option == SELECTED::PLAY && options == false) {

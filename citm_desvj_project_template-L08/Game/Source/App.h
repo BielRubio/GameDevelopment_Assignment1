@@ -22,6 +22,7 @@ class Intro;
 class Menu;
 class ModuleFonts;
 class Physics;
+class DeathMenu;
 class MainMenu;
 
 class App
@@ -96,6 +97,7 @@ public:
 	Menu* menu;
 	ModuleFonts* font;
 	Physics* physics;
+	DeathMenu* deathmenu;
 	MainMenu* mainmenu;
 
 private:

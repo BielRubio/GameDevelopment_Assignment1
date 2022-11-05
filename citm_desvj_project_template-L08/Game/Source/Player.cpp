@@ -152,6 +152,7 @@ bool Player::Update()
 		currentAnim = &playerDie;
 		if (currentAnim->HasFinished()) {
 			this->Disable();
+			DeathAnimationFinished = true;
 		}
 	}
 

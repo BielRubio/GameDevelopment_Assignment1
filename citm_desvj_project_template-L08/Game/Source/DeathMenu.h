@@ -1,19 +1,19 @@
-#ifndef __MENU_H__
-#define __MENU_H__
+#ifndef __DEATHMENU_H__
+#define __DEATHMENU_H__
 
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
 
 
-class Menu : public Module
+class DeathMenu : public Module
 {
 public:
 
-	Menu();
+	DeathMenu();
 
 	// Destructor
-	virtual ~Menu();
+	virtual ~DeathMenu();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& config);
@@ -34,20 +34,13 @@ public:
 	bool CleanUp();
 
 public:
-	enum class SELECTED {
-		FIRST = 1,
-		SECOND,
-		THIRD
-	};
 
 private:
-	SELECTED option = SELECTED::FIRST;
-	int fading = 255, fontFading = 0, change, select, x, y, tempX;
-	bool fadeIn = true, Play = false, PlaySelected = false;
+	int fading = 0, change, select;
 	SDL_Texture* MENUD;
 	int WF, GF;
 
 };
 
-#endif // __MENU_H__
+#endif // __DEATHMENU_H__
 
