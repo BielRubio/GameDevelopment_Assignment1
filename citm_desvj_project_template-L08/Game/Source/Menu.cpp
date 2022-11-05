@@ -28,6 +28,8 @@ bool Menu::Awake(pugi::xml_node& config)
 {
 	LOG("Loading Scene");
 	bool ret = true;
+	x = config.child("player").attribute("x").as_int();
+	y = config.child("player").attribute("y").as_int();
 
 	return ret;
 }
@@ -68,22 +70,23 @@ bool Menu::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 
 	}
+	app->render->DrawTexture(MENUD, x, y);
 	if (option == SELECTED::FIRST) {
-		app->font->BlitText(140, 40, WF, "empty");
-		app->font->BlitText(140, 60, GF, "empty");
-		app->font->BlitText(140, 80, GF, "empty");
+		app->font->BlitText(x + 140, y + 40, WF, "empty");
+		app->font->BlitText(x + 140, y + 60, GF, "empty");
+		app->font->BlitText(x + 140, y + 80, GF, "empty");
 		}
 	if (option == SELECTED::SECOND) {
-		app->font->BlitText(140, 40, GF, "empty");
-		app->font->BlitText(140, 60, WF, "empty");
-		app->font->BlitText(140, 80, GF, "empty");
+		app->font->BlitText(x + 140, y + 40, GF, "empty");
+		app->font->BlitText(x + 140, y + 60, WF, "empty");
+		app->font->BlitText(x + 140, y + 80, GF, "empty");
 	}
 	if (option == SELECTED::THIRD) {
-		app->font->BlitText(140, 40, GF, "empty");
-		app->font->BlitText(140, 60, GF, "empty");
-		app->font->BlitText(140, 80, WF, "empty");
+		app->font->BlitText(x + 140, y + 40, GF, "empty");
+		app->font->BlitText(x + 140, y + 60, GF, "empty");
+		app->font->BlitText(x + 140, y + 80, WF, "empty");
 	}
-	app->render->DrawRectangle({ app->scene->player->positionX,  app->scene->player->positionX,1100,800 }, 0, 0, 0, fading);
+	app->render->DrawRectangle({ -1000,-1000,10000,2000 }, 0, 0, 0, fading);
 	return ret;
 }
 

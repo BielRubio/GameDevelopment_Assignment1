@@ -42,7 +42,7 @@ public:
 
 private:
 	SELECTED option = SELECTED::FIRST;
-	int fading = 255, fontFading = 0, change, select;
+	int fading = 255, fontFading = 0, change, select, x, y;
 	bool fadeIn = true, Play = true, PlaySelected = false;
 	SDL_Texture* MENUD;
 	int WF, GF;
