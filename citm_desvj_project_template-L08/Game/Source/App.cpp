@@ -12,6 +12,7 @@
 #include "Menu.h"
 #include "MainMenu.h"
 #include "ModuleFonts.h"
+#include "DeathMenu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -36,6 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	map = new Map();
 	menu = new Menu();
+	deathmenu = new DeathMenu();
 	mainmenu = new MainMenu();
 
 	// Ordered for awake / Start / Update
@@ -51,6 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(menu);
 	AddModule(font);
+	AddModule(deathmenu);
 	AddModule(mainmenu);
 	mainmenu->active = false;
 	menu->active = false;

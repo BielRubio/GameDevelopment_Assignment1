@@ -28,6 +28,7 @@
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Saw.cpp" />
+    <ClCompile Include="Source\DeathMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -82,6 +83,7 @@
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\Saw.h" />
+    <ClInclude Include="Source\DeathMenu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

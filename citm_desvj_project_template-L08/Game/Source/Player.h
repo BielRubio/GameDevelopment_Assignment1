@@ -35,6 +35,7 @@ public:
 
 public:
 	int positionX, positionY;
+	bool DeathAnimationFinished = false;
 
 private:
 
