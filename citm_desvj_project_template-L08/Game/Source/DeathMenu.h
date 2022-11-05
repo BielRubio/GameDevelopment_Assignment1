@@ -34,6 +34,7 @@ public:
 	bool CleanUp();
 
 public:
+	bool finished = false;
 
 private:
 	bool continue1 = true;

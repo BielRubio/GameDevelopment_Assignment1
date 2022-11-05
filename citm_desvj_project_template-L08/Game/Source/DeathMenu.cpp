@@ -79,14 +79,20 @@ bool DeathMenu::Update(float dt)
 		app->audio->PlayFx(select);
 		if (continue1 == true) {
 			// must be finished
+			app->scene->player->position.x = 120;
+			app->scene->player->position.y = 176;
+			app->scene->player->alive = true;
+			app->scene->player->active = true;
+			app->deathmenu->active = false;
 		}
 		if (continue1 == false) {
 			app->entityManager->active = false;
 			app->physics->active = false;
 			app->scene->active = false;
+			finished = true;
 			app->mainmenu->active = true;
 			app->deathmenu->active = false;
-			//must be finished
+			//In progress
 
 		}
 	}

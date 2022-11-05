@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "DeathMenu.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -153,6 +154,7 @@ bool Player::Update()
 		if (currentAnim->HasFinished()) {
 			this->Disable();
 			DeathAnimationFinished = true;
+			app->deathmenu->active = true;
 		}
 	}
 

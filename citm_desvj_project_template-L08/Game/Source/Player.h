@@ -37,6 +37,10 @@ public:
 	int positionX, positionY;
 	bool DeathAnimationFinished = false;
 
+	PhysBody* pbody;
+
+	bool alive;
+
 private:
 
 	SDL_Texture* texture;
@@ -49,9 +53,7 @@ private:
 	int height;
 	int jumpCounter; 
 
-	bool alive; 
 
-	PhysBody* pbody;
 
 	DIRECTION facing = DIRECTION::RIGHT;
 

@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "Physics.h"
 #include "ModuleFonts.h"
+#include "DeathMenu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -54,7 +55,14 @@ bool MainMenu::PreUpdate()
 bool MainMenu::Update(float dt)
 {
 	bool ret = true;
-
+	if (app->deathmenu->finished == true) {
+		fading = 255;
+		fading2 = 0;
+		fadeIn = true;
+		fadeOut = false;
+		options = false;
+		app->deathmenu->finished = false;
+	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
 			option = SELECTED::PLAY;
@@ -96,7 +104,7 @@ bool MainMenu::Update(float dt)
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		if (option == SELECTED::PLAY && fadeOut == false) {
+		if (option == SELECTED::PLAY && fadeOut == false && fadeIn == false) {
 			app->audio->PlayFx(select);
 			fadeOut = true;
 		}

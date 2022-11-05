@@ -45,6 +45,11 @@ bool Menu::Start()
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
+	fading = 255;
+	fontFading = 0;
+	fadeIn = true;
+	Play = false;
+	PlaySelected = false;
 	return true;
 }
 
@@ -63,7 +68,7 @@ bool Menu::Update(float dt)
 		if (fading >= 1) { fading--; };
 		if (fading == 0) { fadeIn = false; };
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && fadeIn == false) {
 		app->audio->PlayFx(select);
 		PlaySelected = true;
 

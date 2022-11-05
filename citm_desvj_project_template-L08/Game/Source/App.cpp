@@ -55,6 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(font);
 	AddModule(deathmenu);
 	AddModule(mainmenu);
+	deathmenu->active = false;
 	mainmenu->active = false;
 	menu->active = false;
 	entityManager->active = false;
