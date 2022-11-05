@@ -31,16 +31,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	font = new ModuleFonts();
 	audio = new Audio();
 	intro = new Intro();
-	menu = new Menu();
-	mainmenu = new MainMenu();
 	scene = new Scene();
 	physics = new Physics();
 	entityManager = new EntityManager();
 	map = new Map();
+	menu = new Menu();
+	mainmenu = new MainMenu();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
-	AddModule(mainmenu);
 	AddModule(input);
 	AddModule(win);
 	AddModule(tex);
@@ -52,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(menu);
 	AddModule(font);
+	AddModule(mainmenu);
 	mainmenu->active = false;
 	menu->active = false;
 	entityManager->active = false;

@@ -83,6 +83,18 @@ bool MainMenu::Update(float dt)
 			app->audio->PlayFx(change);
 		}
 	}
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && options == true) {
+		if (app->audio->volume >= 1) {
+			app->audio->volume--;
+			app->audio->PlayFx(change);
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && options == true) {
+		if (app->audio->volume <= 63) {
+			app->audio->volume++;
+			app->audio->PlayFx(change);
+		}
+	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (option == SELECTED::PLAY && fadeOut == false) {
 			app->audio->PlayFx(select);
@@ -112,9 +124,10 @@ bool MainMenu::Update(float dt)
 	}
 	if (fading2 == 255) {
 		app->scene->active = true;
-		app->menu->active = true;
+		app->scene->CanPlayerMove = true;
 		app->entityManager->active = true;
 		app->physics->active = true;
+		//app->menu->active = true;
 		app->mainmenu->active = false;
 	}
 	if (option == SELECTED::PLAY && options == false) {
@@ -135,10 +148,14 @@ bool MainMenu::Update(float dt)
 	if (option == SELECTED::MUSIC && options == true) {
 		app->font->BlitText(142, 60, WF, "music");
 		app->font->BlitText(145, 100, GF, "back");
+		app->render->DrawRectangle({ 125,80,64,10 }, 20, 20, 20);
+		app->render->DrawRectangle({ 125,80,app->audio->volume,10 }, 255, 255, 255);
 	}
 	if (option == SELECTED::BACK && options == true) {
 		app->font->BlitText(142, 60, GF, "music");
 		app->font->BlitText(145, 100, WF, "back");
+		app->render->DrawRectangle({ 125,80,64,10 }, 20, 20, 20);
+		app->render->DrawRectangle({ 125,80,app->audio->volume,10 }, 255, 255, 255);
 	}
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading2);

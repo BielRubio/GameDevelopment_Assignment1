@@ -85,6 +85,12 @@ bool Player::Update()
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		position.x = parameters.attribute("x").as_int();
+		position.y = parameters.attribute("y").as_int();
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
 		alive = false;
 	}
@@ -155,6 +161,9 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
+	positionX = position.x;
+	positionY = position.y;
+
 	app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
 
@@ -201,19 +210,19 @@ bool Player::IsAlive() {
 
 bool Player::LoadState(pugi::xml_node& data) {
 
-	position.x = data.child("position").attribute("x").as_int();
-	position.y = data.child("position").attribute("y").as_int();
-
+	position.x = data.child("player_stats").attribute("position_x").as_int();
+	position.y = data.child("player_stats").attribute("position_y").as_int();
+	jumpCounter = data.child("player_stats").attribute("jumpCounter").as_int();
 	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 
 	return true;
 }
 
 bool Player::SaveState(pugi::xml_node& data) {
-
-	data.append_child("position").append_attribute("x") = position.x;
-	data.child("position").append_attribute("y") = position.y;
-	data.append_child("texturePath").append_attribute("path") = texturePath;
+	pugi::xml_node player_stats = data.append_child("player_stats");
+	data.child("player_stats").append_attribute("position_x") = position.x;
+	data.child("player_stats").append_attribute("position_y") = position.y;
+	data.child("player_stats").append_attribute("jumpCounter") = jumpCounter;
 
 	return true; 
 }

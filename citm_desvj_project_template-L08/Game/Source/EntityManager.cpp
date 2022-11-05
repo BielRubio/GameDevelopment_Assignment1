@@ -142,8 +142,13 @@ bool EntityManager::Update(float dt)
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
 	bool ret = true; 
-	pugi::xml_node saw_stats;
-	app->scene->player->LoadState(data);
+	ListItem<Entity*>* item;
+	for (item = entities.start; item != nullptr; item = item->next)
+	{
+		if (item != nullptr) {
+			item->data->LoadState(data);
+		}
+	}
 	
 	return ret;
 }
