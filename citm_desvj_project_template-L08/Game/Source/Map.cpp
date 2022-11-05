@@ -53,7 +53,7 @@ void Map::Draw()
 
     // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
     
-   /* ListItem<ImageLayer*>* imageLayerItem;
+  /*  ListItem<ImageLayer*>* imageLayerItem;
     imageLayerItem = mapData.imagelayers.start;
 
     while (imageLayerItem != NULL) {
