@@ -80,12 +80,12 @@ bool Menu::Update(float dt)
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
-		if (option == SELECTED::FIRST) {
-			option = SELECTED::SECOND;
-			app->audio->PlayFx(change);
-		}
 		if (option == SELECTED::SECOND) {
 			option = SELECTED::THIRD;
+			app->audio->PlayFx(change);
+		}
+		if (option == SELECTED::FIRST) {
+			option = SELECTED::SECOND;
 			app->audio->PlayFx(change);
 		}
 	}

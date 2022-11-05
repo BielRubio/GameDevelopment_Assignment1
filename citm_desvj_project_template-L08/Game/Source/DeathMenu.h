@@ -36,7 +36,8 @@ public:
 public:
 
 private:
-	int fading = 0, change, select;
+	bool continue1 = true;
+	int fading = 0, change, select, x, y;
 	SDL_Texture* MENUD;
 	int WF, GF;
 
