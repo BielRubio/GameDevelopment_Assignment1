@@ -124,6 +124,7 @@ enum ColTypes {
 
 	TERRAIN = 0,
 	DAMAGE,
+	FLOOR,
 	TRIGGER
 };
 

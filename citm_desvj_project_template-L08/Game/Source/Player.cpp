@@ -38,10 +38,8 @@ bool Player::Start() {
 
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
-	
-	pbody->listener = this; 
-
-	pbody->ctype = ColliderType::PLAYER; 
+	pbody->listener = this;
+	pbody->ctype = ColliderType::PLAYER;
 
 	jumpCounter = 0; 
 
@@ -181,7 +179,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		jumpCounter = 0; 
+		break;
+	case ColliderType::FLOOR:
+		LOG("Collision FLOOR");
+		jumpCounter = 0;
 		break;
 	case ColliderType::SPIKES:
 		LOG("Collision SPIKES");
