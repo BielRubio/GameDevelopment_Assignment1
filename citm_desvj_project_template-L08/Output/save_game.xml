@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <save_state>
-	<mainmenu />
 	<input />
 	<window />
 	<textures />
@@ -12,30 +11,33 @@
 		<saw_stats position_x="856" position_y="144" noMove="true" />
 		<saw_stats position_x="1000" position_y="192" noMove="true" />
 		<saw_stats position_x="1000" position_y="144" noMove="true" />
-		<saw_stats position_x="1345" position_y="176" x1="1216" y1="176" x2="1400" y2="176" currentCheckpoint_x="1400" currentCheckpoint_y="176" speed="5" noMove="false" />
-		<saw_stats position_x="1572" position_y="176" x1="1472" y1="176" x2="1728" y2="176" currentCheckpoint_x="1728" currentCheckpoint_y="176" speed="4" noMove="false" />
-		<saw_stats position_x="1733" position_y="232" x1="1688" y1="232" x2="1864" y2="232" currentCheckpoint_x="1688" currentCheckpoint_y="232" speed="5" noMove="false" />
-		<saw_stats position_x="1757" position_y="256" x1="1688" y1="256" x2="1864" y2="256" currentCheckpoint_x="1688" currentCheckpoint_y="256" speed="5" noMove="false" />
-		<saw_stats position_x="1781" position_y="280" x1="1688" y1="280" x2="1864" y2="280" currentCheckpoint_x="1688" currentCheckpoint_y="280" speed="5" noMove="false" />
-		<saw_stats position_x="1805" position_y="304" x1="1688" y1="304" x2="1864" y2="304" currentCheckpoint_x="1688" currentCheckpoint_y="304" speed="5" noMove="false" />
-		<saw_stats position_x="1829" position_y="328" x1="1688" y1="328" x2="1864" y2="328" currentCheckpoint_x="1688" currentCheckpoint_y="328" speed="5" noMove="false" />
-		<saw_stats position_x="1837" position_y="352" x1="1688" y1="352" x2="1864" y2="352" currentCheckpoint_x="1864" currentCheckpoint_y="352" speed="5" noMove="false" />
-		<saw_stats position_x="1817" position_y="376" x1="1688" y1="376" x2="1864" y2="376" currentCheckpoint_x="1864" currentCheckpoint_y="376" speed="5" noMove="false" />
+		<saw_stats position_x="1233" position_y="176" x1="1216" y1="176" x2="1400" y2="176" currentCheckpoint_x="1400" currentCheckpoint_y="176" speed="5" noMove="false" />
+		<saw_stats position_x="1525" position_y="176" x1="1472" y1="176" x2="1728" y2="176" currentCheckpoint_x="1728" currentCheckpoint_y="176" speed="4" noMove="false" />
+		<saw_stats position_x="1824" position_y="232" x1="1688" y1="232" x2="1864" y2="232" currentCheckpoint_x="1688" currentCheckpoint_y="232" speed="5" noMove="false" />
+		<saw_stats position_x="1842" position_y="256" x1="1688" y1="256" x2="1864" y2="256" currentCheckpoint_x="1688" currentCheckpoint_y="256" speed="5" noMove="false" />
+		<saw_stats position_x="1818" position_y="280" x1="1688" y1="280" x2="1864" y2="280" currentCheckpoint_x="1864" currentCheckpoint_y="280" speed="5" noMove="false" />
+		<saw_stats position_x="1794" position_y="304" x1="1688" y1="304" x2="1864" y2="304" currentCheckpoint_x="1864" currentCheckpoint_y="304" speed="5" noMove="false" />
+		<saw_stats position_x="1770" position_y="328" x1="1688" y1="328" x2="1864" y2="328" currentCheckpoint_x="1864" currentCheckpoint_y="328" speed="5" noMove="false" />
+		<saw_stats position_x="1746" position_y="352" x1="1688" y1="352" x2="1864" y2="352" currentCheckpoint_x="1864" currentCheckpoint_y="352" speed="5" noMove="false" />
+		<saw_stats position_x="1737" position_y="376" x1="1688" y1="376" x2="1864" y2="376" currentCheckpoint_x="1864" currentCheckpoint_y="376" speed="5" noMove="false" />
 		<saw_stats position_x="2128" position_y="400" noMove="true" />
 		<saw_stats position_x="2160" position_y="392" noMove="true" />
 		<saw_stats position_x="2192" position_y="384" noMove="true" />
 		<saw_stats position_x="2128" position_y="312" noMove="true" />
 		<saw_stats position_x="2168" position_y="288" noMove="true" />
 		<saw_stats position_x="2168" position_y="256" noMove="true" />
-		<saw_stats position_x="2096" position_y="346" x1="2096" y1="296" x2="2096" y2="400" currentCheckpoint_x="2096" currentCheckpoint_y="400" speed="2" noMove="false" />
-		<saw_stats position_x="2218" position_y="360" x1="2168" y1="360" x2="2296" y2="360" currentCheckpoint_x="2296" currentCheckpoint_y="360" speed="2" noMove="false" />
-		<saw_stats position_x="2040" position_y="147" x1="2040" y1="112" x2="2040" y2="224" currentCheckpoint_x="2040" currentCheckpoint_y="112" speed="6" noMove="false" />
-		<player_stats position_x="1420" position_y="156" jumpCounter="2" />
+		<saw_stats position_x="2096" position_y="354" x1="2096" y1="296" x2="2096" y2="400" currentCheckpoint_x="2096" currentCheckpoint_y="296" speed="2" noMove="false" />
+		<saw_stats position_x="2226" position_y="360" x1="2168" y1="360" x2="2296" y2="360" currentCheckpoint_x="2296" currentCheckpoint_y="360" speed="2" noMove="false" />
+		<saw_stats position_x="2040" position_y="191" x1="2040" y1="112" x2="2040" y2="224" currentCheckpoint_x="2040" currentCheckpoint_y="224" speed="6" noMove="false" />
+		<saw_stats position_x="2317" position_y="128" x1="2120" y1="128" x2="2416" y2="128" currentCheckpoint_x="2120" currentCheckpoint_y="128" speed="7" noMove="false" />
+		<saw_stats position_x="2336" position_y="104" x1="2072" y1="104" x2="2416" y2="104" currentCheckpoint_x="2072" currentCheckpoint_y="104" speed="3" noMove="false" />
+		<player_stats position_x="324" position_y="213" jumpCounter="0" />
 	</entitymanager>
 	<map />
 	<menu />
 	<:anonymous />
+	<mainmenu />
 	<renderer>
-		<camera x="-5040" y="-264" />
+		<camera x="-656" y="-492" />
 	</renderer>
 </save_state>

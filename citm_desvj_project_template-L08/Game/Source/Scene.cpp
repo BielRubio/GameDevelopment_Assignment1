@@ -86,7 +86,7 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	if (Music == false) {
-		app->audio->PlayMusic("Assets/Sounds/Music1.wav");
+		app->audio->PlayMusic("Assets/Sounds/water.wav");
 		Music = true;
 	}
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
