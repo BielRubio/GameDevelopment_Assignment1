@@ -52,6 +52,18 @@ void Map::Draw()
     */
 
     // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
+    
+  /*  ListItem<ImageLayer*>* imageLayerItem;
+    imageLayerItem = mapData.imagelayers.start;
+
+    while (imageLayerItem != NULL) {
+        
+        SDL_Texture* texture = app->tex->Load(imageLayerItem->data->texturePath);
+
+        app->render->DrawTexture(texture, app->render->camera.x * imageLayerItem->data->parallaxFactor, app->render->camera.y);
+    }*/
+
+
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
@@ -329,6 +341,19 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 // L05: DONE 4: Iterate all layers and load each of them
 bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     bool ret = true;
+
+    for (pugi::xml_node imageNode = mapNode.child("imagelayer"); imageNode && ret; imageNode = imageNode.next_sibling("imagelayer")) {
+
+        ImageLayer* imageLayer = new ImageLayer();
+
+        imageLayer->name = imageNode.child("image").attribute("name").as_string();
+        imageLayer->width = imageNode.child("image").attribute("width").as_int();
+        imageLayer->height = imageNode.child("image").attribute("height").as_int();
+        imageLayer->texturePath = (const char*)imageNode.child("image").attribute("source").as_string();
+        imageLayer->parallaxFactor = imageNode.child("image").attribute("parallaxx").as_float();
+
+        mapData.imagelayers.Add(imageLayer);
+    }
 
     for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode && ret; layerNode = layerNode.next_sibling("layer"))
     {

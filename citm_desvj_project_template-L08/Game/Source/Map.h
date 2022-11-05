@@ -67,6 +67,18 @@ struct Properties
 };
 
 // L05: DONE 1: Create a struct for the map layer
+
+struct ImageLayer {
+
+	SString name;
+	int width;
+	int height;
+
+	const char* texturePath;
+	float parallaxFactor;
+
+};
+
 struct MapLayer
 {
 	SString	name;
@@ -105,6 +117,7 @@ struct MapData
 
 	// L05: DONE 2: Add a list/array of layers to the map
 	List<MapLayer*> maplayers;
+	List<ImageLayer*> imagelayers;
 };
 
 enum ColTypes {
