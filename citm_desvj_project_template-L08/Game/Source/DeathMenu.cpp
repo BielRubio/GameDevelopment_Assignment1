@@ -76,36 +76,36 @@ bool DeathMenu::Update(float dt)
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		app->audio->PlayFx(select);
+		app->audio->PlayFxWithVolume(select,0,70);
 		if (continue1 == true) {
-			// must be finished
-			app->scene->player->position.x = 120;
-			app->scene->player->position.y = 176;
-			app->scene->player->alive = true;
 			app->scene->player->active = true;
+			app->scene->player->alive = true;
+			app->scene->player->pbody->body->SetActive(true);
+			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(112), PIXEL_TO_METERS(230) }, 0);
 			app->deathmenu->active = false;
 		}
 		if (continue1 == false) {
+			app->scene->player->alive = true;
+			app->scene->player->pbody->body->SetActive(true);
+			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(112), PIXEL_TO_METERS(230) }, 0);
 			app->entityManager->active = false;
 			app->physics->active = false;
 			app->scene->active = false;
 			finished = true;
 			app->mainmenu->active = true;
 			app->deathmenu->active = false;
-			//In progress
-
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		if (continue1 == false) {
 			continue1 = true;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		if (continue1 == true) {
 			continue1 = false;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 
 	}

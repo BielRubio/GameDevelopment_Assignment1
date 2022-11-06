@@ -66,55 +66,55 @@ bool MainMenu::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
 			option = SELECTED::PLAY;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 		if (option == SELECTED::EXIT) {
 			option = SELECTED::OPTIONS;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 		if (option == SELECTED::BACK) {
 			option = SELECTED::MUSIC;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
 			option = SELECTED::EXIT;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 		if (option == SELECTED::PLAY) {
 			option = SELECTED::OPTIONS;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 		if (option == SELECTED::MUSIC) {
 			option = SELECTED::BACK;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && options == true) {
 		if (app->audio->volume >= 1) {
 			app->audio->volume--;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && options == true) {
 		if (app->audio->volume <= 63) {
 			app->audio->volume++;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		if (option == SELECTED::PLAY && fadeOut == false && fadeIn == false) {
-			app->audio->PlayFx(select);
+			app->audio->PlayFxWithVolume(select, 0, 70);
 			fadeOut = true;
 		}
 		if (option == SELECTED::OPTIONS) {
-			app->audio->PlayFx(select);
+			app->audio->PlayFxWithVolume(select, 0, 70);
 			option = SELECTED::MUSIC;
 			options = true;
 		}
 		if (option == SELECTED::BACK) {
-			app->audio->PlayFx(select);
+			app->audio->PlayFxWithVolume(select, 0, 70);
 			option = SELECTED::OPTIONS;
 			options = false;
 		}
@@ -132,10 +132,12 @@ bool MainMenu::Update(float dt)
 	}
 	if (fading2 == 255) {
 		app->scene->active = true;
+		app->scene->player->active = true;
 		app->entityManager->active = true;
 		app->physics->active = true;
 		app->menu->active = true;
 		app->mainmenu->active = false;
+
 	}
 	if (option == SELECTED::PLAY && options == false) {
 		app->font->BlitText(145, 40, WF, "play");

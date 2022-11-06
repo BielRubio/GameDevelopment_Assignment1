@@ -69,29 +69,29 @@ bool Menu::Update(float dt)
 		if (fading == 0) { fadeIn = false; };
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && fadeIn == false) {
-		app->audio->PlayFx(select);
+		app->audio->PlayFxWithVolume(select,0,70);
 		PlaySelected = true;
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
 		if (option == SELECTED::SECOND) {
 			option = SELECTED::FIRST;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 		if (option == SELECTED::THIRD) {
 			option = SELECTED::SECOND;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
 		if (option == SELECTED::SECOND) {
 			option = SELECTED::THIRD;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 		if (option == SELECTED::FIRST) {
 			option = SELECTED::SECOND;
-			app->audio->PlayFx(change);
+			app->audio->PlayFxWithVolume(change,0,70);
 		}
 	}
 	tempX = -1*x;
