@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="330" height="70" tilewidth="8" tileheight="8" infinite="0" nextlayerid="12" nextobjectid="481">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="330" height="70" tilewidth="8" tileheight="8" infinite="0" nextlayerid="12" nextobjectid="488">
  <tileset firstgid="1" name="GD-tileset" tilewidth="8" tileheight="8" tilecount="130" columns="13">
   <image source="GD-tileset.png" width="104" height="80"/>
  </tileset>
@@ -69544,12 +69544,11 @@
   <object id="287" x="2092" y="409" width="4" height="22"/>
   <object id="288" x="1737" y="452" width="30" height="4"/>
   <object id="289" x="1793" y="452" width="30" height="4"/>
-  <object id="467" x="2259.36" y="393.818" width="14" height="4"/>
   <object id="468" x="2225" y="352" width="22" height="4"/>
   <object id="474" x="2241" y="156" width="38" height="4"/>
   <object id="475" x="2313" y="156" width="38" height="4"/>
  </objectgroup>
- <objectgroup color="#ffaaff" id="10" name="floor" visible="0">
+ <objectgroup color="#ffaaff" id="10" name="floor">
   <properties>
    <property name="Type" type="int" value="2"/>
   </properties>
@@ -69585,22 +69584,26 @@
   <object id="321" x="1584.1" y="223.9" width="39.8" height="4.1"/>
   <object id="322" x="1624.1" y="199.9" width="143.8" height="4.1"/>
   <object id="323" x="1792.1" y="199.9" width="31.8" height="4.1"/>
-  <object id="324" x="1697" y="455" width="398" height="4"/>
-  <object id="325" x="2097" y="447" width="6" height="5"/>
-  <object id="326" x="2097" y="407" width="22" height="5"/>
-  <object id="327" x="2137" y="407" width="6" height="5"/>
-  <object id="328" x="2169" y="399" width="6" height="5"/>
-  <object id="329" x="2201" y="391" width="6" height="5"/>
-  <object id="330" x="2225" y="383" width="22" height="5"/>
-  <object id="331" x="2233" y="327" width="14" height="5"/>
-  <object id="332" x="2217" y="295" width="14" height="5"/>
-  <object id="333" x="2249" y="399" width="22" height="5"/>
-  <object id="334" x="2273" y="391" width="30" height="5"/>
-  <object id="335" x="2305" y="383" width="6" height="5"/>
-  <object id="336" x="2137" y="303" width="6" height="5"/>
-  <object id="337" x="2033" y="255" width="54" height="5"/>
-  <object id="338" x="2009" y="199" width="22" height="5"/>
-  <object id="339" x="2072.1" y="151.9" width="375.8" height="4.1"/>
+  <object id="324" x="1696.1" y="455.9" width="399.8" height="4.1"/>
+  <object id="325" x="2096.1" y="447.9" width="7.8" height="4.1"/>
+  <object id="326" x="2096.1" y="407.9" width="23.8" height="4.1"/>
+  <object id="327" x="2136.1" y="407.8" width="7.8" height="4.1"/>
+  <object id="328" x="2168.1" y="399.9" width="7.8" height="4.1"/>
+  <object id="329" x="2200.1" y="391.9" width="7.8" height="4.1"/>
+  <object id="330" x="2224.1" y="383.9" width="23.8" height="4.1"/>
+  <object id="331" x="2232.1" y="327.9" width="15.8" height="4.1"/>
+  <object id="332" x="2216.1" y="295.9" width="15.8" height="4.1"/>
+  <object id="333" x="2248.1" y="399.9" width="23.8" height="4.1"/>
+  <object id="334" x="2272.1" y="391.9" width="31.8" height="4.1"/>
+  <object id="335" x="2304.1" y="383.9" width="7.8" height="4.1"/>
+  <object id="336" x="2136.1" y="303.9" width="7.8" height="4.1"/>
+  <object id="337" x="2032.1" y="255.9" width="55.8" height="4.1"/>
+  <object id="338" x="2008.1" y="199.9" width="23.8" height="4.1"/>
+  <object id="339" x="2072.1" y="151.9" width="167.8" height="4.1"/>
   <object id="465" x="2448.1" y="143.9" width="47.8" height="4.1"/>
+  <object id="483" x="1768.1" y="439.9" width="23.8" height="4.1"/>
+  <object id="484" x="2280.1" y="151.9" width="31.8" height="4.1"/>
+  <object id="485" x="2352.1" y="151.9" width="159.8" height="4.1"/>
+  <object id="487" x="2512.1" y="143.9" width="7.8" height="4.1"/>
  </objectgroup>
 </map>

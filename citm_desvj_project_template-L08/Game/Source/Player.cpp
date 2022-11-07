@@ -170,7 +170,7 @@ bool Player::Update()
 	app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
 
-	app->render->DrawTexture(texture, position.x, position.y+1, &rect);
+	app->render->DrawTexture(texture, position.x+1, position.y+1, &rect);
 
 	return true;
 }
