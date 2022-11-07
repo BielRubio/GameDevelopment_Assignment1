@@ -49,6 +49,8 @@ private:
 	bool Music = false;
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
+
+	SDL_Texture* trophyTex;
 };
 
 #endif // __SCENE_H__
