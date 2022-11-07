@@ -89,9 +89,10 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	if (Music == false) {
-		app->audio->PlayMusic("Assets/Sounds/water.wav");
+		app->audio->PlayMusic("Assets/Sounds/candybattle.wav");
 		Music = true;
 	}
+	
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
