@@ -40,7 +40,7 @@ public:
 	PhysBody* pbody;
 
 	bool alive, invincible = false;
-
+	
 private:
 
 	SDL_Texture* texture;

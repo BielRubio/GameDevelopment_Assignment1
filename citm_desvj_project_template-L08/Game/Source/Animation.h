@@ -31,7 +31,7 @@ public:
 	{
 		currentFrame = 0;
 	}
-	
+
 	bool HasFinished()
 	{
 		return !loop && !pingpong && loopCount > 0;

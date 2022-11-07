@@ -135,7 +135,8 @@ bool MainMenu::Update(float dt)
 		app->scene->player->active = true;
 		app->entityManager->active = true;
 		app->physics->active = true;
-		app->menu->active = true;
+		app->scene->CanPlayerMove = true;
+		//app->menu->active = true;
 		app->mainmenu->active = false;
 
 	}
