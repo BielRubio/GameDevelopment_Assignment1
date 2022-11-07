@@ -72,6 +72,8 @@ bool Scene::Start()
 
 	app->win->SetTitle(title.GetString());
 
+	//Initialize trophy texture
+	trophyTex = app->tex->Load("Assets/Textures/trophy.png");
 
 	return true;
 }
@@ -113,6 +115,8 @@ bool Scene::Update(float dt)
 	/*app->render->camera.x = -1*(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);*/
 
+	//Draw Trophy
+	app->render->DrawTexture(trophyTex, 2464, 128);
 
 	//Restart
 	if (player->IsAlive() == false) {
