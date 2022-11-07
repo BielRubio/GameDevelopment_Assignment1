@@ -85,6 +85,16 @@ bool Player::Update()
 
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+		if (invincible == false) {
+			invincible = true;
+			MaxJumps = 100;
+		}
+		else if (invincible == true) {
+			invincible = false;
+			MaxJumps = 2;
+		}
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		position.x = parameters.attribute("x").as_int();
@@ -105,7 +115,7 @@ bool Player::Update()
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::RIGHT;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < 2) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps) {
 		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyForce(b2Vec2(0,-37), pbody->body->GetPosition(),true);
@@ -198,7 +208,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::SPIKES:
 		LOG("Collision SPIKES");
-		alive = false; 
+		if (invincible == false) {
+			alive = false;
+		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
