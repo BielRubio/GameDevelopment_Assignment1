@@ -31,13 +31,14 @@
 	  
 	<saw x="1216" y="176" x1="1216" y1="176" x2="1400" y2="176" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
 	<saw x="1472" y="176" x1="1472" y1="176" x2="1728" y2="176" noMove="false" speed="4" texturepath="Assets/Textures/saw.png"/>
+	  
 	<saw x="1832" y="232" x1="1688" y1="232" x2="1864" y2="232" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x="1808" y="256" x1="1688" y1="256" x2="1864" y2="256" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x="1784" y="280" x1="1688" y1="280" x2="1864" y2="280" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x="1760" y="304" x1="1688" y1="304" x2="1864" y2="304" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x="1736" y="328" x1="1688" y1="328" x2="1864" y2="328" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
     <saw x="1712" y="352" x1="1688" y1="352" x2="1864" y2="352" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
-    <saw x="1688" y="376" x1="1688" y1="376" x2="1864" y2="376" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
+    <saw x="1688" y="376" x1="1864" y1="376" x2="1688" y2="376" noMove="false" speed="5" texturepath="Assets/Textures/saw.png"/>
 	  
     <saw x="2128" y="400" noMove="true" texturepath="Assets/Textures/saw.png"/>
     <saw x="2160" y="392" noMove="true" texturepath="Assets/Textures/saw.png"/>
