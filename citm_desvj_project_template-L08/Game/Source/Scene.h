@@ -51,6 +51,7 @@ private:
 	SDL_Texture* MapAdjustment;
 
 	SDL_Texture* trophyTex;
+	SDL_Texture* BGtexture;
 };
 
 #endif // __SCENE_H__

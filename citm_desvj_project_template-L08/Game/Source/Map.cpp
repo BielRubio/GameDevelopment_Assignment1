@@ -38,30 +38,17 @@ void Map::Draw()
     if(mapLoaded == false)
         return;
 
-    /*
-    // L04: DONE 6: Iterate all tilesets and draw all their 
-    // images in 0,0 (you should have only one tileset for now)
-
-    ListItem<TileSet*>* tileset;
-    tileset = mapData.tilesets.start;
-
-    while (tileset != NULL) {
-        app->render->DrawTexture(tileset->data->texture,0,0);
-        tileset = tileset->next;
-    }
-    */
-
-    // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
-    
-  /*  ListItem<ImageLayer*>* imageLayerItem;
+    ListItem<ImageLayer*>* imageLayerItem;
     imageLayerItem = mapData.imagelayers.start;
 
     while (imageLayerItem != NULL) {
-        
-        SDL_Texture* texture = app->tex->Load(imageLayerItem->data->texturePath);
 
-        app->render->DrawTexture(texture, app->render->camera.x * imageLayerItem->data->parallaxFactor, app->render->camera.y);
-    }*/
+        app->render->DrawTexture(imageLayerItem->data->bgtexture, -1 * (app->render->camera.x / (int)app->win->GetScale()), -1 * ((app->render->camera.y / (int)app->win->GetScale())));
+        imageLayerItem = imageLayerItem->next;
+    }
+   
+    //app->render->DrawTexture(BGtexture,  -1 * (app->render->camera.x / (int)app->win->GetScale()),-1 * (app->render->camera.y / (int)app->win->GetScale()));
+   // app->render->DrawRectangle({ -1 * (app->render->camera.x / (int)app->win->GetScale()),-1 * (app->render->camera.y / (int)app->win->GetScale()),app->render->camera.w,app->render->camera.h }, 0, 255, 0, 50);
 
 
 
@@ -353,6 +340,11 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
         imageLayer->parallaxFactor = imageNode.child("image").attribute("parallaxx").as_float();
 
         mapData.imagelayers.Add(imageLayer);
+
+        imageLayer->bgtexture = app->tex->Load(imageLayer->texturePath); 
+
+        LOG("%s", imageLayer->texturePath);
+
     }
 
     for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode && ret; layerNode = layerNode.next_sibling("layer"))

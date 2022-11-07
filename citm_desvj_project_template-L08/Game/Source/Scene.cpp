@@ -74,6 +74,7 @@ bool Scene::Start()
 
 	//Initialize trophy texture
 	trophyTex = app->tex->Load("Assets/Textures/trophy.png");
+	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 
 	return true;
 }
@@ -107,6 +108,9 @@ bool Scene::Update(float dt)
 		}
 	}
 	
+
+	//Draw bg
+	//app->render->DrawTexture(BGtexture, app->render->camera.x*app->win->GetScale(), app->render->camera.y * app->win->GetScale());
 
 	// Draw map
 	app->map->Draw();

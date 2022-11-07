@@ -75,6 +75,7 @@ struct ImageLayer {
 	int height;
 
 	const char* texturePath;
+	SDL_Texture* bgtexture;
 	float parallaxFactor;
 
 };

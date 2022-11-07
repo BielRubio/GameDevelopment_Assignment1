@@ -3,26 +3,26 @@
  <tileset firstgid="1" name="GD-tileset" tilewidth="8" tileheight="8" tilecount="130" columns="13">
   <image source="GD-tileset.png" width="104" height="80"/>
  </tileset>
- <imagelayer id="9" name="parallaxBG" visible="0">
-  <image source="parallax-demon-woods-bg.png" width="320" height="180"/>
+ <imagelayer id="9" name="parallaxBG">
+  <image source="Assets/Maps/parallax1.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <imagelayer id="8" name="parallax3" visible="0" parallaxx="0.8">
-  <image source="parallax-demon-woods-far-trees.png" width="592" height="272"/>
+ <imagelayer id="8" name="parallax2" parallaxx="0.8">
+  <image source="Assets/Maps/parallax2.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <imagelayer id="7" name="parallax2" visible="0" parallaxx="0.5">
-  <image source="parallax-demon-woods-mid-trees.png" width="592" height="272"/>
+ <imagelayer id="7" name="parallax3" parallaxx="0.5">
+  <image source="Assets/Maps/parallax3.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <imagelayer id="6" name="parallax1" visible="0" parallaxx="0.2">
-  <image source="parallax-demon-woods-close-trees.png" width="592" height="272"/>
+ <imagelayer id="6" name="parallax4" parallaxx="3.2">
+  <image source="Assets/Maps/parallax4.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -69354,7 +69354,7 @@
   </properties>
   <object id="6" x="72" y="240" width="208" height="16"/>
   <object id="11" x="40" y="184" width="16" height="48"/>
-  <object id="13" x="48" y="224" width="16" height="24"/>
+  <object id="13" x="48" y="224" width="16" height="16"/>
   <object id="14" x="56" y="232" width="24" height="16"/>
   <object id="17" x="272" y="216" width="32" height="32"/>
   <object id="19" x="296" y="224" width="88" height="16"/>
@@ -69402,7 +69402,7 @@
   <object id="103" x="840" y="192" width="56" height="16"/>
   <object id="105" x="848" y="200" width="8" height="16"/>
   <object id="106" x="872" y="200" width="8" height="24"/>
-  <object id="107" x="864" y="200" width="16" height="16"/>
+  <object id="107" x="864" y="200" width="8" height="16"/>
   <object id="109" x="864" y="152" width="8" height="32"/>
   <object id="110" x="976" y="216" width="104" height="24"/>
   <object id="114" x="1008" y="200" width="8" height="24"/>
@@ -69413,7 +69413,7 @@
   <object id="121" x="904" y="0" width="16" height="40"/>
   <object id="123" x="1008" y="120" width="8" height="40"/>
   <object id="125" x="1072" y="112" width="16" height="32"/>
-  <object id="127" x="936" y="112" width="152" height="16"/>
+  <object id="127" x="944" y="112" width="136" height="16"/>
   <object id="129" x="1080" y="104" width="16" height="16"/>
   <object id="131" x="1088" y="88" width="16" height="24"/>
   <object id="133" x="1096" y="64" width="16" height="32"/>
@@ -69431,8 +69431,7 @@
   <object id="153" x="984" y="288" width="16" height="16"/>
   <object id="156" x="984" y="232" width="16" height="32"/>
   <object id="158" x="992" y="256" width="16" height="40"/>
-  <object id="159" x="1072" y="176" width="16" height="48"/>
-  <object id="163" x="1072" y="168" width="24" height="16"/>
+  <object id="163" x="1072" y="168" width="24" height="56"/>
   <object id="166" x="1088" y="176" width="136" height="32"/>
   <object id="167" x="1216" y="200" width="360" height="24"/>
   <object id="168" x="1568" y="216" width="16" height="16"/>
