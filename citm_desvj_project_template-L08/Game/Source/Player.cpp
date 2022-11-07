@@ -80,6 +80,8 @@ bool Player::Start() {
 	return true;
 }
 
+
+
 bool Player::Update()
 {
 
@@ -88,7 +90,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
 		if (invincible == false) {
 			invincible = true;
-			MaxJumps = 100;
+			MaxJumps = 1000;
 		}
 		else if (invincible == true) {
 			invincible = false;
