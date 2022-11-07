@@ -39,7 +39,7 @@ public:
 
 	PhysBody* pbody;
 
-	bool alive;
+	bool alive, invincible = false;
 
 private:
 
@@ -52,7 +52,7 @@ private:
 	int width;
 	int height;
 	int jumpCounter; 
-
+	int MaxJumps = 2;
 
 
 	DIRECTION facing = DIRECTION::RIGHT;

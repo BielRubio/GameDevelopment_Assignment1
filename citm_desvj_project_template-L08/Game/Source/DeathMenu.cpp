@@ -91,6 +91,7 @@ bool DeathMenu::Update(float dt)
 			app->entityManager->active = false;
 			app->physics->active = false;
 			app->scene->active = false;
+			app->scene->CanPlayerMove = false;
 			finished = true;
 			app->mainmenu->active = true;
 			app->deathmenu->active = false;
