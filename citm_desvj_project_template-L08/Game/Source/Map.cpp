@@ -411,7 +411,6 @@ bool Map::LoadColliders(pugi::xml_node& node) {
             col.height = colNode.attribute("height").as_int()-1;
             col.type = ct;
 
-
             CreateColliders(col);
 
         }
