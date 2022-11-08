@@ -43,7 +43,7 @@ void Map::Draw()
 
     while (imageLayerItem != NULL) {
 
-        app->render->DrawTexture(imageLayerItem->data->bgtexture, -1 * (app->render->camera.x / (int)app->win->GetScale()), -1 * ((app->render->camera.y / (int)app->win->GetScale())));
+        app->render->DrawTexture(imageLayerItem->data->bgtexture, -1 * (app->render->camera.x / (int)app->win->GetScale()*imageLayerItem->data->parallaxFactor), -1 * ((app->render->camera.y / (int)app->win->GetScale())));
         imageLayerItem = imageLayerItem->next;
     }
    
@@ -333,11 +333,9 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
         ImageLayer* imageLayer = new ImageLayer();
 
-        imageLayer->name = imageNode.child("image").attribute("name").as_string();
-        imageLayer->width = imageNode.child("image").attribute("width").as_int();
-        imageLayer->height = imageNode.child("image").attribute("height").as_int();
+        imageLayer->name = imageNode.attribute("name").as_string();
         imageLayer->texturePath = (const char*)imageNode.child("image").attribute("source").as_string();
-        imageLayer->parallaxFactor = imageNode.child("image").attribute("parallaxx").as_float();
+        imageLayer->parallaxFactor = imageNode.attribute("parallaxx").as_float();
 
         mapData.imagelayers.Add(imageLayer);
 

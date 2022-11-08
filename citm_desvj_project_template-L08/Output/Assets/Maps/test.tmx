@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="GD-tileset" tilewidth="8" tileheight="8" tilecount="130" columns="13">
   <image source="GD-tileset.png" width="104" height="80"/>
  </tileset>
- <imagelayer id="9" name="parallaxBG">
+ <imagelayer id="9" name="parallaxBG" parallaxx="1.0">
   <image source="Assets/Maps/parallax1.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -21,7 +21,7 @@
    <property name="Draw" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <imagelayer id="6" name="parallax4" parallaxx="3.2">
+ <imagelayer id="6" name="parallax4" parallaxx="0.3">
   <image source="Assets/Maps/parallax4.png"/>
   <properties>
    <property name="Draw" type="bool" value="true"/>
