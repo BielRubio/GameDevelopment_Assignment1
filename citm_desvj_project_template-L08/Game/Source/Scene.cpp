@@ -89,17 +89,15 @@ bool Scene::PreUpdate()
 bool Scene::Update(float dt)
 {
 	if (Music == false) {
-		app->audio->PlayMusic("Assets/Sounds/candybattle.wav");
+		app->audio->PlayMusic("Assets/Sounds/candybattleLONG.wav");
 		Music = true;
 	}
-	
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
-	app->render->DrawTexture(MapAdjustment, -100, 100);
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		if (app->physics->debug == true) {
 			app->physics->debug = false;
@@ -127,6 +125,8 @@ bool Scene::Update(float dt)
 	if (player->IsAlive() == false) {
 			
 	}
+	//app->render->DrawTexture(MapAdjustment, -100, 75);
+	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);
 
 	return true;
 }

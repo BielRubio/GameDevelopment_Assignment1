@@ -44,7 +44,6 @@ public:
 	//L02: DONE 3: Declare a Player attribute 
 	Player* player;
 	bool CanPlayerMove = false;
-
 private:
 	bool Music = false;
 	SDL_Texture* img;
