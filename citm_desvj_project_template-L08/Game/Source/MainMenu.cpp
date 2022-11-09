@@ -184,6 +184,8 @@ bool MainMenu::PostUpdate()
 bool MainMenu::CleanUp()
 {
 	LOG("Freeing main menu");
+	app->font->UnLoad(WF);
+	app->font->UnLoad(GF);
 
 	return true;
 }

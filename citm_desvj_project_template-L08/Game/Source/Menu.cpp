@@ -44,7 +44,6 @@ bool Menu::Start()
 	GF = app->font->Load("Assets/Fonts/FontGreyDef.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
-	MENUD = app->tex->Load("Assets/Textures/Menu_Gradient.png");
 	fading = 255;
 	fontFading = 0;
 	fadeIn = true;
@@ -142,6 +141,8 @@ bool Menu::PostUpdate()
 bool Menu::CleanUp()
 {
 	LOG("Freeing menu");
+	app->font->UnLoad(WF);
+	app->font->UnLoad(GF);
 
 	return true;
 }

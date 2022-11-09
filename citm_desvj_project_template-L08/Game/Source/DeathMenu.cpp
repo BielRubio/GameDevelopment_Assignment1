@@ -125,6 +125,8 @@ bool DeathMenu::PostUpdate()
 bool DeathMenu::CleanUp()
 {
 	LOG("Freeing menu");
+	app->font->UnLoad(WF);
+	app->font->UnLoad(GF);
 
 	return true;
 }

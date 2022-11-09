@@ -36,7 +36,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics();
 	entityManager = new EntityManager();
 	map = new Map();
-	menu = new Menu();
+	//menu = new Menu();
 	deathmenu = new DeathMenu();
 	mainmenu = new MainMenu();
 
@@ -51,13 +51,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(map);
-	AddModule(menu);
+	//AddModule(menu);
 	AddModule(font);
 	AddModule(deathmenu);
 	AddModule(mainmenu);
 	deathmenu->active = false;
 	mainmenu->active = false;
-	menu->active = false;
+	//menu->active = false;
 	entityManager->active = false;
 	physics->active = false;
 	scene->active = false;

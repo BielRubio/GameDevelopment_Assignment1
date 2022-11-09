@@ -123,6 +123,7 @@
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\Map.h" />
+    <ClInclude Include="Source\MemLeaks.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\Path.h" />
