@@ -47,7 +47,7 @@ private:
 	const char* texturePath;
 
 	//Fx
-	int Step1, Step2, Jump1, aux = -1;
+	int Step1, Step2, StepMetalic1, StepMetalic2, Jump1, DeathSound, aux = -1;
 
 	int width;
 	int height;

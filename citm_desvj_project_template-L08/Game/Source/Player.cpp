@@ -36,7 +36,6 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
@@ -48,6 +47,9 @@ bool Player::Start() {
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
 	Step2 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel2.wav");
+	StepMetalic1 = app->audio->LoadFx("Assets/Sounds/Player/StepMetal1.wav");
+	StepMetalic2 = app->audio->LoadFx("Assets/Sounds/Player/StepMetal2.wav");
+	DeathSound = app->audio->LoadFx("Assets/Sounds/Player/Fire2.wav");
 	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
 
 	//Animations
@@ -164,6 +166,7 @@ bool Player::Update()
 		pbody->body->SetActive(false);
 		currentAnim = &playerDie;
 		if (currentAnim->HasFinished()) {
+			app->audio->PlayFxWithVolume(DeathSound, 0, 50);
 			this->Disable();
 			DeathAnimationFinished = true;
 			app->deathmenu->active = true;
@@ -189,7 +192,6 @@ bool Player::Update()
 
 bool Player::CleanUp()
 {
-
 	return true;
 }
 

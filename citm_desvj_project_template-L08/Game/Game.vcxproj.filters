@@ -84,6 +84,9 @@
     <ClInclude Include="Source\MainMenu.h" />
     <ClInclude Include="Source\Saw.h" />
     <ClInclude Include="Source\DeathMenu.h" />
+    <ClInclude Include="Source\MemLeaks.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

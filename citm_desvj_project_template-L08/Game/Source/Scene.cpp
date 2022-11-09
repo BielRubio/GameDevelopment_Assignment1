@@ -58,7 +58,6 @@ bool Scene::Start()
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 	
 	// L03: DONE: Load map
-	MapAdjustment = app->tex->Load("Assets/Textures/MapAdjustment.png");
 	app->map->Load();
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -146,7 +145,8 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
-
+	app->tex->UnLoad(trophyTex);
+	app->tex->UnLoad(BGtexture);
 	return true;
 }
 
