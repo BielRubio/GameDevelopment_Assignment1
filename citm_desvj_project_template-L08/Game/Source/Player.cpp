@@ -48,6 +48,9 @@ bool Player::Start() {
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
 	Step2 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel2.wav");
+	StepMetalic1 = app->audio->LoadFx("Assets/Sounds/Player/StepMetal1.wav");
+	StepMetalic2 = app->audio->LoadFx("Assets/Sounds/Player/StepMetal2.wav");
+	DeathSound = app->audio->LoadFx("Assets/Sounds/Player/Fire2.wav");
 	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
 
 	//Animations
@@ -164,6 +167,7 @@ bool Player::Update()
 		pbody->body->SetActive(false);
 		currentAnim = &playerDie;
 		if (currentAnim->HasFinished()) {
+			app->audio->PlayFxWithVolume(DeathSound, 0, 50);
 			this->Disable();
 			DeathAnimationFinished = true;
 			app->deathmenu->active = true;
