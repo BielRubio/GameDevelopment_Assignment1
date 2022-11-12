@@ -110,13 +110,17 @@ bool Player::Update()
 		alive = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true && (playerState == State::LANDED || playerState == State::JUMPING)) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+		if (playerState != State::LANDED && pbody->body->GetLinearVelocity().y == 0)
+			vel = b2Vec2(-speed, 5);
 		facing = DIRECTION::LEFT;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true && (playerState == State::LANDED || playerState == State::JUMPING)) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+		if (playerState != State::LANDED && pbody->body->GetLinearVelocity().y == 0)
+			vel = b2Vec2(speed, 5);
 		facing = DIRECTION::RIGHT;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps ) {
@@ -209,7 +213,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerState != State::LANDED) {
 			playerState = State::COLLIDING;
 		}
-		
 		break;
 	case ColliderType::FLOOR:
 		LOG("Collision FLOOR");
@@ -238,6 +241,7 @@ bool Player::LoadState(pugi::xml_node& data) {
 	position.x = data.child("player_stats").attribute("position_x").as_int();
 	position.y = data.child("player_stats").attribute("position_y").as_int();
 	jumpCounter = data.child("player_stats").attribute("jumpCounter").as_int();
+	playerState = (State)data.child("player_stats").attribute("state").as_int();
 	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 
 	return true;
@@ -248,6 +252,7 @@ bool Player::SaveState(pugi::xml_node& data) {
 	data.child("player_stats").append_attribute("position_x") = position.x;
 	data.child("player_stats").append_attribute("position_y") = position.y;
 	data.child("player_stats").append_attribute("jumpCounter") = jumpCounter;
+	data.child("player_stats").append_attribute("state") =	(int)playerState;
 
 	return true; 
 }
