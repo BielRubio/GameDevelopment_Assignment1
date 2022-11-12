@@ -35,7 +35,7 @@ bool Intro::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Intro::Start()
 {
-	INTROD = app->tex->Load("Assets/Textures/Intro.png");
+	logo = app->tex->Load("Assets/Textures/LongCat_Logo.png");
 	return true;
 }
 
@@ -55,7 +55,8 @@ bool Intro::Update(float dt)
 	if (fadeIn == false) {
 		if (fading <= 254) { fading++; };
 	}
-	app->render->DrawTexture(INTROD, 0, 0);
+
+	app->render->DrawTexture(logo,app->render->camera.w / 2 / app->win->GetScale() - 64, app->render->camera.h / 2 / app->win->GetScale() - 56);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	counter++;
 	//Fade out
