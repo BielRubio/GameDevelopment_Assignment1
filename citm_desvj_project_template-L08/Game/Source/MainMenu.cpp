@@ -63,7 +63,7 @@ bool MainMenu::Update(float dt)
 		options = false;
 		app->deathmenu->finished = false;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
 			option = SELECTED::PLAY;
 			app->audio->PlayFxWithVolume(change,0,70);
@@ -77,7 +77,7 @@ bool MainMenu::Update(float dt)
 			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
 		if (option == SELECTED::OPTIONS) {
 			option = SELECTED::EXIT;
 			app->audio->PlayFxWithVolume(change, 0, 70);
@@ -91,13 +91,13 @@ bool MainMenu::Update(float dt)
 			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && options == true) {
+	if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && options == true) {
 		if (app->audio->volume >= 1) {
 			app->audio->volume--;
 			app->audio->PlayFxWithVolume(change, 0, 70);
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && options == true) {
+	if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && options == true) {
 		if (app->audio->volume <= 63) {
 			app->audio->volume++;
 			app->audio->PlayFxWithVolume(change, 0, 70);
