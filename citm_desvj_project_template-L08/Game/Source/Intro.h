@@ -38,7 +38,7 @@ public:
 private:
 	int fading = 255, counter = 0;
 	bool fadeIn = true;
-	SDL_Texture* INTROD;
+	SDL_Texture* logo;
 };
 
 #endif // __INTRO_H__
