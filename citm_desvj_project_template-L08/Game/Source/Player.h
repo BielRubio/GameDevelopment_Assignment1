@@ -9,6 +9,14 @@
 
 struct SDL_Texture;
 
+enum class State {
+	LANDED,
+	JUMPING,
+	COLLIDING,
+	MOVING_RIGHT,
+	MOVING_LEFT
+};
+
 class Player : public Entity
 {
 public:
@@ -53,6 +61,8 @@ private:
 	int height;
 	int jumpCounter; 
 	int MaxJumps = 2;
+
+	State playerState; 
 
 
 	DIRECTION facing = DIRECTION::RIGHT;

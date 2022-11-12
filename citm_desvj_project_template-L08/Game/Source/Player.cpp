@@ -42,7 +42,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	jumpCounter = 0; 
-
+	playerState = State::LANDED; 
 	alive = true; 
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
@@ -110,21 +110,22 @@ bool Player::Update()
 		alive = false;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true && (playerState == State::LANDED || playerState == State::JUMPING)) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::LEFT;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true && (playerState == State::LANDED || playerState == State::JUMPING)) {
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		facing = DIRECTION::RIGHT;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps ) {
 		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyForce(b2Vec2(0,-37), pbody->body->GetPosition(),true);
 		app->audio->PlayFxWithVolume(Jump1, 0, 30);
 		jumpCounter++;
+		playerState = State::JUMPING;
 	}
 
 	//Fx
@@ -205,10 +206,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		if (playerState != State::LANDED) {
+			playerState = State::COLLIDING;
+		}
+		
 		break;
 	case ColliderType::FLOOR:
 		LOG("Collision FLOOR");
 		jumpCounter = 0;
+		playerState = State::LANDED;
 		break;
 	case ColliderType::SPIKES:
 		LOG("Collision SPIKES");
