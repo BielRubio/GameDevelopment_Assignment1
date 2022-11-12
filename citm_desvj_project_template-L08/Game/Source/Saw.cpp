@@ -113,7 +113,7 @@ bool Saw::Path(iPoint p) {
 }
 
 bool Saw::LoadState(pugi::xml_node& data) {
-	position.x = data.child("saw_stats").attribute("position_x").as_int();
+	/*position.x = data.child("saw_stats").attribute("position_x").as_int();
 	position.y = data.child("saw_stats").attribute("position_y").as_int();
 	noMove = data.child("saw_stats").attribute("noMove").as_bool();
 	if (noMove == false) {
@@ -124,7 +124,7 @@ bool Saw::LoadState(pugi::xml_node& data) {
 		speed = data.child("saw_stats").attribute("speed").as_int();
 		currentPoint.x = data.child("saw_stats").attribute("currentCheckpoint_x").as_int();
 		currentPoint.y = data.child("saw_stats").attribute("currentCheckpoint_y").as_int();
-	}
+	}*/
 	return true; 
 }
 
