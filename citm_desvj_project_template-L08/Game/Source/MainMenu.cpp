@@ -41,6 +41,7 @@ bool MainMenu::Start()
 	GF = app->font->Load("Assets/Fonts/FontGreyDef.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
+	BG = app->tex->Load("Assets/Textures/TitleScreen_BG.png");
 
 	return true;
 }
@@ -55,6 +56,9 @@ bool MainMenu::PreUpdate()
 bool MainMenu::Update(float dt)
 {
 	bool ret = true;
+
+	app->render->DrawTexture(BG,0,0);
+
 	if (app->deathmenu->finished == true) {
 		fading = 255;
 		fading2 = 0;
@@ -186,6 +190,7 @@ bool MainMenu::CleanUp()
 	LOG("Freeing main menu");
 	app->font->UnLoad(WF);
 	app->font->UnLoad(GF);
+	app->tex->UnLoad(BG);
 
 	return true;
 }

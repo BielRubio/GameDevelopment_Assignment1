@@ -96,5 +96,7 @@ bool Intro::CleanUp()
 {
 	LOG("Freeing intro");
 
+	app->tex->UnLoad(logo);
+
 	return true;
 }
