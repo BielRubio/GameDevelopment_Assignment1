@@ -146,6 +146,7 @@ bool MainMenu::Update(float dt)
 		app->mainmenu->active = false;
 
 	}
+	app->font->BlitText(134, 10, WF, "obsolete");
 	if (option == SELECTED::PLAY && options == false) {
 		app->font->BlitText(145, 40, WF, "play");
 		app->font->BlitText(137, 80, GF, "options");
