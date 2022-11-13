@@ -447,6 +447,9 @@ void Map::CreateColliders(ColData c) {
     else if (c.type == 2) {
         collider1->ctype = ColliderType::FLOOR;
     }
+    else if (c.type == 3) {
+        collider1->ctype = ColliderType::WALL;
+    }
 
 }
 

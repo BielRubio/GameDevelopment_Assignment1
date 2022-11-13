@@ -112,15 +112,11 @@ bool Player::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
-		if (playerState != State::LANDED && pbody->body->GetLinearVelocity().y == 0)
-			vel = b2Vec2(-speed, 5);
 		facing = DIRECTION::LEFT;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
 		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
-		if (playerState != State::LANDED && pbody->body->GetLinearVelocity().y == 0)
-			vel = b2Vec2(speed, 5);
 		facing = DIRECTION::RIGHT;
 	}
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps ) {
@@ -210,9 +206,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (playerState != State::LANDED) {
-			playerState = State::COLLIDING;
-		}
 		break;
 	case ColliderType::FLOOR:
 		LOG("Collision FLOOR");
@@ -225,6 +218,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			alive = false;
 		}
 		break;
+	case ColliderType::WALL:
+		LOG("Collision WALL");
+		if (playerState != State::LANDED) {
+			playerState = State::COLLIDING;
+		}
+		break; 
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
