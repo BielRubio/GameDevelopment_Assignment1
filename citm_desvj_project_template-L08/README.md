@@ -1,4 +1,4 @@
-# {Project Name}
+# {Obsolete}
 
 ## Description
 
@@ -19,8 +19,7 @@
 
  - {Dev01} - {Role(s)}
  - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - {Maksym Polupan} - {Scenes and scenes transitions, audio and fx, fonts}
 
 ## License
 
