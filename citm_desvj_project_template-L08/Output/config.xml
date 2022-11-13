@@ -24,6 +24,8 @@
   <scene>
 	 <!-- player Starting pos, x: 112 y: 230-->
     <player x="112" y="230" width="16" height="12" texturepath="Assets/Textures/charecter.png"/>
+	
+	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  
 	<saw x="856" y="144" noMove="true" texturepath="Assets/Textures/saw.png"/>
     <saw x="1000" y="192" noMove="true" texturepath="Assets/Textures/saw.png"/>

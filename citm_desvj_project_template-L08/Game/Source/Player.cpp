@@ -202,7 +202,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-
+		alive = false;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

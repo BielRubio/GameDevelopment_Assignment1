@@ -48,6 +48,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 
+	Item* trophy =(Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	trophy->parameters = config.child("trophy");
+
 	return ret;
 }
 
@@ -72,7 +75,7 @@ bool Scene::Start()
 	app->win->SetTitle(title.GetString());
 
 	//Initialize trophy texture
-	trophyTex = app->tex->Load("Assets/Textures/trophy.png");
+	//trophyTex = app->tex->Load("Assets/Textures/trophy.png");
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 
 	return true;
@@ -118,12 +121,8 @@ bool Scene::Update(float dt)
 	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);*/
 
 	//Draw Trophy
-	app->render->DrawTexture(trophyTex, 2464, 128);
+	//app->render->DrawTexture(trophyTex, 2464, 128);
 
-	//Restart
-	if (player->IsAlive() == false) {
-			
-	}
 	//app->render->DrawTexture(MapAdjustment, -100, 75);
 	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);
 
