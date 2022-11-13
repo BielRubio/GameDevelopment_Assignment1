@@ -89,7 +89,7 @@ bool Player::Update()
 
 	float speed = 3; 
 	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
-	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
 		if (invincible == false) {
 			invincible = true;
 			MaxJumps = 1000;
