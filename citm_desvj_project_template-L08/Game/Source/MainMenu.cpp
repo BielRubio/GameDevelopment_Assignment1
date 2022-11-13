@@ -39,6 +39,7 @@ bool MainMenu::Start()
 	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789" };
 	WF = app->font->Load("Assets/Fonts/FontWhiteDef.png", lookupTable, 1);
 	GF = app->font->Load("Assets/Fonts/FontGreyDef.png", lookupTable, 1);
+	YF = app->font->Load("Assets/Fonts/FontYellowDef.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	BG = app->tex->Load("Assets/Textures/TitleScreen_BG.png");
@@ -146,7 +147,7 @@ bool MainMenu::Update(float dt)
 		app->mainmenu->active = false;
 
 	}
-	app->font->BlitText(134, 10, WF, "obsolete");
+	app->font->BlitText(134, 10, YF, "obsolete");
 	if (option == SELECTED::PLAY && options == false) {
 		app->font->BlitText(145, 40, WF, "play");
 		app->font->BlitText(137, 80, GF, "options");
