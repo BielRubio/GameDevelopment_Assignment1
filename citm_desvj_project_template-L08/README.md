@@ -1,4 +1,4 @@
-# {Obsolete}
+# Obsolete
 Repository dedicated to the releases of the development subject (GDDV-CITM)
 
 In this repository we will be updating our platformer for the Development subject, "Obsolete".
