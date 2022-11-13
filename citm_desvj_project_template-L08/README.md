@@ -7,7 +7,7 @@ Obsolete is a basic 2D platformer in which your character is a robot.
 
 ## Key Features
 
-### Code features
+### General features
  - **Configuration loaded though XML** files:
 	- Assets pathing
 	- Window configuration
@@ -16,7 +16,6 @@ Obsolete is a basic 2D platformer in which your character is a robot.
 	- Colliders taken from object groups defined in Tiled
  - **Save/Load file detection**
  - **Menu and settings**: Volume can be modified from options menu, before starting the level
- 
 ### Gameplay
  - Double jump
  
@@ -31,6 +30,7 @@ Obsolete is a basic 2D platformer in which your character is a robot.
  - F1: Avoid the initial transitions
  - F2: Show colliders
  - F3: Start from the beginning of the level
+ - F4: Player death
  - F5: Save game state
  - F6: Load game state
  - F10: God mode
@@ -42,9 +42,12 @@ Obsolete is a basic 2D platformer in which your character is a robot.
  
 ## Developers
 
- - {Biel Rubio} - {Art, level design, module saw creation, map TMX loading and drawing}
- - {Nacho Moreno} - {Player mechanics, collision detection and Load/Save game state}
- - {Maksym Polupan} - {Scenes and scenes transitions, audio and fx, fonts}
+ - Biel Rubio - Art, level design, module saw creation, map TMX loading and drawing 
+ > https://github.com/BielRubio
+ - Nacho Moreno - Player mechanics, collision detection and Load/Save game state 
+ > https://github.com/NachoMoren
+ - Maksym Polupan - Scenes and scenes transitions, audio and fx, fonts 
+ > https://github.com/Maksym203
 
 ## License
 

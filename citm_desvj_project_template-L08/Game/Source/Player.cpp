@@ -106,7 +106,7 @@ bool Player::Update()
 		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
 		alive = false;
 	}
 
