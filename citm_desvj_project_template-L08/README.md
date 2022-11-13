@@ -1,24 +1,49 @@
 # {Obsolete}
+Repository dedicated to the releases of the development subject (GDDV-CITM)
 
+In this repository we will be updating our platformer for the Development subject, "Obsolete".
 ## Description
-
-{project description}
+Obsolete is a basic 2D platformer in which your character is a robot. 
 
 ## Key Features
 
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
+### Code features
+ - **Configuration loaded though XML** files:
+	- Assets pathing
+	- Window configuration
+	- Main characther and saw parameters
+ - **Map Loading from TMX:**
+	- Colliders taken from object groups defined in Tiled
+ - **Save/Load file detection**
+ - **Menu and settings**: Volume can be modified from options menu, before starting the level
+ 
+### Gameplay
+ - Double jump
  
 ## Controls
 
- - {ControlsScheme}
+ - A: Move left
+ - D: Move right
+ - Spacebar: Jump
+ 
+## Debug Keys
 
+ - F1: Avoid the initial transitions
+ - F2: Show colliders
+ - F3: Start from the beginning of the level
+ - F5: Save game state
+ - F6: Load game state
+ - F10: God mode
+ 
+## Known bugs
+
+ - Walking towards a wall while colliding will prevent the player to fall, even if there is no floor. 
+ - While saving, the positions of the saw won't be saved, so don't save if you are inside a saw's pathing
+ 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
+ - {Biel Rubio} - {Art, level design, module saw creation, map TMX loading and drawing}
+ - {Nacho Moreno} - {Player mechanics, collision detection and Load/Save game state}
  - {Maksym Polupan} - {Scenes and scenes transitions, audio and fx, fonts}
 
 ## License
