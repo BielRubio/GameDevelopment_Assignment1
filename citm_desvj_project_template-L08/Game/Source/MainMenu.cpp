@@ -166,6 +166,7 @@ bool MainMenu::Update(float dt)
 	if (option == SELECTED::MUSIC && options == true) {
 		app->font->BlitText(142, 60, WF, "music");
 		app->font->BlitText(145, 100, GF, "back");
+		app->render->DrawRectangle({ 124,79,66,12 }, 255, 255, 255);
 		app->render->DrawRectangle({ 125,80,64,10 }, 20, 20, 20);
 		app->render->DrawRectangle({ 125,80,app->audio->volume,10 }, 255, 255, 255);
 	}
