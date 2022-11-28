@@ -66,7 +66,7 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-    <mapfile path="Assets/Maps/test.tmx"/>
+    <mapfile path="Assets/Maps/playground.tmx"/>
   </map>
   
 </config>
