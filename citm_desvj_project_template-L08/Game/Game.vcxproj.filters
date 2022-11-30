@@ -29,6 +29,7 @@
     <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Saw.cpp" />
     <ClCompile Include="Source\DeathMenu.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Source\MemLeaks.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

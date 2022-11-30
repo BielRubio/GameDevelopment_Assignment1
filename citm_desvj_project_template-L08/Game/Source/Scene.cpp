@@ -51,6 +51,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	Item* trophy =(Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	trophy->parameters = config.child("trophy");
 
+	Enemy* ene = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	ene->parameters = config.child("enemy");
+
 	return ret;
 }
 
@@ -109,19 +112,12 @@ bool Scene::Update(float dt)
 		}
 	}
 	
-
-	//Draw bg
-	//app->render->DrawTexture(BGtexture, app->render->camera.x*app->win->GetScale(), app->render->camera.y * app->win->GetScale());
+	//Camera on player
+	app->render->camera.x = -1 * (player->position.x * app->win->GetScale() - app->render->camera.w / 2);
+	app->render->camera.y = -1 * (player->position.y * app->win->GetScale() - app->render->camera.h / 2);
 
 	// Draw map
 	app->map->Draw();
-
-	//Camera on player
-	/*app->render->camera.x = -1*(player->position.x*app->win->GetScale() - app->render->camera.w / 2);
-	app->render->camera.y = -1*(player->position.y*app->win->GetScale() - app->render->camera.h / 2);*/
-
-	//Draw Trophy
-	//app->render->DrawTexture(trophyTex, 2464, 128);
 
 	//app->render->DrawTexture(MapAdjustment, -100, 75);
 	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);

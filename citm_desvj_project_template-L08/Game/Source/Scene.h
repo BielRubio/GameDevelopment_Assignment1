@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Item.h"
 #include "Saw.h"
 

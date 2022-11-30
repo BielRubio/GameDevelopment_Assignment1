@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="334" height="70" tilewidth="8" tileheight="8" infinite="0" nextlayerid="14" nextobjectid="671">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="334" height="70" tilewidth="8" tileheight="8" infinite="0" nextlayerid="14" nextobjectid="671">
  <tileset firstgid="1" name="GD-tileset" tilewidth="8" tileheight="8" tilecount="130" columns="13">
   <image source="GD-tileset.png" width="104" height="80"/>
  </tileset>

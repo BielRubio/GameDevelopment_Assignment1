@@ -42,7 +42,7 @@ public:
 	bool SaveState(pugi::xml_node& data);
 
 public:
-	int positionX, positionY;
+
 	bool DeathAnimationFinished = false;
 
 	PhysBody* pbody;

@@ -180,13 +180,12 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	positionX = position.x;
-	positionY = position.y;
+	//app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
+	//app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
+	
+	//app->render->DrawTexture(texture, position.x+1, position.y+1, &rect);
+	app->render->DrawRectangle({ position.x, position.y, width, height }, 0,255,255);
 
-	app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
-	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
-
-	app->render->DrawTexture(texture, position.x+1, position.y+1, &rect);
 
 	return true;
 }

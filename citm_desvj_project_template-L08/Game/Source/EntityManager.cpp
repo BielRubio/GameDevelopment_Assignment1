@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Item.h"
 #include "Saw.h"
 #include "App.h"
@@ -81,13 +82,15 @@ Entity* EntityManager::CreateEntity(EntityType type)
 {
 	Entity* entity = nullptr; 
 
-	//L02: DONE 2: Instantiate entity according to the type and add the new entoty it to the list of Entities
-
 	switch (type)
 	{
 
 	case EntityType::PLAYER:
 		entity = new Player();
+		break;
+
+	case EntityType::ENEMY:
+		entity = new Enemy();
 		break;
 
 	case EntityType::ITEM:
