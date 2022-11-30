@@ -109,6 +109,7 @@
     <ClCompile Include="Source\Menu.cpp" />
     <ClCompile Include="Source\ModuleFonts.cpp" />
     <ClCompile Include="Source\Path.cpp" />
+    <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Saw.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ModuleFonts.h" />
     <ClInclude Include="Source\Path.h" />
+    <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Queue.h" />

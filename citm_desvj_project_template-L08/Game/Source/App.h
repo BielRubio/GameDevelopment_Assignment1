@@ -24,6 +24,7 @@ class ModuleFonts;
 class Physics;
 class DeathMenu;
 class MainMenu;
+class PathFinding; 
 
 class App
 {
@@ -99,6 +100,7 @@ public:
 	Physics* physics;
 	DeathMenu* deathmenu;
 	MainMenu* mainmenu;
+	PathFinding* pathfinding; 
 
 private:
 

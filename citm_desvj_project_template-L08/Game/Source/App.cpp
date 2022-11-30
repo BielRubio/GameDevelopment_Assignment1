@@ -13,6 +13,7 @@
 #include "MainMenu.h"
 #include "ModuleFonts.h"
 #include "DeathMenu.h"
+#include "Pathfinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -34,6 +35,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	intro = new Intro();
 	scene = new Scene();
 	physics = new Physics();
+	pathfinding = new PathFinding(); 
 	entityManager = new EntityManager();
 	map = new Map();
 	//menu = new Menu();
@@ -48,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(intro);
 	AddModule(physics);
+	AddModule(pathfinding); 
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(map);

@@ -86,94 +86,16 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-
-	float speed = 3; 
-	b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
-		if (invincible == false) {
-			invincible = true;
-			MaxJumps = 1000;
-		}
-		else if (invincible == true) {
-			invincible = false;
-			MaxJumps = 2;
-		}
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		position.x = parameters.attribute("x").as_int();
-		position.y = parameters.attribute("y").as_int();
-		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
-		alive = false;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
-		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
-		facing = DIRECTION::LEFT;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
-		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
-		facing = DIRECTION::RIGHT;
-	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps ) {
-		vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
-		pbody->body->SetLinearVelocity(vel);
-		pbody->body->ApplyForce(b2Vec2(0,-37), pbody->body->GetPosition(),true);
-		app->audio->PlayFxWithVolume(Jump1, 0, 30);
-		jumpCounter++;
-		playerState = State::JUMPING;
-	}
-
-	//Fx
-	if (vel.x != 0 && vel.y == 0) {
-		aux++;
-		if (aux == 0) {
-			app->audio->PlayFxWithVolume(Step1,0,25);
-		}
-		if (aux == 10) {
-			app->audio->PlayFxWithVolume(Step2,0,25);
-			aux = -10;
-		}
-	}
 	
-	//Set the velocity of the pbody of the player
-	pbody->body->SetLinearVelocity(vel);
+	debugKeys();
 
-	if (facing == DIRECTION::RIGHT && vel.x == 0) {
-		currentAnim = &playerIdleR;
-	}
-	if (facing == DIRECTION::LEFT && vel.x == 0) {
-		currentAnim = &playerIdleL;
-	}
-	if (facing == DIRECTION::RIGHT && vel.x != 0) {
-		currentAnim = &playerRunR;
-	}
-	if (facing == DIRECTION::LEFT && vel.x != 0) {
-		currentAnim = &playerRunL;
-	}
-	if (facing == DIRECTION::RIGHT && vel.y != 0) {
-		currentAnim = &playerJumpR;
-	}
-	if (facing == DIRECTION::LEFT && vel.y != 0) {
-		currentAnim = &playerJumpL;
-	}
+	Move();
 
 	//Death
 	if (alive != true) {
-		pbody->body->SetActive(false);
-		currentAnim = &playerDie;
-		if (currentAnim->HasFinished()) {
-			app->audio->PlayFxWithVolume(DeathSound, 0, 50);
-			this->Disable();
-			DeathAnimationFinished = true;
-			app->deathmenu->active = true;
-		}
+		Death(); 
 	}
-
+	
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
 
@@ -253,4 +175,100 @@ bool Player::SaveState(pugi::xml_node& data) {
 	data.child("player_stats").append_attribute("state") =	(int)playerState;
 
 	return true; 
+}
+
+void Player::Move() {
+
+	float speed = 3;
+	vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
+		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+		facing = DIRECTION::LEFT;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->scene->CanPlayerMove == true) {
+		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+		facing = DIRECTION::RIGHT;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->CanPlayerMove == true && jumpCounter < MaxJumps) {
+		Jump(); 
+	}
+	//Fx
+	if (vel.x != 0 && vel.y == 0) {
+		aux++;
+		if (aux == 0) {
+			app->audio->PlayFxWithVolume(Step1, 0, 25);
+		}
+		if (aux == 10) {
+			app->audio->PlayFxWithVolume(Step2, 0, 25);
+			aux = -10;
+		}
+	}
+
+	if (facing == DIRECTION::RIGHT && vel.x == 0) {
+		currentAnim = &playerIdleR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x == 0) {
+		currentAnim = &playerIdleL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.x != 0) {
+		currentAnim = &playerRunR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x != 0) {
+		currentAnim = &playerRunL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.y != 0) {
+		currentAnim = &playerJumpR;
+	}
+	if (facing == DIRECTION::LEFT && vel.y != 0) {
+		currentAnim = &playerJumpL;
+	}
+
+	//Set the velocity of the pbody of the player
+	pbody->body->SetLinearVelocity(vel);
+}
+
+void Player::Jump() {
+	vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
+	pbody->body->SetLinearVelocity(vel);
+	pbody->body->ApplyForce(b2Vec2(0, -37), pbody->body->GetPosition(), true);
+	app->audio->PlayFxWithVolume(Jump1, 0, 30);
+	jumpCounter++;
+	playerState = State::JUMPING;
+}
+
+void Player::debugKeys() {
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		if (invincible == false) {
+			invincible = true;
+			MaxJumps = 1000;
+		}
+		else if (invincible == true) {
+			invincible = false;
+			MaxJumps = 2;
+		}
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
+		position.x = parameters.attribute("x").as_int();
+		position.y = parameters.attribute("y").as_int();
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) {
+		alive = false;
+	}
+
+}
+
+void Player::Death() {
+	pbody->body->SetActive(false);
+	currentAnim = &playerDie;
+	if (currentAnim->HasFinished()) {
+		app->audio->PlayFxWithVolume(DeathSound, 0, 50);
+		this->Disable();
+		DeathAnimationFinished = true;
+		app->deathmenu->active = true;
+	}
 }
