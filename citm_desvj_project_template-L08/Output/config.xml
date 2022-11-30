@@ -23,7 +23,7 @@
 
   <scene>
 	 <!-- player Starting pos, x: 112 y: 230-->
-    <player x="112" y="230" width="16" height="12" texturepath="Assets/Textures/charecter.png"/>
+    <player x="1200" y="130" width="16" height="12" texturepath="Assets/Textures/charecter.png"/>
 	
 	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  
@@ -66,7 +66,7 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-    <mapfile path="Assets/Maps/playground.tmx"/>
+    <mapfile path="Assets/Maps/test.tmx"/>
   </map>
   
 </config>

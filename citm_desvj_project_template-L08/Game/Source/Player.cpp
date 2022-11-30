@@ -86,32 +86,14 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-	debugKeys(); 
-
-	Move(); 
 	
+	debugKeys();
+
+	Move();
+
 	//Death
 	if (alive != true) {
-		Death();
-	}
-
-	if (facing == DIRECTION::RIGHT && vel.x == 0) {
-		currentAnim = &playerIdleR;
-	}
-	if (facing == DIRECTION::LEFT && vel.x == 0) {
-		currentAnim = &playerIdleL;
-	}
-	if (facing == DIRECTION::RIGHT && vel.x != 0) {
-		currentAnim = &playerRunR;
-	}
-	if (facing == DIRECTION::LEFT && vel.x != 0) {
-		currentAnim = &playerRunL;
-	}
-	if (facing == DIRECTION::RIGHT && vel.y != 0) {
-		currentAnim = &playerJumpR;
-	}
-	if (facing == DIRECTION::LEFT && vel.y != 0) {
-		currentAnim = &playerJumpL;
+		Death(); 
 	}
 	
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
@@ -222,6 +204,25 @@ void Player::Move() {
 			app->audio->PlayFxWithVolume(Step2, 0, 25);
 			aux = -10;
 		}
+	}
+
+	if (facing == DIRECTION::RIGHT && vel.x == 0) {
+		currentAnim = &playerIdleR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x == 0) {
+		currentAnim = &playerIdleL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.x != 0) {
+		currentAnim = &playerRunR;
+	}
+	if (facing == DIRECTION::LEFT && vel.x != 0) {
+		currentAnim = &playerRunL;
+	}
+	if (facing == DIRECTION::RIGHT && vel.y != 0) {
+		currentAnim = &playerJumpR;
+	}
+	if (facing == DIRECTION::LEFT && vel.y != 0) {
+		currentAnim = &playerJumpL;
 	}
 
 	//Set the velocity of the pbody of the player
