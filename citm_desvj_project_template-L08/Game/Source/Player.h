@@ -6,6 +6,7 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Path.h"
+#include "Physics.h"
 
 struct SDL_Texture;
 
@@ -41,6 +42,14 @@ public:
 
 	bool SaveState(pugi::xml_node& data);
 
+	void Jump(); 
+	
+	void Move(); 
+
+	void debugKeys(); 
+
+	void Death(); 
+
 public:
 	int positionX, positionY;
 	bool DeathAnimationFinished = false;
@@ -63,6 +72,8 @@ private:
 	int MaxJumps = 2;
 
 	State playerState; 
+
+	b2Vec2 vel; 
 
 
 	DIRECTION facing = DIRECTION::RIGHT;
