@@ -8,7 +8,6 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
-    <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Log.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -29,6 +28,10 @@
     <ClCompile Include="Source\MainMenu.cpp" />
     <ClCompile Include="Source\Saw.cpp" />
     <ClCompile Include="Source\DeathMenu.cpp" />
+    <ClCompile Include="Source\App.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pathfinding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -87,6 +90,7 @@
     <ClInclude Include="Source\MemLeaks.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Pathfinding.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
