@@ -36,8 +36,8 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	//pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
-	pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-8, bodyType::DYNAMIC);
+	//pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
