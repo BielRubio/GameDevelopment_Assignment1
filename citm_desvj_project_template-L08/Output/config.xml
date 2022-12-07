@@ -9,7 +9,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="4"/>
+    <resolution width="1280" height="720" scale="3"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -23,7 +23,7 @@
 
   <scene>
 	 <!-- player Starting pos, x: 112 y: 230-->
-    <player x="112" y="230" width="16" height="12" texturepath="Assets/Textures/charecter.png"/>
+    <player x="400" y="100" width="16" height="16" texturepath="Assets/Textures/player16.png"/>
 
 	<enemy x="112" y="230" width="8" height="8" texturepath="Assets/Textures/charecter.png"/>
 	
@@ -68,7 +68,7 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-    <mapfile path="Assets/Maps/test.tmx"/>
+    <mapfile path="Assets/Maps/sixteen.tmx"/>
   </map>
   
 </config>

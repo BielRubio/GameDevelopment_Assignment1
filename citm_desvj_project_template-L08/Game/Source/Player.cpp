@@ -36,7 +36,8 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
+	//pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
@@ -102,11 +103,11 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	//app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
-	//app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
+	app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
+	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
 	
-	//app->render->DrawTexture(texture, position.x+1, position.y+1, &rect);
-	app->render->DrawRectangle({ position.x, position.y, width, height }, 0,255,255);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	//app->render->DrawRectangle({ position.x, position.y, width, height }, 0,255,255);
 
 
 	return true;
@@ -231,7 +232,7 @@ void Player::Move() {
 void Player::Jump() {
 	vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
 	pbody->body->SetLinearVelocity(vel);
-	pbody->body->ApplyForce(b2Vec2(0, -37), pbody->body->GetPosition(), true);
+	pbody->body->ApplyForce(b2Vec2(0, -60), pbody->body->GetPosition(), true);
 	app->audio->PlayFxWithVolume(Jump1, 0, 30);
 	jumpCounter++;
 	playerState = State::JUMPING;
