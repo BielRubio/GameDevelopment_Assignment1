@@ -9,7 +9,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="3"/>
+    <resolution width="1280" height="720" scale="4"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -19,17 +19,17 @@
   <audio>
     <music volume="30"/>
     <fx volume="128"/>
-  </audio>
+  </audio> 
 
   <scene>
 	 <!-- player Starting pos, x: 112 y: 230-->
-    <player x="400" y="100" width="16" height="20" texturepath="Assets/Textures/testP.png"/>
+    <player x="400" y="150" width="32" height="16" texturepath="Assets/Textures/player16_2.png"/>
 
-	<enemy x="112" y="230" width="8" height="8" texturepath="Assets/Textures/charecter.png"/>
+	<enemy x="112" y="230" width="8" height="8" texturepath="Assets/Textures/grounded_enemy.png"/>
 	
 	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  
-	<saw x="856" y="144" noMove="true" texturepath="Assets/Textures/saw.png"/>
+	<!--<saw x="856" y="144" noMove="true" texturepath="Assets/Textures/saw.png"/>
     <saw x="1000" y="192" noMove="true" texturepath="Assets/Textures/saw.png"/>
 	<saw x="1000" y="144" noMove="true" texturepath="Assets/Textures/saw.png"/>
 	  
@@ -56,7 +56,7 @@
 	<saw x="2040" y="112" x1="2040" y1="112" x2="2040" y2="224" noMove="false" speed="6" texturepath="Assets/Textures/saw.png"/>
 	  
 	<saw x="2120" y="128" x1="2120" y1="128" x2="2416" y2="128" noMove="false" speed="7" texturepath="Assets/Textures/saw.png"/>
-	<saw x="2072" y="104" x1="2072" y1="104" x2="2416" y2="104" noMove="false" speed="3" texturepath="Assets/Textures/saw.png"/>
+	<saw x="2072" y="104" x1="2072" y1="104" x2="2416" y2="104" noMove="false" speed="3" texturepath="Assets/Textures/saw.png"/>-->
 	  
 	  
 	<item x="104" y="150" texturepath="Assets/Textures/goldCoin.png"/>

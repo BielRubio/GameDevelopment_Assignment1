@@ -36,7 +36,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-8, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-24, height-2, bodyType::DYNAMIC);
 	//pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
@@ -60,13 +60,13 @@ bool Player::Start() {
 	playerJumpR.PushBack({ 0 * width,4 * height,width,height });
 	playerJumpL.PushBack({ 0 * width,5 * height,width,height });
 	
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 6; i++) {
 		playerRunR.PushBack({ i * width,2 * height,width,height });
 	}
 	playerRunR.loop = true;
 	playerRunR.speed = 0.3f;
 	
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 6; i++) {
 		playerRunL.PushBack({ i * width,3 * height,width,height });
 	}
 	playerRunL.loop = true;
@@ -232,8 +232,8 @@ void Player::Move() {
 void Player::Jump() {
 	vel = b2Vec2(pbody->body->GetLinearVelocity().x, 0);
 	pbody->body->SetLinearVelocity(vel);
-	pbody->body->ApplyForce(b2Vec2(0, -60), pbody->body->GetPosition(), true);
-	app->audio->PlayFxWithVolume(Jump1, 0, 30);
+	pbody->body->ApplyForce(b2Vec2(0, -45), pbody->body->GetPosition(), true);
+	app->audio->PlayFxWithVolume(Jump1, 0, 35);
 	jumpCounter++;
 	playerState = State::JUMPING;
 }
