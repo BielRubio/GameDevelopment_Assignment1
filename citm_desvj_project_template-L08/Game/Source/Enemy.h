@@ -46,6 +46,16 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	Animation* currentAnim = nullptr;
+
+	Animation enemyIdleR;
+	Animation enemyIdleL;
+	Animation enemyRunR;
+	Animation enemyRunL;
+	Animation enemyDropR;
+	Animation enemyDropL;
+	Animation enemyDie;
+
 	int width;
 	int height;
 };

@@ -35,11 +35,38 @@ bool Enemy::Awake() {
 bool Enemy::Start() {
 
 	//initilize textures
-	//texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width, height, bodyType::DYNAMIC);
+	texture = app->tex->Load(texturePath);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
+
+	//Animations
+	enemyIdleR.PushBack({ 0 * width,0 * height,width,height });
+	enemyIdleL.PushBack({ 0 * width,1 * height,width,height });
+
+	enemyDropR.PushBack({ 0 * width,4 * height,width,height });
+	enemyDropL.PushBack({ 0 * width,5 * height,width,height });
+
+	for (int i = 0; i < 3; i++) {
+		enemyRunR.PushBack({ i * width,2 * height,width,height });
+	}
+	enemyRunR.loop = true;
+	enemyRunR.speed = 0.3f;
+
+	for (int i = 0; i < 3; i++) {
+		enemyRunL.PushBack({ i * width,3 * height,width,height });
+	}
+	enemyRunL.loop = true;
+	enemyRunL.speed = 0.3f;
+
+	for (int i = 0; i < 4; i++) {
+		enemyDie.PushBack({ i * width,6 * height,width,height });
+	}
+	enemyDie.loop = false;
+	enemyDie.speed = 0.3f;
+
+	currentAnim = &enemyIdleR;
 
 	return true;
 }
@@ -49,10 +76,20 @@ bool Enemy::Start() {
 bool Enemy::Update()
 {
 
+	if (pbody->body->GetLinearVelocity().x > 0)
+		currentAnim = &enemyRunR;
+
+	if (pbody->body->GetLinearVelocity().x < 0)
+		currentAnim = &enemyRunL;
+
+	SDL_Rect rect = currentAnim->GetCurrentFrame();
+	currentAnim->Update();
+
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
 
 	return true;
 }
