@@ -9,6 +9,12 @@
 
 struct SDL_Texture;
 
+enum class ENEMY_TYPE {
+	GROUNDED = 1,
+	FLYING,
+	UNKNOWN
+};
+
 class Enemy : public Entity
 {
 public:
