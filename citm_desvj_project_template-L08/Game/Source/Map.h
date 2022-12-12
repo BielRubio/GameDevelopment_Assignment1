@@ -114,7 +114,7 @@ struct MapData
 	int	tileWidth;
 	int	tileHeight;
 	List<TileSet*> tilesets;
-	MapTypes type;
+	MapTypes type = MapTypes::MAPTYPE_ORTHOGONAL;
 
 	// L05: DONE 2: Add a list/array of layers to the map
 	List<MapLayer*> maplayers;

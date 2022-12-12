@@ -35,9 +35,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	intro = new Intro();
 	scene = new Scene();
 	physics = new Physics();
-	pathfinding = new PathFinding(); 
 	entityManager = new EntityManager();
 	map = new Map();
+	pathfinding = new PathFinding();
 	//menu = new Menu();
 	deathmenu = new DeathMenu();
 	mainmenu = new MainMenu();
@@ -50,12 +50,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(intro);
 	AddModule(physics);
-	AddModule(pathfinding); 
+	//AddModule(pathfinding); 
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(map);
 	//AddModule(menu);
 	AddModule(font);
+	AddModule(pathfinding);
 	AddModule(deathmenu);
 	AddModule(mainmenu);
 	deathmenu->active = false;

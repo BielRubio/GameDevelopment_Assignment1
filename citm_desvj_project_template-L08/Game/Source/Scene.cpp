@@ -144,6 +144,10 @@ bool Scene::Update(float dt)
 			app->physics->debug = true;
 		}
 	}
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+		app->pathfinding->CreatePath(iPoint(15, 26), iPoint(15, 21));
+	}
+
 	
 	//Camera on player
 	/*app->render->camera.x = -1 * (player->position.x * app->win->GetScale() - app->render->camera.w / 2);
@@ -156,8 +160,9 @@ bool Scene::Update(float dt)
 	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);
 
 	// L08: DONE 3: Test World to map method
-	int mouseX, mouseY;
+	int mouseX, mouseY;                             
 	app->input->GetMousePosition(mouseX, mouseY);
+	LOG("%d %d", mouseX, mouseY);
 
 	iPoint mouseTile = iPoint(0, 0);
 
@@ -169,11 +174,14 @@ bool Scene::Update(float dt)
 		mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
 			mouseY - app->render->camera.y);
 	}
+	mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
+	mouseY - app->render->camera.y);
 
 	//Convert again the tile coordinates to world coordinates to render the texture of the tile
 	iPoint highlightedTileWorld = app->map->MapToWorld(mouseTile.x, mouseTile.y);
 	app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
-
+	//app->render->DrawRectangle({ highlightedTileWorld.x, highlightedTileWorld.y, 16,16 }, 0, 0, 200);
+	//app->render->DrawRectangle({ mouseX +230, mouseY+120, 16,16 }, 0, 0, 200);
 	//Test compute path function
 	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 	{
@@ -195,12 +203,14 @@ bool Scene::Update(float dt)
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		//app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		app->render->DrawRectangle({ pos.x, pos.y, 16,16 }, 0, 0, 200);
 	}
 
 	// L12: Debug pathfinding
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
-	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+	//app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+	app->render->DrawRectangle({ originScreen.x, originScreen.y, 16,16 }, 0, 0, 200);
 
 
 	return true;
