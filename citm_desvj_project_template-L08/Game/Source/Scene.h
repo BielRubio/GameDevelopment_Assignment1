@@ -45,6 +45,16 @@ public:
 	//L02: DONE 3: Declare a Player attribute 
 	Player* player;
 	bool CanPlayerMove = false;
+
+	// PATHFINDING
+	SDL_Texture* mouseTileTex = nullptr;
+	SDL_Texture* originTex = nullptr;
+
+	// L12: Debug pathfing
+	iPoint origin;
+	iPoint destination;
+	bool originSelected = false;
+
 private:
 	bool Music = false;
 	SDL_Texture* img;
@@ -52,15 +62,6 @@ private:
 
 	SDL_Texture* trophyTex;
 	SDL_Texture* BGtexture;
-
-	// PATHFINDING
-	SDL_Texture* mouseTileTex = nullptr;
-	SDL_Texture* originTex = nullptr;
-
-
-	// L12: Debug pathfing
-	iPoint origin;
-	bool originSelected = false;
 
 };
 
