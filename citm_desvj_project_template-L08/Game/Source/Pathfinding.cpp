@@ -170,6 +170,10 @@ int PathNode::CalculateF(const iPoint& destination)
 	return g + h;
 }
 
+void PathFinding::DrawPath() {
+
+}
+
 // ----------------------------------------------------------------------------------
 // Actual A* algorithm: return number of steps in the creation of the path or -1 ----
 // ----------------------------------------------------------------------------------

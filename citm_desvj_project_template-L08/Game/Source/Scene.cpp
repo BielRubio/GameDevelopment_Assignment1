@@ -209,13 +209,12 @@ bool Scene::Update(float dt)
 	//}
 	destination = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y+4);
 	destination = app->map->MapToWorld(destination.x+1, destination.y);
+	app->render->DrawRectangle({ origin.x, origin.y, 16,16 }, 0, 255, 255, 150);
 	app->render->DrawTexture(originTex,destination.x, destination.y);
 	
 
 	// L12: Debug pathfinding
 	//iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
-	//app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
-	//app->render->DrawRectangle({ originScreen.x, originScreen.y, 16,16 }, 0, 0, 200);
 
 
 	return true;

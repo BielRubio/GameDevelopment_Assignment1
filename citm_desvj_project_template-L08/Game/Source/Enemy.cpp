@@ -91,9 +91,9 @@ bool Enemy::Update()
 
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
-	app->scene->origin = app->map->WorldToMap(position.x, position.y);
+	app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
 	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);
-	app->render->DrawTexture(app->scene->originTex, app->scene->destination.x, app->scene->destination.y);
+	//app->render->DrawTexture(app->scene->originTex, app->scene->destination.x, app->scene->destination.y);
 	return true;
 }
 
