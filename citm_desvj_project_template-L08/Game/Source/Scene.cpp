@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "MainMenu.h"
 #include "Intro.h"
+#include "Pathfinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -64,7 +65,7 @@ bool Scene::Start()
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 	
 	// L03: DONE: Load map
-	app->map->Load();
+	bool retLoad = app->map->Load();
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	// L04: DONE 7: Set the window title with map/tileset info
@@ -80,6 +81,38 @@ bool Scene::Start()
 	//Initialize trophy texture
 	//trophyTex = app->tex->Load("Assets/Textures/trophy.png");
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
+
+	// L12 Create walkability map
+	if (retLoad) {
+		int w, h;
+		uchar* data = NULL;
+
+		bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
+		if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+
+		RELEASE_ARRAY(data);
+
+	}
+
+	//Sets the camera to be centered in isometric map
+	if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
+
+		// Texture to highligh mouse position 
+		mouseTileTex = app->tex->Load("Assets/Maps/path.png");
+
+		// Texture to show path origin 
+		originTex = app->tex->Load("Assets/Maps/x.png");
+	}
+
+	if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
+
+		// Texture to highligh mouse position 
+		mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
+
+		// Texture to show path origin 
+		originTex = app->tex->Load("Assets/Maps/x_square.png");
+	}
+
 
 	return true;
 }
@@ -121,6 +154,54 @@ bool Scene::Update(float dt)
 
 	//app->render->DrawTexture(MapAdjustment, -100, 75);
 	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);
+
+	// L08: DONE 3: Test World to map method
+	int mouseX, mouseY;
+	app->input->GetMousePosition(mouseX, mouseY);
+
+	iPoint mouseTile = iPoint(0, 0);
+
+	if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
+		mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x - app->map->mapData.tileWidth / 2,
+			mouseY - app->render->camera.y - app->map->mapData.tileHeight / 2);
+	}
+	if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
+		mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
+			mouseY - app->render->camera.y);
+	}
+
+	//Convert again the tile coordinates to world coordinates to render the texture of the tile
+	iPoint highlightedTileWorld = app->map->MapToWorld(mouseTile.x, mouseTile.y);
+	app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
+
+	//Test compute path function
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	{
+		if (originSelected == true)
+		{
+			app->pathfinding->CreatePath(origin, mouseTile);
+			originSelected = false;
+		}
+		else
+		{
+			origin = mouseTile;
+			originSelected = true;
+			app->pathfinding->ClearLastPath();
+		}
+	}
+
+	// L12: Get the latest calculated path and draw
+	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+	}
+
+	// L12: Debug pathfinding
+	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
+	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+
 
 	return true;
 }

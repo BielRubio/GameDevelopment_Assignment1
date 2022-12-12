@@ -52,6 +52,15 @@ private:
 
 	SDL_Texture* trophyTex;
 	SDL_Texture* BGtexture;
+
+	// PATHFINDING
+	SDL_Texture* mouseTileTex = nullptr;
+	SDL_Texture* originTex = nullptr;
+
+	// L12: Debug pathfing
+	iPoint origin;
+	bool originSelected = false;
+
 };
 
 #endif // __SCENE_H__
