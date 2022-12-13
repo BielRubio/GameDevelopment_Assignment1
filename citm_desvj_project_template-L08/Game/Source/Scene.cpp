@@ -84,35 +84,35 @@ bool Scene::Start()
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 
 	// L12 Create walkability map
-	if (retLoad) {
-		int w, h;
-		uchar* data = NULL;
+	//if (retLoad) {
+	//	int w, h;
+	//	uchar* data = NULL;
 
-		bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
-		if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+	//	bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
+	//	if (retWalkMap) app->pathfinding->SetMap(w, h, data);
 
-		RELEASE_ARRAY(data);
+	//	RELEASE_ARRAY(data);
 
-	}
+	//}
 
-	//Sets the camera to be centered in isometric map
-	if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
+	////Sets the camera to be centered in isometric map
+	//if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
 
-		// Texture to highligh mouse position 
-		mouseTileTex = app->tex->Load("Assets/Maps/path.png");
+	//	// Texture to highligh mouse position 
+	//	mouseTileTex = app->tex->Load("Assets/Maps/path.png");
 
-		// Texture to show path origin 
-		originTex = app->tex->Load("Assets/Maps/x.png");
-	}
+	//	// Texture to show path origin 
+	//	originTex = app->tex->Load("Assets/Maps/x.png");
+	//}
 
-	if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
+	//if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
 
-		// Texture to highligh mouse position 
-		mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
+	//	// Texture to highligh mouse position 
+	//	mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
 
-		// Texture to show path origin 
-		originTex = app->tex->Load("Assets/Maps/destination.png");
-	}
+	//	// Texture to show path origin 
+	//	originTex = app->tex->Load("Assets/Maps/destination.png");
+	//}
 
 
 	return true;
@@ -145,9 +145,16 @@ bool Scene::Update(float dt)
 			app->physics->debug = true;
 		}
 	}
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-		app->pathfinding->CreatePath(destination, origin);
-	}
+	//if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+	//	app->pathfinding->CreatePath(destination, origin);
+	//}
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) app->map->PropagateDijkstra();
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) app->map->ResetPath();
+
+
+
+
 
 	
 	//Camera on player
@@ -158,7 +165,6 @@ bool Scene::Update(float dt)
 	app->map->Draw();
 
 	//app->render->DrawTexture(MapAdjustment, -100, 75);
-	app->render->DrawRectangle({ 0,0,-150,560 }, 34, 32, 52);
 
 	//// L08: DONE 3: Test World to map method
 	//int mouseX, mouseY;                             
@@ -208,9 +214,32 @@ bool Scene::Update(float dt)
 	//	//app->render->DrawRectangle({ pos.x, pos.y, 16,16 }, 0, 0, 200);
 	//}
 	destination = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y+4);
+	AuxPlayer = destination;
+	AuxPlayer.x = destination.x+1;
+	origin = app->map->WorldToMap(origin.x, origin.y);
+	AuxEnemy = origin;
+	if (checked == false) {
+		Checker = AuxPlayer;
+		Checker2 = AuxEnemy;
+		checked = true;
+	}
 	destination = app->map->MapToWorld(destination.x+1, destination.y);
-	app->render->DrawRectangle({ origin.x, origin.y, 16,16 }, 0, 255, 255, 150);
-	app->render->DrawTexture(originTex,destination.x, destination.y);
+	//app->render->DrawRectangle({ origin.x, origin.y, 16,16 }, 0, 255, 255, 150);
+	//app->render->DrawRectangle({ destination.x, destination.y, 16,16 }, 150, 150, 0, 200);
+	if (Checker != AuxPlayer || Checker2 != AuxEnemy) {
+		app->map->ResetPath();
+		checked = false;
+		//app->map->frontier.Push(AuxPlayer, 0);
+		//app->map->visited.Add(AuxPlayer);
+		//app->map->breadcrumbs.Add(AuxPlayer);
+		//app->map->destination = AuxEnemy;
+	}
+	//app->map->frontier.Push(iPoint(20, 14), 0);
+	//app->map->visited.Add(iPoint(20, 14));
+	//app->map->breadcrumbs.Add(iPoint(20, 14));
+	//app->map->destination = iPoint(25, 14);
+
+	//app->render->DrawTexture(originTex,destination.x, destination.y);
 	
 
 	// L12: Debug pathfinding

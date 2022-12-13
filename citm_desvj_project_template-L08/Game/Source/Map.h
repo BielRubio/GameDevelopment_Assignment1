@@ -4,6 +4,10 @@
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
+#include "PQueue.h"
+#include "DynArray.h"
+
+#define COST_MAP_SIZE 25
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -166,6 +170,18 @@ public:
 
 	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
+	void ResetPath();
+	void DrawPath();
+	bool IsWalkable(int x, int y) const;
+
+	// L10: Methods for BFS + Pathfinding and cost function for Dijkstra
+	int MovementCost(int x, int y) const;
+	void ComputePath(int x, int y);
+
+	// Propagation methods
+	void PropagateDijkstra(); //L10
+
+
 private:
 
 	bool LoadMap(pugi::xml_node mapFile);
@@ -186,16 +202,30 @@ private:
 	// L06: DONE 6: Load a group of properties 
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
-public: 
+public:
 
 	// L04: DONE 1: Declare a variable data of the struct MapData
 	MapData mapData;
+	// L09: BFS Pathfinding variables
+	PQueue<iPoint> frontier;
+	List<iPoint> visited;
+
+	// L09 DONE 4: Define destionation point 
+	iPoint destination;
+
+	// L10: Additional variables
+	List<iPoint> breadcrumbs;
 
 private:
 
-    SString mapFileName;
+	SString mapFileName;
 	SString mapFolder;
-    bool mapLoaded;
+	bool mapLoaded;
+
+	uint costSoFar[COST_MAP_SIZE][COST_MAP_SIZE];
+	DynArray<iPoint> path;
+
+	SDL_Texture* tileX = nullptr;
 };
 
 #endif // __MAP_H__

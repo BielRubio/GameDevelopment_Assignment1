@@ -127,3 +127,19 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 
 	return true; 
 }
+
+void Enemy::Attack() {
+
+}
+
+void Enemy::TakeDamage() {
+
+}
+
+void Enemy::DetectPlayer() {
+
+}
+
+void Enemy::Patrol() {
+
+}

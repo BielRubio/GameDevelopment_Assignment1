@@ -39,9 +39,15 @@ public:
 
 	bool SaveState(pugi::xml_node& data);
 
-public:
+	virtual void Attack();
 
-	int positionX, positionY;
+	virtual void TakeDamage();
+
+	virtual void DetectPlayer();
+
+	virtual void Patrol();
+
+public:
 
 	PhysBody* pbody;
 

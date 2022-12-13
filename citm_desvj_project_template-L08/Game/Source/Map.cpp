@@ -6,6 +6,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "Pathfinding.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -30,6 +31,14 @@ bool Map::Awake(pugi::xml_node& config)
 
     mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
+
+    ////Initialize the path
+    //frontier.Push(iPoint(20, 14), 0);
+    //visited.Add(iPoint(20, 14));
+    //breadcrumbs.Add(iPoint(20, 14));
+
+    //// L09 DONE 4: Initialize destination point
+    //destination = iPoint(25, 14);
 
     return ret;
 }
@@ -88,6 +97,8 @@ void Map::Draw()
         mapLayerItem = mapLayerItem->next;
 
     }
+    DrawPath();
+
 }
 
 // L12: Create walkability map for pathfinding
@@ -249,6 +260,7 @@ bool Map::CleanUp()
 bool Map::Load()
 {
     bool ret = true;
+    tileX = app->tex->Load("Assets/Maps/path_square.png");
 
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
@@ -531,5 +543,197 @@ void Map::CreateColliders(ColData c) {
         collider1->ctype = ColliderType::WALL;
     }
 
+}
+
+//TEMPORARY PATHFINDING -----------------------------------------------------------------------------------------------------------------
+
+void Map::ResetPath()
+{
+    frontier.Clear();
+    visited.Clear();
+    breadcrumbs.Clear();
+    path.Clear();
+
+    frontier.Push(app->scene->AuxPlayer, 0);
+    visited.Add(app->scene->AuxPlayer);
+    breadcrumbs.Add(app->scene->AuxPlayer);
+    destination = app->scene->AuxEnemy;
+
+    //initailize the cost matrix
+    memset(costSoFar, 0, sizeof(uint) * COST_MAP_SIZE * COST_MAP_SIZE);
+
+}
+
+//Draw the visited nodes
+void Map::DrawPath()
+{
+    iPoint point;
+
+    // Draw visited
+    ListItem<iPoint>* item = visited.start;
+
+    while (item)
+    {
+        point = item->data;
+        TileSet* tileset = GetTilesetFromTileId(119);
+
+        SDL_Rect rec = tileset->GetTileRect(119);
+        iPoint pos = MapToWorld(point.x, point.y);
+
+        app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+
+        item = item->next;
+    }
+
+    // Draw frontier
+    for (uint i = 0; i < frontier.Count(); ++i)
+    {
+        point = *(frontier.Peek(i));
+        TileSet* tileset = GetTilesetFromTileId(118);
+
+        SDL_Rect rec = tileset->GetTileRect(118);
+        iPoint pos = MapToWorld(point.x, point.y);
+
+        app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+    }
+
+    // L09 DONE 4: Draw destination point
+    iPoint posDestination = MapToWorld(destination.x, destination.y);
+    TileSet* tileset = GetTilesetFromTileId(118);
+    SDL_Rect rec = tileset->GetTileRect(118);
+    //app->render->DrawRectangle({ posDestination.x, posDestination.y, 16,16 }, 150, 150, 0, 200);
+    app->render->DrawTexture(tileset->texture, posDestination.x, posDestination.y, &rec);
+
+    // Draw path
+    for (uint i = 0; i < path.Count(); ++i)
+    {
+        iPoint pos = MapToWorld(path[i].x, path[i].y);
+        app->render->DrawTexture(tileX, pos.x, pos.y);
+    }
+
+}
+
+int Map::MovementCost(int x, int y) const
+{
+    int ret = -1;
+
+    if ((x >= 0) && (x < mapData.width) && (y >= 0) && (y < mapData.height))
+    {
+        int id = mapData.maplayers.start->next->data->Get(x, y); //TODO - Look for the navigation layer iteratinng all layers
+
+        if (id == 25) ret = 10;
+        else ret = 1;
+    }
+
+    return ret;
+}
+
+bool Map::IsWalkable(int x, int y) const
+{
+    bool isWalkable = false;
+
+    // L09: DONE 3: return true only if x and y are within map limits
+    // and the tile is walkable (tile id 0 in the navigation layer)
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+    MapLayer* navigationLayer = mapLayerItem->data;
+
+    //Search the layer in the map that contains information for navigation
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
+            navigationLayer = mapLayerItem->data;
+        }
+
+        mapLayerItem = mapLayerItem->next;
+    }
+
+    //Set isWalkable to true if the position is inside map limits and is a position that is not blocked in the navigation layer
+    if (x >= 0 && y >= 0 && x < mapData.width && y < mapData.height && navigationLayer->Get(x, y) != NULL) {
+        isWalkable = true;
+    }
+
+    return isWalkable;
+}
+
+void Map::ComputePath(int x, int y)
+{
+    path.Clear();
+    iPoint goal = iPoint(x, y);
+
+    // L10: DONE 2: Follow the breadcrumps to goal back to the origin
+    // add each step into "path" dyn array (it will then draw automatically)
+
+    path.PushBack(goal);
+    int index = visited.Find(goal);
+
+    while ((index >= 0) && (goal != breadcrumbs[index]))
+    {
+        goal = breadcrumbs[index];
+        path.PushBack(goal);
+        index = visited.Find(goal);
+    }
+
+}
+
+void Map::PropagateDijkstra()
+{
+    // L10: DONE 3: Taking BFS as a reference, implement the Dijkstra algorithm
+    // use the 2 dimensional array "costSoFar" to track the accumulated costs
+    // on each cell (is already reset to 0 automatically)
+    iPoint currentTile;
+    bool foundDestination = false;
+
+    if (frontier.Count() > 0) {
+        iPoint frontierPoint = *(frontier.Peek(0));
+        if (frontierPoint == destination) {
+            foundDestination = true;
+            ComputePath(destination.x, destination.y);
+        }
+    }
+
+    if (!foundDestination && frontier.Pop(currentTile))
+    {
+
+        List<iPoint> neighbors;
+        if (IsWalkable(currentTile.x + 1, currentTile.y)) {
+            iPoint p;
+            neighbors.Add(p.Create(currentTile.x + 1, currentTile.y));
+        }
+        if (IsWalkable(currentTile.x, currentTile.y + 1)) {
+            iPoint p;
+            neighbors.Add(p.Create(currentTile.x, currentTile.y + 1));
+        }
+        if (IsWalkable(currentTile.x - 1, currentTile.y)) {
+            iPoint p;
+            neighbors.Add(p.Create(currentTile.x - 1, currentTile.y));
+        }
+        if (IsWalkable(currentTile.x, currentTile.y - 1)) {
+            iPoint p;
+            neighbors.Add(p.Create(currentTile.x, currentTile.y - 1));
+        }
+
+        ListItem<iPoint>* item = neighbors.start;
+
+        while (item != NULL)
+        {
+            int cost = MovementCost(item->data.x, item->data.y);
+
+            if (cost >= 0)
+            {
+                cost += costSoFar[currentTile.x][currentTile.y];
+                if (visited.Find(item->data) == -1 || cost < costSoFar[item->data.x][item->data.y])
+                {
+                    costSoFar[item->data.x][item->data.y] = cost;
+                    frontier.Push(item->data, cost);
+                    visited.Add(item->data);
+                    breadcrumbs.Add(currentTile);
+                }
+            }
+            item = item->next;
+        }
+
+    }
 }
 

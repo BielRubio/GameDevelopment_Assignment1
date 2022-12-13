@@ -53,7 +53,8 @@ public:
 	// L12: Debug pathfing
 	iPoint origin;
 	iPoint destination;
-	bool originSelected = false;
+	bool originSelected = false, checked = false;
+	iPoint AuxPlayer, AuxEnemy, Checker, Checker2;
 
 private:
 	bool Music = false;
