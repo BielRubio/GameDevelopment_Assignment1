@@ -650,7 +650,7 @@ bool Map::IsWalkable(int x, int y) const
     }
 
     //Set isWalkable to true if the position is inside map limits and is a position that is not blocked in the navigation layer
-    if (x >= 0 && y >= 0 && x < mapData.width && y < mapData.height && navigationLayer->Get(x, y) != 26) {
+    if (x >= 0 && y >= 0 && x < mapData.width && y < mapData.height && navigationLayer->Get(x, y) != NULL) {
         isWalkable = true;
     }
 
