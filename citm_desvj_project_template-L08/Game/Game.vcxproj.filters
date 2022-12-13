@@ -97,6 +97,9 @@
     <ClInclude Include="Source\Enemies\Grounded.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PQueue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
