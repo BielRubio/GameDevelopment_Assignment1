@@ -57,7 +57,7 @@ public:
 	iPoint AuxPlayer, AuxEnemy, Checker, Checker2;
 
 private:
-	bool Music = false;
+	bool Music = false, pathActive = false;
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
 

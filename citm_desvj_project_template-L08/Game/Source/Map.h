@@ -7,7 +7,7 @@
 #include "PQueue.h"
 #include "DynArray.h"
 
-#define COST_MAP_SIZE 25
+#define COST_MAP_SIZE 150
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -215,6 +215,8 @@ public:
 
 	// L10: Additional variables
 	List<iPoint> breadcrumbs;
+
+	bool DestinationFound = false;
 
 private:
 

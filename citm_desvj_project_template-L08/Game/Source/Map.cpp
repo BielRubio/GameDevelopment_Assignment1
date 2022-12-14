@@ -554,10 +554,10 @@ void Map::ResetPath()
     breadcrumbs.Clear();
     path.Clear();
 
-    frontier.Push(app->scene->AuxPlayer, 0);
-    visited.Add(app->scene->AuxPlayer);
-    breadcrumbs.Add(app->scene->AuxPlayer);
-    destination = app->scene->AuxEnemy;
+    frontier.Push(app->scene->AuxEnemy, 0);
+    visited.Add(app->scene->AuxEnemy); 
+    breadcrumbs.Add(app->scene->AuxEnemy);
+    destination = app->scene->AuxPlayer;
 
     //initailize the cost matrix
     memset(costSoFar, 0, sizeof(uint) * COST_MAP_SIZE * COST_MAP_SIZE);
@@ -609,6 +609,14 @@ void Map::DrawPath()
     {
         iPoint pos = MapToWorld(path[i].x, path[i].y);
         app->render->DrawTexture(tileX, pos.x, pos.y);
+    }
+    iPoint Enemy = MapToWorld(app->scene->AuxEnemy.x, app->scene->AuxEnemy.y);
+    iPoint Player = MapToWorld(app->scene->AuxPlayer.x, app->scene->AuxPlayer.y);
+    app->render->DrawLine(Enemy.x,Enemy.y,Player.x,Player.y, 100, 0, 100);
+    float ModulVec = sqrt((pow(Player.x - Enemy.x, 2)) + (pow(Player.y - Enemy.y, 2)));
+    LOG("VEC %f", ModulVec);
+    if (ModulVec < 30) {
+        LOG("player in enmey radius");
     }
 
 }
@@ -689,6 +697,7 @@ void Map::PropagateDijkstra()
         iPoint frontierPoint = *(frontier.Peek(0));
         if (frontierPoint == destination) {
             foundDestination = true;
+            DestinationFound = true;
             ComputePath(destination.x, destination.y);
         }
     }

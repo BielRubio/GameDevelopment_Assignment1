@@ -148,71 +148,28 @@ bool Scene::Update(float dt)
 	//if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
 	//	app->pathfinding->CreatePath(destination, origin);
 	//}
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) app->map->PropagateDijkstra();
-
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) app->map->ResetPath();
-
-
-
-
+	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		while (app->map->DestinationFound == false) {
+			app->map->PropagateDijkstra();
+		}
+	}
+	//if (app->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) {
+	//	if (((AuxPlayer.x + AuxPlayer.y) - (AuxEnemy.x + AuxEnemy.y)) < 5 && ((AuxPlayer.x + AuxPlayer.y) - (AuxEnemy.x + AuxEnemy.y)) > 5) {
+	//		while (app->map->DestinationFound == false) {
+	//			app->map->PropagateDijkstra();
+	//		}
+	//	}
+	//}
 
 	
+
 	//Camera on player
 	/*app->render->camera.x = -1 * (player->position.x * app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1 * (player->position.y * app->win->GetScale() - app->render->camera.h / 2);*/
 
 	// Draw map
 	app->map->Draw();
-
-	//app->render->DrawTexture(MapAdjustment, -100, 75);
-
-	//// L08: DONE 3: Test World to map method
-	//int mouseX, mouseY;                             
-	//app->input->GetMousePosition(mouseX, mouseY);
-	//LOG("%d %d", mouseX, mouseY);
-
-	//iPoint mouseTile = iPoint(0, 0);
-
-	//if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
-	//	mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x - app->map->mapData.tileWidth / 2,
-	//		mouseY - app->render->camera.y - app->map->mapData.tileHeight / 2);
-	//}
-	//if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
-	//	mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
-	//		mouseY - app->render->camera.y);
-	//}
-	////mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
-	////mouseY - app->render->camera.y);
-
-	////Convert again the tile coordinates to world coordinates to render the texture of the tile
-	//iPoint highlightedTileWorld = app->map->MapToWorld(mouseTile.x, mouseTile.y);
-	//app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
-	////app->render->DrawRectangle({ highlightedTileWorld.x, highlightedTileWorld.y, 16,16 }, 0, 0, 200);
-	////app->render->DrawRectangle({ mouseX +230, mouseY+120, 16,16 }, 0, 0, 200);
-	////Test compute path function
-	//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	//{
-	//	if (originSelected == true)
-	//	{
-	//		app->pathfinding->CreatePath(origin, mouseTile);
-	//		originSelected = false;
-	//	}
-	//	else
-	//	{
-	//		origin = mouseTile;
-	//		originSelected = true;
-	//		app->pathfinding->ClearLastPath();
-	//	}
-	//}
-
-	 //L12: Get the latest calculated path and draw
-	//const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
-	//for (uint i = 0; i < path->Count(); ++i)
-	//{
-	//	iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-	//	app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
-	//	//app->render->DrawRectangle({ pos.x, pos.y, 16,16 }, 0, 0, 200);
-	//}
+	//Pathfinding
 	destination = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y+4);
 	AuxPlayer = destination;
 	AuxPlayer.x = destination.x+1;
@@ -224,26 +181,11 @@ bool Scene::Update(float dt)
 		checked = true;
 	}
 	destination = app->map->MapToWorld(destination.x+1, destination.y);
-	//app->render->DrawRectangle({ origin.x, origin.y, 16,16 }, 0, 255, 255, 150);
-	//app->render->DrawRectangle({ destination.x, destination.y, 16,16 }, 150, 150, 0, 200);
 	if (Checker != AuxPlayer || Checker2 != AuxEnemy) {
 		app->map->ResetPath();
+		app->map->DestinationFound = false;
 		checked = false;
-		//app->map->frontier.Push(AuxPlayer, 0);
-		//app->map->visited.Add(AuxPlayer);
-		//app->map->breadcrumbs.Add(AuxPlayer);
-		//app->map->destination = AuxEnemy;
 	}
-	//app->map->frontier.Push(iPoint(20, 14), 0);
-	//app->map->visited.Add(iPoint(20, 14));
-	//app->map->breadcrumbs.Add(iPoint(20, 14));
-	//app->map->destination = iPoint(25, 14);
-
-	//app->render->DrawTexture(originTex,destination.x, destination.y);
-	
-
-	// L12: Debug pathfinding
-	//iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 
 
 	return true;

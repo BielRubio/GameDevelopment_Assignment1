@@ -90,10 +90,10 @@ bool Enemy::Update()
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	app->render->DrawCircle(position.x*app->win->GetScale(), position.y * app->win->GetScale(), 30 * app->win->GetScale(), 255, 255, 0, 100);
 	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
 	app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
 	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);
-	//app->render->DrawTexture(app->scene->originTex, app->scene->destination.x, app->scene->destination.y);
 	return true;
 }
 
