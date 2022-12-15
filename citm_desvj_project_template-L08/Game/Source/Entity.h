@@ -12,6 +12,7 @@ enum class EntityType
 {
 	PLAYER,
 	ENEMY,
+	ENEMY2,
 	ITEM,
 	SAW,
 	UNKNOWN

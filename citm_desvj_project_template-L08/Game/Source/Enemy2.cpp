@@ -12,7 +12,7 @@
 #include "Physics.h"
 #include "Window.h"
 
-Enemy2::Enemy2() : Entity(EntityType::ENEMY)
+Enemy2::Enemy2() : Entity(EntityType::ENEMY2)
 {
 	name.Create("Enemy2");
 
@@ -37,10 +37,11 @@ bool Enemy2::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-4, height-4, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-10, height-8, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
+	pbody->body->SetGravityScale(0);
 
 	//Animations
 	enemyIdleR.PushBack({ 0 * width,0 * height,width,height });
@@ -78,10 +79,10 @@ bool Enemy2::Update()
 {
 
 	if (pbody->body->GetLinearVelocity().x > 0)
-		currentAnim = &enemyRunR;
+		currentAnim = &enemyIdleR;
 
 	if (pbody->body->GetLinearVelocity().x < 0)
-		currentAnim = &enemyRunL;
+		currentAnim = &enemyIdleL;
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
