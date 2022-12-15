@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Enemy2.h"
 #include "Item.h"
 #include "Saw.h"
 #include "App.h"

@@ -17,6 +17,12 @@ enum class EntityType
 	UNKNOWN
 };
 
+enum class ENEMY_TYPE {
+	GROUNDED = 1,
+	FLYING,
+	UNKNOWN
+};
+
 enum class DIRECTION {
 	RIGHT = 1,
 	LEFT,

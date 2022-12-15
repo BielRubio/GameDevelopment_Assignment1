@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "Enemy2.h"
 #include "Player.h"
 #include "EntityManager.h"
 #include "App.h"
@@ -12,17 +12,17 @@
 #include "Physics.h"
 #include "Window.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+Enemy2::Enemy2() : Entity(EntityType::ENEMY)
 {
-	name.Create("Enemy");
+	name.Create("Enemy2");
 
 }
 
-Enemy::~Enemy() {
+Enemy2::~Enemy2() {
 
 }
 
-bool Enemy::Awake() {
+bool Enemy2::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -33,7 +33,7 @@ bool Enemy::Awake() {
 	return true;
 }
 
-bool Enemy::Start() {
+bool Enemy2::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -74,7 +74,7 @@ bool Enemy::Start() {
 
 
 
-bool Enemy::Update()
+bool Enemy2::Update()
 {
 
 	if (pbody->body->GetLinearVelocity().x > 0)
@@ -99,20 +99,20 @@ bool Enemy::Update()
 	return true;
 }
 
-bool Enemy::CleanUp()
+bool Enemy2::CleanUp()
 {
 	return true;
 }
 
-void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy2::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 }
 
-bool Enemy::IsAlive() {
+bool Enemy2::IsAlive() {
 	return alive; 
 }
 
-bool Enemy::LoadState(pugi::xml_node& data) {
+bool Enemy2::LoadState(pugi::xml_node& data) {
 
 	/*position.x = data.child("enemy_stats").attribute("position_x").as_int();
 	position.y = data.child("enemy_stats").attribute("position_y").as_int();
@@ -121,7 +121,7 @@ bool Enemy::LoadState(pugi::xml_node& data) {
 	return true;
 }
 
-bool Enemy::SaveState(pugi::xml_node& data) {
+bool Enemy2::SaveState(pugi::xml_node& data) {
 
 	/*pugi::xml_node enemy_stats = data.append_child("enemy_stats");
 	data.child("enemy_stats").append_attribute("position_x") = position.x;
@@ -130,10 +130,10 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 	return true; 
 }
 
-void Enemy::DetectPlayer() {
+void Enemy2::DetectPlayer() {
 
 }
 
-void Enemy::Patrol() {
+void Enemy2::Patrol() {
 
 }

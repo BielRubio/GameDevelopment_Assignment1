@@ -96,8 +96,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\DeathMenu.cpp" />
-    <ClCompile Include="Source\Enemies\Grounded.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\Enemy2.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\Intro.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -120,8 +120,8 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\DeathMenu.h" />
-    <ClInclude Include="Source\Enemies\Grounded.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\Enemy2.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\Intro.h" />
