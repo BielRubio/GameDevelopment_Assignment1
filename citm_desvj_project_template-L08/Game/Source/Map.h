@@ -216,7 +216,7 @@ public:
 	// L10: Additional variables
 	List<iPoint> breadcrumbs;
 
-	bool DestinationFound = false;
+	bool DestinationFound = false, DrawPathing = false;
 
 private:
 

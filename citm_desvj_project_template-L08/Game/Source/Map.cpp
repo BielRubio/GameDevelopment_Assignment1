@@ -571,53 +571,57 @@ void Map::DrawPath()
 
     // Draw visited
     ListItem<iPoint>* item = visited.start;
+    if (app->map->DrawPathing == true) {
 
-    while (item)
-    {
-        point = item->data;
-        TileSet* tileset = GetTilesetFromTileId(119);
+        while (item)
+        {
+            point = item->data;
+            TileSet* tileset = GetTilesetFromTileId(119);
 
-        SDL_Rect rec = tileset->GetTileRect(119);
-        iPoint pos = MapToWorld(point.x, point.y);
+            SDL_Rect rec = tileset->GetTileRect(119);
+            iPoint pos = MapToWorld(point.x, point.y);
 
-        app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+            app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
 
-        item = item->next;
-    }
+            item = item->next;
+        }
 
-    // Draw frontier
-    for (uint i = 0; i < frontier.Count(); ++i)
-    {
-        point = *(frontier.Peek(i));
+        // Draw frontier
+        for (uint i = 0; i < frontier.Count(); ++i)
+        {
+            point = *(frontier.Peek(i));
+            TileSet* tileset = GetTilesetFromTileId(118);
+
+            SDL_Rect rec = tileset->GetTileRect(118);
+            iPoint pos = MapToWorld(point.x, point.y);
+
+            app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
+        }
+
+        // L09 DONE 4: Draw destination point
+        iPoint posDestination = MapToWorld(destination.x, destination.y);
         TileSet* tileset = GetTilesetFromTileId(118);
-
         SDL_Rect rec = tileset->GetTileRect(118);
-        iPoint pos = MapToWorld(point.x, point.y);
+        //app->render->DrawRectangle({ posDestination.x, posDestination.y, 16,16 }, 150, 150, 0, 200);
+        app->render->DrawTexture(tileset->texture, posDestination.x, posDestination.y, &rec);
 
-        app->render->DrawTexture(tileset->texture, pos.x, pos.y, &rec);
-    }
-
-    // L09 DONE 4: Draw destination point
-    iPoint posDestination = MapToWorld(destination.x, destination.y);
-    TileSet* tileset = GetTilesetFromTileId(118);
-    SDL_Rect rec = tileset->GetTileRect(118);
-    //app->render->DrawRectangle({ posDestination.x, posDestination.y, 16,16 }, 150, 150, 0, 200);
-    app->render->DrawTexture(tileset->texture, posDestination.x, posDestination.y, &rec);
-
-    // Draw path
-    for (uint i = 0; i < path.Count(); ++i)
-    {
-        iPoint pos = MapToWorld(path[i].x, path[i].y);
-        app->render->DrawTexture(tileX, pos.x, pos.y);
+        // Draw path
+        for (uint i = 0; i < path.Count(); ++i)
+        {
+            iPoint pos = MapToWorld(path[i].x, path[i].y);
+            app->render->DrawTexture(tileX, pos.x, pos.y);
+        }
     }
     iPoint Enemy = MapToWorld(app->scene->AuxEnemy.x, app->scene->AuxEnemy.y);
     iPoint Player = MapToWorld(app->scene->AuxPlayer.x, app->scene->AuxPlayer.y);
-    app->render->DrawLine(Enemy.x,Enemy.y,Player.x,Player.y, 100, 0, 100);
+    //app->render->DrawLine(Enemy.x,Enemy.y,Player.x,Player.y, 100, 0, 100);
     float ModulVec = sqrt((pow(Player.x - Enemy.x, 2)) + (pow(Player.y - Enemy.y, 2)));
     LOG("VEC %f", ModulVec);
-    if (ModulVec < 30) {
+    if (ModulVec < 16*10) {
         LOG("player in enmey radius");
+        app->scene->pathActive = true;
     }
+
 
 }
 

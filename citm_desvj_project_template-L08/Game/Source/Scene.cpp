@@ -138,28 +138,18 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		if (app->physics->debug == true) {
-			app->physics->debug = false;
-		}
-		else if (app->physics->debug == false) {
-			app->physics->debug = true;
-		}
+		app->physics->debug = !app->physics->debug;
 	}
-	//if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-	//	app->pathfinding->CreatePath(destination, origin);
-	//}
-	if (app->input->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
+		PF = !PF;
+		app->map->DrawPathing = !app->map->DrawPathing;
+	}
+	if (pathActive == true && PF == true) {
 		while (app->map->DestinationFound == false) {
 			app->map->PropagateDijkstra();
 		}
+		pathActive = false;
 	}
-	//if (app->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) {
-	//	if (((AuxPlayer.x + AuxPlayer.y) - (AuxEnemy.x + AuxEnemy.y)) < 5 && ((AuxPlayer.x + AuxPlayer.y) - (AuxEnemy.x + AuxEnemy.y)) > 5) {
-	//		while (app->map->DestinationFound == false) {
-	//			app->map->PropagateDijkstra();
-	//		}
-	//	}
-	//}
 
 	
 

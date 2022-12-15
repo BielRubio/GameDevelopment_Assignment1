@@ -53,11 +53,11 @@ public:
 	// L12: Debug pathfing
 	iPoint origin;
 	iPoint destination;
-	bool originSelected = false, checked = false;
+	bool originSelected = false, checked = false, pathActive = false;;
 	iPoint AuxPlayer, AuxEnemy, Checker, Checker2;
 
 private:
-	bool Music = false, pathActive = false;
+	bool Music = false, PF = false;
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
 
