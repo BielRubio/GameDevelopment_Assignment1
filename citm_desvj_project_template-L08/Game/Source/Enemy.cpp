@@ -80,7 +80,7 @@ bool Enemy::Start() {
 
 bool Enemy::Update()
 {
-	float speed = 3; 
+	float speed = 2; 
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
@@ -105,11 +105,8 @@ bool Enemy::Update()
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
 
 
-	int walk =  app->pathfinding->CreatePath(enemyPos, playerPos);
-
-	if (walk == -1) {
-		LOG("Cant create path"); 
-	}
+	app->pathfinding->CreatePath(enemyPos, playerPos);
+	
 	enemyPath.Clear(); 
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
  
@@ -120,10 +117,10 @@ bool Enemy::Update()
 
 	if (enemyPath.Count() > 1) {
 		if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
-			vel = b2Vec2(-speed, 0);
+			vel = b2Vec2(speed, 0);
 		}
 		else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
-			vel = b2Vec2(speed, 0);
+			vel = b2Vec2(-speed, 0);
 		}
 		else {
 			vel = b2Vec2(0, 0);

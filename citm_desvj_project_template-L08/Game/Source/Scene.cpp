@@ -88,36 +88,16 @@ bool Scene::Start()
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 
 	// L12 Create walkability map
-	//if (retLoad) {
-	//	int w, h;
-	//	uchar* data = NULL;
+	if (retLoad) {
+		int w, h;
+		uchar* data = NULL;
 
-	//	bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
-	//	if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+		bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
+		if (retWalkMap) app->pathfinding->SetMap(w, h, data);
 
-	//	RELEASE_ARRAY(data);
+		RELEASE_ARRAY(data);
 
-	//}
-
-	////Sets the camera to be centered in isometric map
-	//if (app->map->mapData.type == MapTypes::MAPTYPE_ISOMETRIC) {
-
-	//	// Texture to highligh mouse position 
-	//	mouseTileTex = app->tex->Load("Assets/Maps/path.png");
-
-	//	// Texture to show path origin 
-	//	originTex = app->tex->Load("Assets/Maps/x.png");
-	//}
-
-	//if (app->map->mapData.type == MapTypes::MAPTYPE_ORTHOGONAL) {
-
-	//	// Texture to highligh mouse position 
-	//	mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
-
-	//	// Texture to show path origin 
-	//	originTex = app->tex->Load("Assets/Maps/destination.png");
-	//}
-
+	}
 
 	return true;
 }
@@ -155,14 +135,14 @@ bool Scene::Update(float dt)
 		pathActive = false;
 	}
 
-	
-
 	//Camera on player
 	/*app->render->camera.x = -1 * (player->position.x * app->win->GetScale() - app->render->camera.w / 2);
 	app->render->camera.y = -1 * (player->position.y * app->win->GetScale() - app->render->camera.h / 2);*/
 
 	// Draw map
 	app->map->Draw();
+
+
 	//Pathfinding
 	destination = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y+4);
 	AuxPlayer = destination;
