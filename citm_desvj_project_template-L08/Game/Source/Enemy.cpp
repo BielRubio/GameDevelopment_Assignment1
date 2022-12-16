@@ -11,6 +11,8 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Window.h"
+#include "Pathfinding.h"
+#include "DynArray.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -69,6 +71,8 @@ bool Enemy::Start() {
 
 	currentAnim = &enemyIdleR;
 
+	vel = b2Vec2(0, 0);
+
 	return true;
 }
 
@@ -76,6 +80,9 @@ bool Enemy::Start() {
 
 bool Enemy::Update()
 {
+	float speed = 3; 
+	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
+	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
 	if (pbody->body->GetLinearVelocity().x > 0)
 		currentAnim = &enemyRunR;
@@ -86,16 +93,47 @@ bool Enemy::Update()
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
 
-	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
-	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
-
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 	if (app->map->DrawPathing == true) {
 		app->render->DrawCircle(position.x * app->win->GetScale(), position.y * app->win->GetScale(), 16 * 10 * app->win->GetScale(), 255, 255, 0, 100);
 	}
 	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
-	app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
-	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);
+	/*app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
+	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);*/
+
+	iPoint playerPos = app->map->WorldToMap(METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().x), METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().y));
+	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
+
+
+	int walk =  app->pathfinding->CreatePath(enemyPos, playerPos);
+
+	if (walk == -1) {
+		LOG("Cant create path"); 
+	}
+	enemyPath.Clear(); 
+	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+ 
+	for (uint i = 0; i < path->Count(); i++){
+		enemyPath.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
+	}
+
+
+	if (enemyPath.Count() > 1) {
+		if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
+			vel = b2Vec2(-speed, 0);
+		}
+		else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
+			vel = b2Vec2(speed, 0);
+		}
+		else {
+			vel = b2Vec2(0, 0);
+		}
+	}
+
+	pbody->body->SetLinearVelocity(vel);
+
+	
+
 	return true;
 }
 
@@ -130,8 +168,13 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 	return true; 
 }
 
-void Enemy::DetectPlayer() {
-
+void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
+	if (playerPos.DistanceTo(enemyPos) <= 16 * 10 * app->win->GetScale()) {
+		state = EnemyState::MOVING; 
+	}
+	else {
+		state = EnemyState::IDLE; 
+	}
 }
 
 void Enemy::Patrol() {

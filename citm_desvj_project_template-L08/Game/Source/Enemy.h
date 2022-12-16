@@ -6,8 +6,14 @@
 #include "SDL/include/SDL.h"
 #include "Animation.h"
 #include "Path.h"
-
+#include "Physics.h"
+#include "DynArray.h"
 struct SDL_Texture;
+
+enum class EnemyState {
+	IDLE, 
+	MOVING
+};
 
 class Enemy : public Entity
 {
@@ -33,7 +39,7 @@ public:
 
 	bool SaveState(pugi::xml_node& data);
 
-	void DetectPlayer();
+	void DetectPlayer(iPoint playerPos, iPoint enemyPos);
 
 	void Patrol();
 
@@ -60,6 +66,11 @@ private:
 
 	int width;
 	int height;
+
+	EnemyState state; 
+
+	b2Vec2 vel;
+	DynArray<iPoint> enemyPath; 
 };
 
 #endif // __ENEMY_H__

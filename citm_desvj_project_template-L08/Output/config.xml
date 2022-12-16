@@ -25,7 +25,7 @@
 	 <!-- player Starting pos, x: 112 y: 230-->
     <player x="400" y="150" width="32" height="16" texturepath="Assets/Textures/player16_2.png"/>
 
-	<enemy x="420" y="150" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
+	<enemy x="420" y="220" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
 
 	<enemy2 x="520" y="150" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
 	
