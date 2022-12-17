@@ -97,9 +97,6 @@ bool Enemy::Update()
 	if (app->map->DrawPathing == true) {
 		app->render->DrawCircle(position.x * app->win->GetScale(), position.y * app->win->GetScale(), 16 * 10 * app->win->GetScale(), 255, 255, 0, 100);
 	}
-	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
-	/*app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
-	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);*/
 
 	iPoint playerPos = app->map->WorldToMap(METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().x), METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().y));
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
@@ -116,20 +113,23 @@ bool Enemy::Update()
 
 
 	if (enemyPath.Count() > 1) {
-		if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
-			vel = b2Vec2(speed, 0);
-		}
-		else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
-			vel = b2Vec2(-speed, 0);
-		}
-		else {
-			vel = b2Vec2(0, 0);
+		DetectPlayer(playerPos, enemyPos);
+		if (state == EnemyState::MOVING) {
+			if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
+				if (pbody->body->GetLinearVelocity().x < 2.5) {
+					pbody->body->ApplyForce(b2Vec2(1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+				}
+			}
+			else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
+				if (pbody->body->GetLinearVelocity().x > -2.5) {
+					pbody->body->ApplyForce(b2Vec2(-1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+				}
+			}
+			else {
+				pbody->body->ApplyForce(b2Vec2(-pbody->body->GetLinearVelocity().x * 0.1f, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
 		}
 	}
-
-	pbody->body->SetLinearVelocity(vel);
-
-	
 
 	return true;
 }
@@ -166,11 +166,13 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 }
 
 void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
-	if (playerPos.DistanceTo(enemyPos) <= 16 * 10 * app->win->GetScale()) {
+	if (playerPos.DistanceTo(enemyPos) <= 5) {
 		state = EnemyState::MOVING; 
+		LOG("MOVING FlyingEnemy");
 	}
 	else {
 		state = EnemyState::IDLE; 
+		LOG("IDLE FlyingEnemy");
 	}
 }
 
