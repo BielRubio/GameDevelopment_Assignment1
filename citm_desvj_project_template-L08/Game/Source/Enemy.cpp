@@ -151,7 +151,9 @@ bool Enemy::CleanUp()
 }
 
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+	if (physB->ctype == ColliderType::PLAYER_ATTACK) {
+		LOG("Enemy die");
+	}
 }
 
 bool Enemy::IsAlive() {

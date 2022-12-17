@@ -45,6 +45,11 @@ bool Player::Start() {
 	jumpCounter = 0; 
 	playerState = State::LANDED; 
 	alive = true; 
+
+
+	attackHitbox = app->physics->CreateRectangleSensor(0, 0, 50, 20, bodyType::STATIC);
+	attackHitbox->ctype = ColliderType::PLAYER_ATTACK;
+
 	//Sounds
 	Step1 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel1.wav");
 	Step2 = app->audio->LoadFx("Assets/Sounds/Player/FootGravel2.wav");
@@ -91,6 +96,14 @@ bool Player::Update()
 	debugKeys();
 
 	Move();
+
+	if (app->input->GetMouseButtonDown(1) && attackCD <= 0 && attackFF) {
+		Attack(attackFF);
+	}
+	else if (!attackFF) {
+		Attack(attackFF);
+	}
+	attackCD--;
 
 	//Death
 	if (alive != true) {
@@ -227,6 +240,35 @@ void Player::Move() {
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
+}
+
+void Player::Attack(bool first) {
+
+	
+
+	if (first) {
+		
+		if (facing == DIRECTION::RIGHT) {
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS(position.x +21),  PIXEL_TO_METERS(position.y) }, 0.0f);
+			app->render->DrawRectangle({ position.x+21, position.y, 50, 20 }, 255, 0, 0, 200);
+		}
+		if (facing == DIRECTION::LEFT) {
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS(position.x - 39), PIXEL_TO_METERS(position.y) }, 0.0f);
+			app->render->DrawRectangle({ position.x-39, position.y, 50, 20 }, 255, 0, 0, 200);
+		}
+	
+		attackFF = false;
+	}
+	else {
+
+		attackHitbox->body->SetTransform({0, 0}, 0);
+
+		attackFF = true;
+	}
+	
+	attackCD = 40;
+
+	
 }
 
 void Player::Jump() {

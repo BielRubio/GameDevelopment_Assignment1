@@ -15,7 +15,8 @@ enum class State {
 	JUMPING,
 	COLLIDING,
 	MOVING_RIGHT,
-	MOVING_LEFT
+	MOVING_LEFT,
+	ATTACKING
 };
 
 class Player : public Entity
@@ -46,6 +47,8 @@ public:
 	
 	void Move(); 
 
+	void Attack(bool first);
+
 	void debugKeys(); 
 
 	void Death(); 
@@ -55,6 +58,7 @@ public:
 	bool DeathAnimationFinished = false;
 
 	PhysBody* pbody;
+	PhysBody* attackHitbox;
 
 	bool alive, invincible = false;
 	
@@ -70,6 +74,9 @@ private:
 	int height;
 	int jumpCounter; 
 	int MaxJumps = 2;
+
+	int attackCD = 40;
+	bool attackFF = true;
 
 	State playerState; 
 
