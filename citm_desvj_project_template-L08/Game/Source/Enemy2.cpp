@@ -44,6 +44,8 @@ bool Enemy2::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->body->SetGravityScale(0);
 
+	tileX = app->tex->Load("Assets/Maps/path_square.png");
+
 	//Animations
 	enemyIdleR.PushBack({ 0 * width,0 * height,width,height });
 	enemyIdleL.PushBack({ 0 * width,1 * height,width,height });
@@ -110,6 +112,12 @@ bool Enemy2::Update()
 		enemyPath.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
 	}
 
+	//Draw the path
+	for (uint i = 0; i < enemyPath.Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(enemyPath.At(i)->x, enemyPath.At(i)->y);
+		app->render->DrawTexture(tileX, pos.x, pos.y);
+	}
 
 	if (enemyPath.Count() > 1) {
 		DetectPlayer(enemyPos, playerPos);

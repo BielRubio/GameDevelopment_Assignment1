@@ -71,6 +71,8 @@ private:
 
 	b2Vec2 vel;
 	DynArray<iPoint> enemyPath; 
+
+	SDL_Texture* tileX = nullptr;
 };
 
 #endif // __ENEMY_H__

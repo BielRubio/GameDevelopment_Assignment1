@@ -69,6 +69,7 @@ private:
 	DynArray<iPoint> enemyPath;
 
 	EnemyState state; 
+	SDL_Texture* tileX = nullptr; 
 };
 
 #endif // __ENEMY2_H__
