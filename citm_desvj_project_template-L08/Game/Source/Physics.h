@@ -34,6 +34,7 @@ enum class ColliderType {
 	SPIKES,
 	WALL,
 	ENEMY,
+	PLAYER_ATTACK,
 	UNKNOWN
 };
 
