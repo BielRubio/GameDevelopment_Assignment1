@@ -14,6 +14,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
+
 Map::Map() : Module(), mapLoaded(false)
 {
     name.Create("map");
@@ -112,24 +113,34 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
     {
         MapLayer* layer = item->data;
 
-        if (layer->properties.GetProperty("Navigation") != NULL && !layer->properties.GetProperty("Navigation")->value)
-            continue;
+        LOG("Layer: %d", layer->id);
+        
+        /*if (layer->properties.GetProperty("Navigation") != NULL && !layer->properties.GetProperty("Navigation")->value)
+            continue;*/
+        if (layer->id != 12)
+            continue; 
 
         uchar* map = new uchar[layer->width * layer->height];
         memset(map, 1, layer->width * layer->height);
-
+        LOG("Layer: %d", layer->id);
         for (int y = 0; y < mapData.height; ++y)
         {
             for (int x = 0; x < mapData.width; ++x)
             {
                 int i = (y * layer->width) + x;
-
-                int tileId = layer->Get(x, y);
+                
+                int tileId = layer->data[i];
+                LOG("i : %d", i);
+                LOG("id : %u",layer->data[i]);
+                
                 TileSet* tileset = (tileId > -1) ? GetTilesetFromTileId(tileId) : NULL;
 
                 if (tileset != NULL)
                 {
-                map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1;
+                    //map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1;
+                    if (mapData.type == MapTypes::MAPTYPE_ISOMETRIC && tileId == 25) map[i] = 1;
+                    else if (mapData.type == MapTypes::MAPTYPE_ORTHOGONAL && tileId == 23) map[i] = 1;
+                    else map[i] = 0;
                 }
                 else {
                     LOG("CreateWalkabilityMap: Invalid tileset found");
@@ -410,6 +421,10 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
     {
         layer->data[i] = tile.attribute("gid").as_int();
+        /*if (layer->name == "Navigation") {
+            LOG(" i: %d", i);
+            LOG("data: %u", layer->data[i]);
+        }*/
         i++;
     }
 
