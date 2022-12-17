@@ -44,6 +44,8 @@ bool Enemy::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ENEMY;
 
+	tileX = app->tex->Load("Assets/Maps/path_square.png");
+
 	//Animations
 	enemyIdleR.PushBack({ 0 * width,0 * height,width,height });
 	enemyIdleL.PushBack({ 0 * width,1 * height,width,height });
@@ -97,9 +99,6 @@ bool Enemy::Update()
 	if (app->map->DrawPathing == true) {
 		app->render->DrawCircle(position.x * app->win->GetScale(), position.y * app->win->GetScale(), 16 * 10 * app->win->GetScale(), 255, 255, 0, 100);
 	}
-	//app->render->DrawRectangle({position.x, position.y, width, height}, 255, 0,0);
-	/*app->scene->origin = app->map->WorldToMap(position.x+4, position.y+4);
-	app->scene->origin = app->map->MapToWorld(app->scene->origin.x, app->scene->origin.y);*/
 
 	iPoint playerPos = app->map->WorldToMap(METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().x), METERS_TO_PIXELS(app->scene->player->pbody->body->GetPosition().y));
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
@@ -114,22 +113,33 @@ bool Enemy::Update()
 		enemyPath.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
 	}
 
-
-	if (enemyPath.Count() > 1) {
-		if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
-			vel = b2Vec2(speed, 0);
-		}
-		else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
-			vel = b2Vec2(-speed, 0);
-		}
-		else {
-			vel = b2Vec2(0, 0);
+	//Draw the path
+	if (app->entityManager->debug) {
+		for (uint i = 0; i < enemyPath.Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(enemyPath.At(i)->x, enemyPath.At(i)->y);
+			app->render->DrawTexture(tileX, pos.x, pos.y);
 		}
 	}
 
-	pbody->body->SetLinearVelocity(vel);
-
-	
+	if (enemyPath.Count() > 1) {
+		DetectPlayer(playerPos, enemyPos);
+		if (state == EnemyState::MOVING) {
+			if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
+				if (pbody->body->GetLinearVelocity().x < 2.5) {
+					pbody->body->ApplyForce(b2Vec2(1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+				}
+			}
+			else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
+				if (pbody->body->GetLinearVelocity().x > -2.5) {
+					pbody->body->ApplyForce(b2Vec2(-1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
+				}
+			}
+			else {
+				pbody->body->ApplyForce(b2Vec2(-pbody->body->GetLinearVelocity().x * 0.1f, 0.0f), pbody->body->GetWorldCenter(), true);
+			}
+		}
+	}
 
 	return true;
 }
@@ -151,28 +161,30 @@ bool Enemy::IsAlive() {
 
 bool Enemy::LoadState(pugi::xml_node& data) {
 
-	/*position.x = data.child("enemy_stats").attribute("position_x").as_int();
+	position.x = data.child("enemy_stats").attribute("position_x").as_int();
 	position.y = data.child("enemy_stats").attribute("position_y").as_int();
-	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);*/
+	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 
 	return true;
 }
 
 bool Enemy::SaveState(pugi::xml_node& data) {
 
-	/*pugi::xml_node enemy_stats = data.append_child("enemy_stats");
+	pugi::xml_node enemy_stats = data.append_child("enemy_stats");
 	data.child("enemy_stats").append_attribute("position_x") = position.x;
-	data.child("enemy_stats").append_attribute("position_y") = position.y;*/
+	data.child("enemy_stats").append_attribute("position_y") = position.y;
 
 	return true; 
 }
 
 void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
-	if (playerPos.DistanceTo(enemyPos) <= 16 * 10 * app->win->GetScale()) {
+	if (playerPos.DistanceTo(enemyPos) <= 5) {
 		state = EnemyState::MOVING; 
+		LOG("MOVING FlyingEnemy");
 	}
 	else {
 		state = EnemyState::IDLE; 
+		LOG("IDLE FlyingEnemy");
 	}
 }
 

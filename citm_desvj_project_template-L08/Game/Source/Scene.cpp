@@ -123,6 +123,7 @@ bool Scene::Update(float dt)
 		app->LoadGameRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		app->physics->debug = !app->physics->debug;
+		app->entityManager->debug = !app->entityManager->debug; 
 	}
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		PF = !PF;

@@ -41,6 +41,8 @@ public:
 
 	List<Entity*> entities;
 
+	bool debug = false; 
+
 };
 
 #endif // __ENTITYMANAGER_H__

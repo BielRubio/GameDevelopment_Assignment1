@@ -293,9 +293,6 @@ bool Map::Load()
         ret = LoadColliders(mapFileXML.child("map"));
     }
 
-    //app->physics->CreateRectangle((224 + 128) / app->win->GetScale(), (543 + 32) / app->win->GetScale(), 256 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
-    //app->physics->CreateRectangle((352 + 64) / app->win->GetScale(), (384 + 32) / app->win->GetScale(), 128 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
-    //app->physics->CreateRectangle(256 / app->win->GetScale(), (704 + 32) / app->win->GetScale(), 576 / app->win->GetScale(), 64 / app->win->GetScale(), STATIC);
 
     if(ret == true)
     {
