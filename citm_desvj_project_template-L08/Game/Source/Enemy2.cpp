@@ -160,18 +160,18 @@ bool Enemy2::IsAlive() {
 
 bool Enemy2::LoadState(pugi::xml_node& data) {
 
-	/*position.x = data.child("enemy_stats").attribute("position_x").as_int();
-	position.y = data.child("enemy_stats").attribute("position_y").as_int();
-	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);*/
+	position.x = data.child("flyingEnemy_stats").attribute("position_x").as_int();
+	position.y = data.child("flyingEnemy_stats").attribute("position_y").as_int();
+	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
 
 	return true;
 }
 
 bool Enemy2::SaveState(pugi::xml_node& data) {
 
-	/*pugi::xml_node enemy_stats = data.append_child("enemy_stats");
-	data.child("enemy_stats").append_attribute("position_x") = position.x;
-	data.child("enemy_stats").append_attribute("position_y") = position.y;*/
+	pugi::xml_node enemy_stats = data.append_child("flyingEnemy_stats");
+	data.child("flyingEnemy_stats").append_attribute("position_x") = position.x;
+	data.child("flyingEnemy_stats").append_attribute("position_y") = position.y;
 
 	return true; 
 }
