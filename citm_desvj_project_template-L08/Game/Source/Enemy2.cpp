@@ -113,10 +113,12 @@ bool Enemy2::Update()
 	}
 
 	//Draw the path
-	for (uint i = 0; i < enemyPath.Count(); ++i)
-	{
-		iPoint pos = app->map->MapToWorld(enemyPath.At(i)->x, enemyPath.At(i)->y);
-		app->render->DrawTexture(tileX, pos.x, pos.y);
+	if (app->entityManager->debug) {
+		for (uint i = 0; i < enemyPath.Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(enemyPath.At(i)->x, enemyPath.At(i)->y);
+			app->render->DrawTexture(tileX, pos.x, pos.y);
+		}
 	}
 
 	if (enemyPath.Count() > 1) {
