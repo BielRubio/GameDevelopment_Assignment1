@@ -83,14 +83,24 @@ bool Enemy::Start() {
 bool Enemy::Update()
 {
 	float speed = 2; 
+
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	if (pbody->body->GetLinearVelocity().x > 0)
-		currentAnim = &enemyRunR;
+	if (state != EnemyState::IDLE) {
+		if (pbody->body->GetLinearVelocity().x > 0)
+			currentAnim = &enemyRunR;
 
-	if (pbody->body->GetLinearVelocity().x < 0)
-		currentAnim = &enemyRunL;
+		if (pbody->body->GetLinearVelocity().x < 0)
+			currentAnim = &enemyRunL;
+	}
+	else {
+		if(position.x - app->scene->player->position.x < 0) 
+			currentAnim = &enemyIdleR;
+		if(position.x - app->scene->player->position.x > 0)
+			currentAnim = &enemyIdleL;
+	}
+	
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();

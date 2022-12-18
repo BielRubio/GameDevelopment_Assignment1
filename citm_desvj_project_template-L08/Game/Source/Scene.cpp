@@ -56,8 +56,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	Enemy* grounded_e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	grounded_e->parameters = config.child("enemy");
 
-	/*Enemy2* flying_e = (Enemy2*)app->entityManager->CreateEntity(EntityType::ENEMY2);
-	flying_e->parameters = config.child("enemy2");*/
+	Enemy2* flying_e = (Enemy2*)app->entityManager->CreateEntity(EntityType::ENEMY2);
+	flying_e->parameters = config.child("enemy2");
 
 
 	return ret;
