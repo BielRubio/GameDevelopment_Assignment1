@@ -22,12 +22,17 @@
   </audio> 
 
   <scene>
-	 <!-- player Starting pos, x: 112 y: 230-->
-    <player x="400" y="150" width="64" height="16" texturepath="Assets/Textures/player16_2.png"/>
+	 <!-- player Starting pos, x: 400 y: 150-->
+    <player x="500" y="220" width="64" height="16" texturepath="Assets/Textures/player16_2.png"/>
 
-	<enemy x="420" y="220" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
+	<enemy x="1270" y="190" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
+	<enemy x="2220" y="400" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
+	<enemy x="2900" y="380" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
+	<enemy x="3050" y="380" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
 
-	<enemy2 x="520" y="150" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
+	<enemy2 x="1550" y="150" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
+	<enemy2 x="2040" y="315" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
+	<enemy2 x="2687" y="348" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
 	
 	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  

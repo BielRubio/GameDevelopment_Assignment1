@@ -44,11 +44,14 @@ public:
 
 	void Patrol();
 
+	void Death();
+
 public:
 
 	PhysBody* pbody;
 
-	bool alive, invincible = false;
+	bool invincible = false;
+	bool alive = true;
 	
 private:
 

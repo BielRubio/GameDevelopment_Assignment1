@@ -50,7 +50,7 @@ bool Enemy2::Start() {
 	enemyIdleR.PushBack({ 0 * width,0 * height,width,height });
 	enemyIdleL.PushBack({ 0 * width,1 * height,width,height });
 
-	enemyDropR.PushBack({ 0 * width,4 * height,width,height });
+	/*enemyDropR.PushBack({ 0 * width,4 * height,width,height });
 	enemyDropL.PushBack({ 0 * width,5 * height,width,height });
 
 	for (int i = 0; i < 3; i++) {
@@ -63,10 +63,10 @@ bool Enemy2::Start() {
 		enemyRunL.PushBack({ i * width,3 * height,width,height });
 	}
 	enemyRunL.loop = true;
-	enemyRunL.speed = 0.3f;
+	enemyRunL.speed = 0.3f;*/
 
-	for (int i = 0; i < 4; i++) {
-		enemyDie.PushBack({ i * width,6 * height,width,height });
+	for (int i = 0; i < 3; i++) {
+		enemyDie.PushBack({ i * width,2 * height,width,height });
 	}
 	enemyDie.loop = false;
 	enemyDie.speed = 0.3f;
@@ -81,11 +81,15 @@ bool Enemy2::Start() {
 bool Enemy2::Update()
 {
 	float speed = 3; 
-	if (pbody->body->GetLinearVelocity().x > 0)
-		currentAnim = &enemyIdleR;
 
-	if (pbody->body->GetLinearVelocity().x < 0)
-		currentAnim = &enemyIdleL;
+	if (alive) {
+		if (pbody->body->GetLinearVelocity().x > 0)
+			currentAnim = &enemyIdleR;
+
+		if (pbody->body->GetLinearVelocity().x < 0)
+			currentAnim = &enemyIdleL;
+	}
+	
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
@@ -181,7 +185,7 @@ void Enemy2::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Enemy die");
-		pbody->body->SetActive(false);
+		Death();
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -226,4 +230,14 @@ void Enemy2::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
 
 void Enemy2::Patrol() {
 
+}
+
+void Enemy2::Death() {
+	pbody->body->SetActive(false);
+	currentAnim = &enemyDie;
+	alive = false;
+	if (currentAnim->HasFinished()) {
+		//app->audio->PlayFxWithVolume(DeathSound, 0, 50);
+		//this->Disable();
+	}
 }

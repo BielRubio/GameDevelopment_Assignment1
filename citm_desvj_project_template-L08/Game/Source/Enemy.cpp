@@ -65,7 +65,7 @@ bool Enemy::Start() {
 	enemyRunL.loop = true;
 	enemyRunL.speed = 0.3f;
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		enemyDie.PushBack({ i * width,6 * height,width,height });
 	}
 	enemyDie.loop = false;
@@ -87,19 +87,22 @@ bool Enemy::Update()
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	if (state != EnemyState::IDLE) {
-		if (pbody->body->GetLinearVelocity().x > 0)
-			currentAnim = &enemyRunR;
+	if (alive) {
+		if (state != EnemyState::IDLE) {
+			if (pbody->body->GetLinearVelocity().x > 0)
+				currentAnim = &enemyRunR;
 
-		if (pbody->body->GetLinearVelocity().x < 0)
-			currentAnim = &enemyRunL;
+			if (pbody->body->GetLinearVelocity().x < 0)
+				currentAnim = &enemyRunL;
+		}
+		else {
+			if (position.x - app->scene->player->position.x < 0)
+				currentAnim = &enemyIdleR;
+			if (position.x - app->scene->player->position.x > 0)
+				currentAnim = &enemyIdleL;
+		}
 	}
-	else {
-		if(position.x - app->scene->player->position.x < 0) 
-			currentAnim = &enemyIdleR;
-		if(position.x - app->scene->player->position.x > 0)
-			currentAnim = &enemyIdleL;
-	}
+	
 	
 
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
@@ -183,7 +186,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Enemy die");
-		pbody->body->SetActive(false);
+		Death();
 		break;
 	case ColliderType::JUMPTERRAIN:
 		LOG("JUMP");
@@ -239,4 +242,14 @@ void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
 
 void Enemy::Patrol() {
 
+}
+
+void Enemy::Death() {
+	pbody->body->SetActive(false);
+	currentAnim = &enemyDie;
+	alive = false;
+	if (currentAnim->HasFinished()) {
+		//app->audio->PlayFxWithVolume(DeathSound, 0, 50);
+		//this->Disable();
+	}
 }

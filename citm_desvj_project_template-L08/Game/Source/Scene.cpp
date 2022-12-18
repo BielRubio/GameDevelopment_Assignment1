@@ -53,12 +53,15 @@ bool Scene::Awake(pugi::xml_node& config)
 	Item* trophy =(Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	trophy->parameters = config.child("trophy");
 
-	Enemy* grounded_e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-	grounded_e->parameters = config.child("enemy");
+	for (pugi::xml_node en1Node = config.child("enemy"); en1Node; en1Node = en1Node.next_sibling("enemy")) {
+		Enemy* grounded_e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		grounded_e->parameters = en1Node;
+	}
 
-	Enemy2* flying_e = (Enemy2*)app->entityManager->CreateEntity(EntityType::ENEMY2);
-	flying_e->parameters = config.child("enemy2");
-
+	for (pugi::xml_node en2Node = config.child("enemy2"); en2Node; en2Node = en2Node.next_sibling("enemy2")) {
+		Enemy2* flying_e = (Enemy2*)app->entityManager->CreateEntity(EntityType::ENEMY2);
+		flying_e->parameters = en2Node;
+	}
 
 	return ret;
 }
