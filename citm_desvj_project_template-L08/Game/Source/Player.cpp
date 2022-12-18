@@ -57,6 +57,7 @@ bool Player::Start() {
 	StepMetalic2 = app->audio->LoadFx("Assets/Sounds/Player/StepMetal2.wav");
 	DeathSound = app->audio->LoadFx("Assets/Sounds/Player/Fire2.wav");
 	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
+	Swing = app->audio->LoadFx("Assets/Sounds/Player/Swing.wav");
 
 	//Animations
 	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
@@ -106,6 +107,7 @@ bool Player::Update()
 
 	if ((app->input->GetMouseButtonDown(1) && attackCD <= 0) || (attackFrames > 0 && playerState == State::ATTACKING)) {
 		playerState = State::ATTACKING;
+		app->audio->PlayFxWithVolume(Swing, 0, 25);
 		Attack(attackFrames);
 		
 		attackFrames--;
