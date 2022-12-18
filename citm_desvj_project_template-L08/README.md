@@ -5,6 +5,9 @@ In this repository we will be updating our platformer for the Development subjec
 ## Description
 Obsolete is a basic 2D platformer in which your character is a robot. 
 
+## Changelog
+Version 1.1: Remodeled all assets from the game (tiles, player, enemy...) and added enemies with pathfinding towards the player.
+
 ## Key Features
 
 ### General features
@@ -24,7 +27,8 @@ Obsolete is a basic 2D platformer in which your character is a robot.
  - A: Move left
  - D: Move right
  - Spacebar: Jump
- 
+ - Left click: Player attack
+
 ## Debug Keys
 
  - F1: Avoid the initial transitions
