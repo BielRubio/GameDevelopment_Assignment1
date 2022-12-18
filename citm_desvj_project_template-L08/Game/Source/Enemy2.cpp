@@ -37,6 +37,7 @@ bool Enemy2::Awake() {
 bool Enemy2::Start() {
 
 	//initilize textures
+	dedFx = app->audio->LoadFx("Assets/Sounds/Enemy/Dead2.wav");
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-10, height-8, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
@@ -234,6 +235,7 @@ void Enemy2::Patrol() {
 
 void Enemy2::Death() {
 	pbody->body->SetActive(false);
+	app->audio->PlayFxWithVolume(dedFx, 0, 35);
 	currentAnim = &enemyDie;
 	alive = false;
 	if (currentAnim->HasFinished()) {
