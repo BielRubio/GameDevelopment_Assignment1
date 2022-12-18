@@ -76,7 +76,7 @@ private:
 	int MaxJumps = 2;
 
 	int attackCD = 40;
-	bool attackFF = true;
+	bool attackFF = true; 
 
 	State playerState; 
 
