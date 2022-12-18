@@ -36,7 +36,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-24, height-2, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-55, height-2, bodyType::DYNAMIC);
 	//pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
 	pbody->listener = this;
@@ -47,7 +47,7 @@ bool Player::Start() {
 	alive = true; 
 
 
-	attackHitbox = app->physics->CreateRectangleSensor(0, 0, 50, 15, bodyType::STATIC);
+	attackHitbox = app->physics->CreateRectangleSensor(0, 0, 25, 15, bodyType::STATIC);
 	attackHitbox->ctype = ColliderType::PLAYER_ATTACK;
 
 	//Sounds
@@ -64,6 +64,10 @@ bool Player::Start() {
 
 	playerJumpR.PushBack({ 0 * width,4 * height,width,height });
 	playerJumpL.PushBack({ 0 * width,5 * height,width,height });
+
+	playerAttackR.PushBack({ 0 * width,6 * height,width,height });
+	playerAttackL.PushBack({ 0 * width,7 * height,width,height });
+
 	
 	for (int i = 0; i < 6; i++) {
 		playerRunR.PushBack({ i * width,2 * height,width,height });
@@ -77,8 +81,8 @@ bool Player::Start() {
 	playerRunL.loop = true;
 	playerRunL.speed = 0.3f;
 
-	for (int i = 0; i < 4; i++) {
-		playerDie.PushBack({ i * width,6 * height,width,height });
+	for (int i = 0; i < 6; i++) {
+		playerDie.PushBack({ i * width,8 * height,width,height });
 	}
 	playerDie.loop = false;
 	playerDie.speed = 0.3f;
@@ -93,17 +97,25 @@ bool Player::Start() {
 bool Player::Update()
 {
 	
+	LOG("Attack Cooldown: %i",attackCD);
+
 	debugKeys();
 
-	Move();
+	if (playerState != State::ATTACKING)
+		Move();
 
-	if (app->input->GetMouseButtonDown(1) && attackCD <= 0 && attackFF) {
-		Attack(attackFF);
+	if ((app->input->GetMouseButtonDown(1) && attackCD <= 0) || (attackFrames > 0 && playerState == State::ATTACKING)) {
+		playerState = State::ATTACKING;
+		Attack(attackFrames);
+		
+		attackFrames--;
 	}
-	else if (!attackFF) {
-		Attack(attackFF);
+	else {
+		playerState = State::IDLE;
+		attackFrames = 10;
 	}
 	attackCD--;
+	
 
 	//Death
 	if (alive != true) {
@@ -242,31 +254,30 @@ void Player::Move() {
 	pbody->body->SetLinearVelocity(vel);
 }
 
-void Player::Attack(bool first) {
+void Player::Attack(int frames) {
 
 	
 
-	if (first) {
+	if (frames > 1) {
 		
 		if (facing == DIRECTION::RIGHT) {
-			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x+37)),  PIXEL_TO_METERS((position.y+8)) }, 0);
-			app->render->DrawRectangle({ position.x+21, position.y, 50, 20 }, 255, 0, 0, 200);
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x+50)),  PIXEL_TO_METERS((position.y+8)) }, 0);
+			//app->render->DrawRectangle({ position.x+21, position.y, 50, 20 }, 255, 0, 0, 200);
+			currentAnim = &playerAttackR;
 		}
 		if (facing == DIRECTION::LEFT) {
-			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x - 10)), PIXEL_TO_METERS((position.y+8)) }, 0);
-			app->render->DrawRectangle({ position.x-39, position.y, 50, 20 }, 255, 0, 0, 200);
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x +15)), PIXEL_TO_METERS((position.y+8)) }, 0);
+			//app->render->DrawRectangle({ position.x-39, position.y, 50, 20 }, 255, 0, 0, 200);
+			currentAnim = &playerAttackL;
 		}
-	
-		attackFF = false;
 	}
 	else {
 
 		attackHitbox->body->SetTransform({0, 0}, 0);
-
-		attackFF = true;
+		attackCD = 40;
 	}
 	
-	attackCD = 40;
+	
 
 	
 }

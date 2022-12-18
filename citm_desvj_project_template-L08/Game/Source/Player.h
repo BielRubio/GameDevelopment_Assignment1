@@ -16,7 +16,8 @@ enum class State {
 	COLLIDING,
 	MOVING_RIGHT,
 	MOVING_LEFT,
-	ATTACKING
+	ATTACKING,
+	IDLE
 };
 
 class Player : public Entity
@@ -47,7 +48,7 @@ public:
 	
 	void Move(); 
 
-	void Attack(bool first);
+	void Attack(int frames);
 
 	void debugKeys(); 
 
@@ -75,8 +76,8 @@ private:
 	int jumpCounter; 
 	int MaxJumps = 2;
 
-	int attackCD = 40;
-	bool attackFF = true; 
+	int attackCD = 0;
+	int attackFrames = 10; 
 
 	State playerState; 
 
@@ -93,6 +94,8 @@ private:
 	Animation playerRunL;
 	Animation playerJumpR;
 	Animation playerJumpL;
+	Animation playerAttackR;
+	Animation playerAttackL;
 	Animation playerDie;
 
 };
