@@ -129,12 +129,12 @@ bool Enemy::Update()
 		DetectPlayer(playerPos, enemyPos);
 		if (state == EnemyState::MOVING) {
 			if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
-				if (pbody->body->GetLinearVelocity().x < 2.5) {
+				if (pbody->body->GetLinearVelocity().x < speed) {
 					pbody->body->ApplyForce(b2Vec2(1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
 				}
 			}
 			else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
-				if (pbody->body->GetLinearVelocity().x > -2.5) {
+				if (pbody->body->GetLinearVelocity().x > -speed) {
 					pbody->body->ApplyForce(b2Vec2(-1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
 				}
 			}
@@ -171,9 +171,9 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::WALL:
 		LOG("Collision WALL");
 		break;
-	
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Enemy die");
+		pbody->body->SetActive(false);
 		break;
 	case ColliderType::JUMPTERRAIN:
 		LOG("JUMP");

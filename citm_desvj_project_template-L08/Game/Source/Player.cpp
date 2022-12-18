@@ -261,7 +261,7 @@ void Player::Attack(bool first) {
 	}
 	else {
 
-		attackHitbox->body->SetTransform({0, 0}, 0);
+		//attackHitbox->body->SetTransform({0, 0}, 0);
 
 		attackFF = true;
 	}
