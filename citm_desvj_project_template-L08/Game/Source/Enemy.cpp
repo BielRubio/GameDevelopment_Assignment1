@@ -218,9 +218,9 @@ bool Enemy::LoadState(pugi::xml_node& data) {
 bool Enemy::SaveState(pugi::xml_node& data) {
 
 	pugi::xml_node enemy_stats = data.append_child("enemy_stats");
-	data.child("enemy_stats").append_attribute("position_x") = position.x;
-	data.child("enemy_stats").append_attribute("position_y") = position.y;
-	data.child("enemy_stats").append_attribute("state") = (int)state;
+	enemy_stats.append_attribute("position_x") = position.x;
+	enemy_stats.append_attribute("position_y") = position.y;
+	enemy_stats.append_attribute("state") = (int)state;
 
 	return true; 
 }
