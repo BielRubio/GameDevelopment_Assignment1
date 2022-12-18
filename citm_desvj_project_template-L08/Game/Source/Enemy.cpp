@@ -105,7 +105,7 @@ bool Enemy::Update()
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
 
 
-	if (playerPos.DistanceTo(enemyPos) <= 5) {
+	if (playerPos.DistanceTo(enemyPos) <= detectDistance) {
 		app->pathfinding->CreatePath(enemyPos, playerPos);
 	}
 	enemyPath.Clear();
@@ -196,6 +196,7 @@ bool Enemy::LoadState(pugi::xml_node& data) {
 	position.x = data.child("enemy_stats").attribute("position_x").as_int();
 	position.y = data.child("enemy_stats").attribute("position_y").as_int();
 	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	state = (EnemyState)data.child("enemy_stats").attribute("state").as_int();
 
 	return true;
 }
@@ -205,13 +206,14 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 	pugi::xml_node enemy_stats = data.append_child("enemy_stats");
 	data.child("enemy_stats").append_attribute("position_x") = position.x;
 	data.child("enemy_stats").append_attribute("position_y") = position.y;
+	data.child("enemy_stats").append_attribute("state") = (int)state;
 
 	return true; 
 }
 
 void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
 	if (jumping == false) {
-		if (playerPos.DistanceTo(enemyPos) <= 5) {
+		if (playerPos.DistanceTo(enemyPos) <= detectDistance) {
 			state = EnemyState::MOVING;
 			//LOG("MOVING FlyingEnemy");
 		}

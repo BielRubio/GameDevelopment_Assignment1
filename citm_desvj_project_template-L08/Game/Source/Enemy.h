@@ -76,6 +76,8 @@ private:
 	SDL_Texture* tileX = nullptr;
 
 	bool jumping = false; 
+
+	int detectDistance = 6; 
 };
 
 #endif // __ENEMY_H__
