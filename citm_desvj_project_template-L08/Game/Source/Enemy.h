@@ -52,6 +52,10 @@ public:
 
 	bool invincible = false;
 	bool alive = true;
+
+	//Fx
+
+	int dedFx = -1;
 	
 private:
 
