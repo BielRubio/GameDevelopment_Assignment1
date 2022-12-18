@@ -58,7 +58,7 @@ bool MainMenu::Update(float dt)
 {
 	bool ret = true;
 
-	app->render->DrawTexture(BG,0,0);
+	//app->render->DrawTexture(BG,0,0);
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 

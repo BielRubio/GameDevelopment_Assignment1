@@ -7,7 +7,7 @@
 #include "PQueue.h"
 #include "DynArray.h"
 
-#define COST_MAP_SIZE 150
+#define COST_MAP_SIZE 500
 
 #include "PugiXml\src\pugixml.hpp"
 
