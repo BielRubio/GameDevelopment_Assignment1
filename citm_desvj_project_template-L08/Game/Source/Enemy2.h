@@ -70,6 +70,8 @@ private:
 
 	EnemyState state; 
 	SDL_Texture* tileX = nullptr; 
+
+	int detectDistance = 6;
 };
 
 #endif // __ENEMY2_H__

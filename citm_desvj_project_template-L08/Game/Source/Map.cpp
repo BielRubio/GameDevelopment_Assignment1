@@ -139,7 +139,7 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 {
                     //map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1;
                     if (mapData.type == MapTypes::MAPTYPE_ISOMETRIC && tileId == 25) map[i] = 1;
-                    else if (mapData.type == MapTypes::MAPTYPE_ORTHOGONAL && tileId == 23) map[i] = 1;
+                    else if (mapData.type == MapTypes::MAPTYPE_ORTHOGONAL && tileId == 119) map[i] = 1;
                     else map[i] = 0;
                 }
                 else {

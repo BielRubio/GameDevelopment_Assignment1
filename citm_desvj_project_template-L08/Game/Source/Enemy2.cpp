@@ -103,8 +103,9 @@ bool Enemy2::Update()
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
 
 
-	app->pathfinding->CreatePath(enemyPos, playerPos);
-
+	if (playerPos.DistanceTo(enemyPos) <= detectDistance) {
+		app->pathfinding->CreatePath(enemyPos, playerPos);
+	}
 	enemyPath.Clear();
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
@@ -124,12 +125,12 @@ bool Enemy2::Update()
 	if (enemyPath.Count() > 1) {
 		DetectPlayer(enemyPos, playerPos);
 		if (enemyPath.At(1)->x - enemyPath.At(0)->x > 0) {
-			if (pbody->body->GetLinearVelocity().x < 2.5) {
+			if (pbody->body->GetLinearVelocity().x < speed) {
 				pbody->body->ApplyForce(b2Vec2(1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
 			}
 		}
 		else if (enemyPath.At(1)->x - enemyPath.At(0)->x < 0) {
-			if (pbody->body->GetLinearVelocity().x > -2.5) {
+			if (pbody->body->GetLinearVelocity().x > -speed) {
 				pbody->body->ApplyForce(b2Vec2(-1.0f, 0.0f), pbody->body->GetWorldCenter(), true);
 			}
 		}
@@ -138,12 +139,12 @@ bool Enemy2::Update()
 		}
 
 		if (enemyPath.At(1)->y - enemyPath.At(0)->y > 0) {
-			if (pbody->body->GetLinearVelocity().y < 2.5) {
+			if (pbody->body->GetLinearVelocity().y < speed) {
 				pbody->body->ApplyForce(b2Vec2(0.0f, 1.0f), pbody->body->GetWorldCenter(), true);
 			}
 		}
 		else if (enemyPath.At(1)->y - enemyPath.At(0)->y < 0) {
-			if (pbody->body->GetLinearVelocity().y > -2.5) {
+			if (pbody->body->GetLinearVelocity().y > -speed) {
 				pbody->body->ApplyForce(b2Vec2(0.0f, -1.0f), pbody->body->GetWorldCenter(), true);
 			}
 		}
@@ -161,7 +162,31 @@ bool Enemy2::CleanUp()
 }
 
 void Enemy2::OnCollision(PhysBody* physA, PhysBody* physB) {
-
+	switch (physB->ctype)
+	{
+	case ColliderType::ITEM:
+		LOG("Collision ITEM");
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::FLOOR:
+		LOG("Collision FLOOR");
+		break;
+	case ColliderType::SPIKES:
+		LOG("Collision SPIKES");
+		break;
+	case ColliderType::WALL:
+		LOG("Collision WALL");
+		break;
+	case ColliderType::PLAYER_ATTACK:
+		LOG("Enemy die");
+		pbody->body->SetActive(false);
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	}
 }
 
 bool Enemy2::IsAlive() {
@@ -173,6 +198,7 @@ bool Enemy2::LoadState(pugi::xml_node& data) {
 	position.x = data.child("flyingEnemy_stats").attribute("position_x").as_int();
 	position.y = data.child("flyingEnemy_stats").attribute("position_y").as_int();
 	pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+	state = (EnemyState)data.child("flyingEnemy_stats").attribute("state").as_int();
 
 	return true;
 }
@@ -182,12 +208,13 @@ bool Enemy2::SaveState(pugi::xml_node& data) {
 	pugi::xml_node enemy_stats = data.append_child("flyingEnemy_stats");
 	data.child("flyingEnemy_stats").append_attribute("position_x") = position.x;
 	data.child("flyingEnemy_stats").append_attribute("position_y") = position.y;
+	data.child("flyingEnemy_stats").append_attribute("state") = (int)state;
 
 	return true; 
 }
 
 void Enemy2::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
-	if (playerPos.DistanceTo(enemyPos) <= 5) {
+	if (playerPos.DistanceTo(enemyPos) <= detectDistance) {
 		state = EnemyState::MOVING;
 		LOG("MOVING");
 	}
