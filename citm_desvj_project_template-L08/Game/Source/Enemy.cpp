@@ -105,16 +105,17 @@ bool Enemy::Update()
 	iPoint enemyPos = app->map->WorldToMap(METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - width / 2, METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - height / 2);
 
 
-	app->pathfinding->CreatePath(enemyPos, playerPos);
-	
-	enemyPath.Clear(); 
+	if (playerPos.DistanceTo(enemyPos) <= 5) {
+		app->pathfinding->CreatePath(enemyPos, playerPos);
+	}
+	enemyPath.Clear();
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
  
 	for (uint i = 0; i < path->Count(); i++){
 		enemyPath.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
 	}
 
-	LOG("state: %d", state);
+	//LOG("state: %d", state);
 	//Draw the path
 	if (app->entityManager->debug) {
 		for (uint i = 0; i < enemyPath.Count(); ++i)
