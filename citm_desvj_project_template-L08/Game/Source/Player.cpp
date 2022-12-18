@@ -174,9 +174,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
+	case ColliderType::ENEMY:
+		LOG("Collision Enemy");
+		if (invincible == false) {
+			alive = false;
+		}
 	}
-
+	
 }
+
 
 bool Player::IsAlive() {
 	return alive; 
