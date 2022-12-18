@@ -47,7 +47,7 @@ bool Player::Start() {
 	alive = true; 
 
 
-	attackHitbox = app->physics->CreateRectangleSensor(0, 0, 50, 20, bodyType::STATIC);
+	attackHitbox = app->physics->CreateRectangleSensor(0, 0, 50, 15, bodyType::STATIC);
 	attackHitbox->ctype = ColliderType::PLAYER_ATTACK;
 
 	//Sounds
@@ -249,11 +249,11 @@ void Player::Attack(bool first) {
 	if (first) {
 		
 		if (facing == DIRECTION::RIGHT) {
-			attackHitbox->body->SetTransform({ PIXEL_TO_METERS(position.x +21),  PIXEL_TO_METERS(position.y) }, 0.0f);
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x+37)),  PIXEL_TO_METERS((position.y+8)) }, 0);
 			app->render->DrawRectangle({ position.x+21, position.y, 50, 20 }, 255, 0, 0, 200);
 		}
 		if (facing == DIRECTION::LEFT) {
-			attackHitbox->body->SetTransform({ PIXEL_TO_METERS(position.x - 39), PIXEL_TO_METERS(position.y) }, 0.0f);
+			attackHitbox->body->SetTransform({ PIXEL_TO_METERS((position.x - 10)), PIXEL_TO_METERS((position.y+8)) }, 0);
 			app->render->DrawRectangle({ position.x-39, position.y, 50, 20 }, 255, 0, 0, 200);
 		}
 	
