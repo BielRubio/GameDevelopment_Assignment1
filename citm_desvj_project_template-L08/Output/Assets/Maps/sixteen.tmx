@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="73">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="76">
  <tileset firstgid="1" name="GD-tileset16" tilewidth="16" tileheight="16" tilecount="117" columns="13">
   <image source="GD-tileset16.png" width="208" height="144"/>
  </tileset>
@@ -40100,6 +40100,12 @@
   <object id="65" x="2528" y="400" width="64" height="32"/>
   <object id="67" x="2592" y="368" width="192" height="32"/>
  </objectgroup>
+ <objectgroup color="#aaff00" id="17" name="jumpTerrain">
+  <properties>
+   <property name="Type" type="int" value="4"/>
+  </properties>
+  <object id="74" x="841.375" y="238.057" width="15.9091" height="2.63636"/>
+ </objectgroup>
  <objectgroup color="#ff55ff" id="13" name="floor">
   <properties>
    <property name="Type" type="int" value="2"/>
@@ -40124,12 +40130,12 @@
  </objectgroup>
  <objectgroup id="15" name="wall">
   <properties>
-   <property name="Type" type="int" value="0"/>
+   <property name="Type" type="int" value="3"/>
   </properties>
  </objectgroup>
  <objectgroup id="16" name="damage">
   <properties>
-   <property name="Type" type="int" value="0"/>
+   <property name="Type" type="int" value="1"/>
   </properties>
  </objectgroup>
 </map>

@@ -12,7 +12,8 @@ struct SDL_Texture;
 
 enum class EnemyState {
 	IDLE, 
-	MOVING
+	MOVING,
+	JUMPING
 };
 
 class Enemy : public Entity
@@ -73,6 +74,8 @@ private:
 	DynArray<iPoint> enemyPath; 
 
 	SDL_Texture* tileX = nullptr;
+
+	bool jumping = false; 
 };
 
 #endif // __ENEMY_H__

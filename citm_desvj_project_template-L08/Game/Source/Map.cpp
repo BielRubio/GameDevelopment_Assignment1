@@ -130,9 +130,9 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 int i = (y * layer->width) + x;
                 
                 int tileId = layer->data[i];
-                LOG("i : %d", i);
+                /*LOG("i : %d", i);
                 LOG("id : %u",layer->data[i]);
-                
+                */
                 TileSet* tileset = (tileId > -1) ? GetTilesetFromTileId(tileId) : NULL;
 
                 if (tileset != NULL)
@@ -536,6 +536,9 @@ void Map::CreateColliders(ColData c) {
     if (c.type == ColTypes::FLOOR) {
         collider1 = app->physics->CreateRectangleSensor(c.x + c.width / 2, c.y + c.height / 2, c.width, c.height, bodyType::STATIC);
     }
+    else if (c.type == 4) {
+        collider1 = app->physics->CreateRectangleSensor(c.x + c.width / 2, c.y + c.height / 2, c.width, c.height, bodyType::STATIC);
+    }
     else {
         collider1 = app->physics->CreateRectangle(c.x + c.width / 2, c.y + c.height / 2, c.width, c.height, bodyType::STATIC);
     }
@@ -551,6 +554,9 @@ void Map::CreateColliders(ColData c) {
     }
     else if (c.type == 3) {
         collider1->ctype = ColliderType::WALL;
+    }
+    else if (c.type == 4) {
+        collider1->ctype = ColliderType::JUMPTERRAIN; 
     }
 
 }
@@ -626,7 +632,7 @@ void Map::DrawPath()
     iPoint Player = MapToWorld(app->scene->AuxPlayer.x, app->scene->AuxPlayer.y);
     //app->render->DrawLine(Enemy.x,Enemy.y,Player.x,Player.y, 100, 0, 100);
     float ModulVec = sqrt((pow(Player.x - Enemy.x, 2)) + (pow(Player.y - Enemy.y, 2)));
-    LOG("VEC %f", ModulVec);
+    /*LOG("VEC %f", ModulVec);*/
     if (ModulVec < 16*10) {
         LOG("player in enmey radius");
         app->scene->pathActive = true;

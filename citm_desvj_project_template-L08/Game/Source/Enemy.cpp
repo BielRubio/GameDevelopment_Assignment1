@@ -114,6 +114,7 @@ bool Enemy::Update()
 		enemyPath.PushBack(iPoint(path->At(i)->x, path->At(i)->y));
 	}
 
+	LOG("state: %d", state);
 	//Draw the path
 	if (app->entityManager->debug) {
 		for (uint i = 0; i < enemyPath.Count(); ++i)
@@ -151,9 +152,38 @@ bool Enemy::CleanUp()
 }
 
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
-	if (physB->ctype == ColliderType::PLAYER_ATTACK) {
+	switch (physB->ctype)
+	{
+	case ColliderType::ITEM:
+		LOG("Collision ITEM");
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		jumping = false;
+		break;
+	case ColliderType::FLOOR:
+		LOG("Collision FLOOR");
+		break;
+	case ColliderType::SPIKES:
+		LOG("Collision SPIKES");
+		break;
+	case ColliderType::WALL:
+		LOG("Collision WALL");
+		break;
+	
+	case ColliderType::PLAYER_ATTACK:
 		LOG("Enemy die");
+		break;
+	case ColliderType::JUMPTERRAIN:
+		LOG("JUMP");
+		jumping = true; 
+		pbody->body->ApplyForce(b2Vec2(0, -60), pbody->body->GetPosition(), true);
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
 	}
+	
 }
 
 bool Enemy::IsAlive() {
@@ -179,13 +209,18 @@ bool Enemy::SaveState(pugi::xml_node& data) {
 }
 
 void Enemy::DetectPlayer(iPoint playerPos, iPoint enemyPos) {
-	if (playerPos.DistanceTo(enemyPos) <= 5) {
-		state = EnemyState::MOVING; 
-		LOG("MOVING FlyingEnemy");
+	if (jumping == false) {
+		if (playerPos.DistanceTo(enemyPos) <= 5) {
+			state = EnemyState::MOVING;
+			//LOG("MOVING FlyingEnemy");
+		}
+		else {
+			state = EnemyState::IDLE;
+			//LOG("IDLE FlyingEnemy");
+		}
 	}
 	else {
-		state = EnemyState::IDLE; 
-		LOG("IDLE FlyingEnemy");
+		state = EnemyState::JUMPING; 
 	}
 }
 

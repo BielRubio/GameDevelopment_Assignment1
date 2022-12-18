@@ -35,6 +35,7 @@ enum class ColliderType {
 	WALL,
 	ENEMY,
 	PLAYER_ATTACK,
+	JUMPTERRAIN,
 	UNKNOWN
 };
 
