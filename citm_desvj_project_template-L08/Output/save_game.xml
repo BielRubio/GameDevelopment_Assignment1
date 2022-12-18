@@ -8,9 +8,14 @@
 	<:anonymous />
 	<scene />
 	<entitymanager>
-		<player_stats position_x="537" position_y="224" jumpCounter="1" state="1" />
-		<enemy_stats position_x="517" position_y="227" />
-		<flyingEnemy_stats position_x="581" position_y="227" />
+		<player_stats position_x="643" position_y="224" jumpCounter="0" state="6" />
+		<enemy_stats position_x="1270" position_y="194" state="0" position_x="2220" position_y="403" state="0" position_x="2900" position_y="387" state="0" position_x="3050" position_y="387" state="0" />
+		<enemy_stats />
+		<enemy_stats />
+		<enemy_stats />
+		<flyingEnemy_stats position_x="1550" position_y="147" state="0" position_x="2040" position_y="315" state="0" position_x="2687" position_y="348" state="0" />
+		<flyingEnemy_stats />
+		<flyingEnemy_stats />
 	</entitymanager>
 	<map />
 	<:anonymous />
@@ -18,6 +23,6 @@
 	<menu />
 	<mainmenu />
 	<renderer>
-		<camera x="-1508" y="-536" />
+		<camera x="-1932" y="-536" />
 	</renderer>
 </save_state>
