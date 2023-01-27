@@ -14,6 +14,7 @@
 #include "ModuleFonts.h"
 #include "DeathMenu.h"
 #include "Pathfinding.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -41,6 +42,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//menu = new Menu();
 	deathmenu = new DeathMenu();
 	mainmenu = new MainMenu();
+	guiManager = new GuiManager();
+
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -59,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(pathfinding);
 	AddModule(deathmenu);
 	AddModule(mainmenu);
+	AddModule(guiManager);
 	deathmenu->active = false;
 	mainmenu->active = false;
 	//menu->active = false;

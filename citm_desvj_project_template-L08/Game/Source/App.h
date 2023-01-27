@@ -25,6 +25,7 @@ class Physics;
 class DeathMenu;
 class MainMenu;
 class PathFinding; 
+class GuiManager;
 
 class App
 {
@@ -101,6 +102,7 @@ public:
 	DeathMenu* deathmenu;
 	MainMenu* mainmenu;
 	PathFinding* pathfinding; 
+	GuiManager* guiManager;
 
 private:
 
