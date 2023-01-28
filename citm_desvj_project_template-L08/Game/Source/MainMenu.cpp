@@ -172,6 +172,7 @@ bool MainMenu::Update(float dt)
 			if (option == SELECTED::FS && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
 				FS = !FS;
 				app->audio->PlayFxWithVolume(select, 0, 70);
+				//SaveSelection();
 			}
 
 		}
@@ -184,6 +185,7 @@ bool MainMenu::Update(float dt)
 			if (option == SELECTED::VS && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
 				VS = !VS;
 				app->audio->PlayFxWithVolume(select, 0, 70);
+				//SaveSelection();
 			}
 
 		}
@@ -255,6 +257,12 @@ bool MainMenu::PostUpdate()
 	return ret;
 }
 
+void MainMenu::SaveSelection(pugi::xml_node& config) {
+	pugi::xml_node Selection = config.append_child("renderer");
+	Selection.append_child("vsync").append_attribute("value") = VS;
+	pugi::xml_node Selection1 = config.append_child("window");
+	Selection1.append_child("fullscreen").append_attribute("value") = FS;
+}
 // Called before quitting
 bool MainMenu::CleanUp()
 {
