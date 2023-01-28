@@ -11,6 +11,8 @@
 #include "Physics.h"
 #include "ModuleFonts.h"
 #include "DeathMenu.h"
+#include "GuiManager.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,6 +45,8 @@ bool MainMenu::Start()
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
 	BG = app->tex->Load("Assets/Textures/TitleScreen_BG.png");
+	MX = 125 + app->audio->volume;
+	FX = 125 + app->audio->fxvolume/2;
 
 	return true;
 }
@@ -70,66 +74,7 @@ bool MainMenu::Update(float dt)
 		options = false;
 		app->deathmenu->finished = false;
 	}
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-		if (option == SELECTED::OPTIONS) {
-			option = SELECTED::PLAY;
-			app->audio->PlayFxWithVolume(change,0,70);
-		}
-		if (option == SELECTED::EXIT) {
-			option = SELECTED::OPTIONS;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-		if (option == SELECTED::BACK) {
-			option = SELECTED::MUSIC;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-	}
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-		if (option == SELECTED::OPTIONS) {
-			option = SELECTED::EXIT;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-		if (option == SELECTED::PLAY) {
-			option = SELECTED::OPTIONS;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-		if (option == SELECTED::MUSIC) {
-			option = SELECTED::BACK;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-	}
-	if ((app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && options == true) {
-		if (app->audio->volume >= 1) {
-			app->audio->volume--;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-	}
-	if ((app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && options == true) {
-		if (app->audio->volume <= 63) {
-			app->audio->volume++;
-			app->audio->PlayFxWithVolume(change, 0, 70);
-		}
-	}
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		if (option == SELECTED::PLAY && fadeOut == false && fadeIn == false) {
-			app->audio->PlayFxWithVolume(select, 0, 70);
-			fadeOut = true;
-		}
-		if (option == SELECTED::OPTIONS) {
-			app->audio->PlayFxWithVolume(select, 0, 70);
-			option = SELECTED::MUSIC;
-			options = true;
-		}
-		if (option == SELECTED::BACK) {
-			app->audio->PlayFxWithVolume(select, 0, 70);
-			option = SELECTED::OPTIONS;
-			options = false;
-		}
-		if (option == SELECTED::EXIT) {
-			ret = false;
-		}
 
-	}
 	if (fadeIn == true) {
 		if (fading >= 1) { fading--; };
 		if (fading == 0) { fadeIn = false; };
@@ -148,34 +93,155 @@ bool MainMenu::Update(float dt)
 
 	}
 	app->font->BlitText(134, 10, YF, "obsolete");
-	if (option == SELECTED::PLAY && options == false) {
-		app->font->BlitText(145, 40, WF, "play");
-		app->font->BlitText(137, 80, GF, "options");
-		app->font->BlitText(145, 120, GF, "exit");
+	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
+		if (option == SELECTED::PLAY) {
+			app->audio->PlayFxWithVolume(select, 0, 70);
+			fadeOut = true;
+		}
+		if (option == SELECTED::OPTIONS) {
+			app->audio->PlayFxWithVolume(select, 0, 70);
+			options = true;
+		}
+		if (option == SELECTED::EXIT) {
+			ret = false;
+		}
 	}
-	if (option == SELECTED::OPTIONS && options == false) {
-		app->font->BlitText(145, 40, GF, "play");
-		app->font->BlitText(137, 80, WF, "options");
-		app->font->BlitText(145, 120, GF, "exit");
+	if (options == true) {
+		int x, y;
+		x = app->input->GetMousePositionX();
+		y = app->input->GetMousePositionY();
+		app->font->BlitText(142, 40, WF, "music");
+		app->font->BlitText(151, 65, WF, "fx");
+		app->font->BlitText(127, 95, WF, "fullscreen");
+		app->font->BlitText(142, 120, WF, "vsync");
+		app->font->BlitText(145, 145, GF, "back");
+		app->render->DrawRectangle({ 125,58,64,2 }, 150, 150, 150);
+		app->render->DrawRectangle({ MX,56,5,6 }, 150, 150, 150);
+		app->render->DrawRectangle({ 125,83,64,2 }, 150, 150, 150);
+		app->render->DrawRectangle({ FX,81,5,6 }, 150, 150, 150);
+		app->render->DrawRectangle({ 152,108,10,10 }, RGB, RGB, RGB);
+		app->render->DrawRectangle({ 152,134,10,10 }, RGB1, RGB1, RGB1);
+		app->render->DrawRectangle({ 153,109,8,8 }, 0, 0, 0);
+		app->render->DrawRectangle({ 153,135,8,8 }, 0, 0, 0);
+		app->render->DrawRectangle({ 154,110,6,6 }, 0, 200, 0);
+		app->render->DrawRectangle({ 154,136,6,6 }, 0, 200, 0);
+		if (FS == false) {
+			app->render->DrawRectangle({ 154,110,6,6 }, 200, 0, 0);
+		}
+		if (VS == false) {
+			app->render->DrawRectangle({ 154,136,6,6 }, 200, 0, 0);
+		}
+		if (x >= MX && x <= (MX+6) && y >= 56 && y <= 62) {
+			app->render->DrawRectangle({ 125,58,64,2 }, 255, 255, 255);
+			app->render->DrawRectangle({ MX,56,5,6 }, 255, 255, 255);
+			if (option == SELECTED::NONE) {
+				option = SELECTED::MUSIC;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+			if (option == SELECTED::MUSIC && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
+				MX = x-2;
+				if (x < 125) MX = 125;
+				if (x > 189) MX = 189;
+				app->audio->volume = (MX - 125);
+				if (MX <= 130) app->audio->volume = 1;
+				if (MX >= 180) app->audio->volume = 100;
+			}
+		}
+		else if (x >= FX && x <= (FX + 6) && y >= 81 && y <= 87) {
+			app->render->DrawRectangle({ 125,83,64,2 }, 255, 255, 255);
+			app->render->DrawRectangle({ FX,81,5,6 }, 255, 255, 255);
+			if (option == SELECTED::NONE) {
+				option = SELECTED::FX;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+			if (option == SELECTED::FX && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
+				FX = x - 2;
+				if (x < 125) FX = 125;
+				if (x > 189) FX = 189;
+				app->audio->fxvolume = (FX - 95);
+				if (FX <= 130) app->audio->fxvolume = 1;
+				if (FX >= 180) app->audio->fxvolume = 100;
+			}
+		}
+		else if (x >= 152 && x <= 162 && y >= 108 && y <= 118) {
+			RGB = 255;
+			if (option == SELECTED::NONE) {
+				option = SELECTED::FS;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+			if (option == SELECTED::FS && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
+				FS = !FS;
+				app->audio->PlayFxWithVolume(select, 0, 70);
+			}
+
+		}
+		else if (x >= 152 && x <= 162 && y >= 134 && y <= 144) {
+			RGB1 = 255;
+			if (option == SELECTED::NONE) {
+				option = SELECTED::VS;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+			if (option == SELECTED::VS && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
+				VS = !VS;
+				app->audio->PlayFxWithVolume(select, 0, 70);
+			}
+
+		}
+		else if (x >= 145 && x <= 169 && y >= 145 && y <= 157) {
+			app->font->BlitText(145, 145, WF, "back");
+			if (option == SELECTED::NONE) {
+				option = SELECTED::BACK;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+			if (option == SELECTED::VS && app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_DOWN) {
+				options = false;
+			}
+		}
+		else {
+			RGB = 150;
+			RGB1 = 150;
+			option = SELECTED::NONE;
+		}
 	}
-	if (option == SELECTED::EXIT && options == false) {
-		app->font->BlitText(145, 40, GF, "play");
-		app->font->BlitText(137, 80, GF, "options");
-		app->font->BlitText(145, 120, WF, "exit");
+	if (options == false) {
+		int x, y;
+		x = app->input->GetMousePositionX();
+		y = app->input->GetMousePositionY();
+		if (x >= 145 && x <= 169 && y >= 40 && y <= 52) {
+			app->font->BlitText(145, 40, WF, "play");
+			app->font->BlitText(137, 80, GF, "options");
+			app->font->BlitText(145, 120, GF, "exit");
+			if (option == SELECTED::NONE) {
+				option = SELECTED::PLAY;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+		}
+		else if (x >= 137 && x <= 179 && y >= 80 && y <= 92) {
+			app->font->BlitText(145, 40, GF, "play");
+			app->font->BlitText(137, 80, WF, "options");
+			app->font->BlitText(145, 120, GF, "exit");
+			if (option == SELECTED::NONE) {
+				option = SELECTED::OPTIONS;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+		}
+		else if (x >= 145 && x <= 169 && y >= 120 && y <= 132) {
+			app->font->BlitText(145, 40, GF, "play");
+			app->font->BlitText(137, 80, GF, "options");
+			app->font->BlitText(145, 120, WF, "exit");
+			if (option == SELECTED::NONE) {
+				option = SELECTED::EXIT;
+				app->audio->PlayFxWithVolume(change, 0, 70);
+			}
+		}
+		else {
+			app->font->BlitText(145, 40, GF, "play");
+			app->font->BlitText(137, 80, GF, "options");
+			app->font->BlitText(145, 120, GF, "exit");
+			option = SELECTED::NONE;
+		}
 	}
-	if (option == SELECTED::MUSIC && options == true) {
-		app->font->BlitText(142, 60, WF, "music");
-		app->font->BlitText(145, 100, GF, "back");
-		app->render->DrawRectangle({ 124,79,66,12 }, 255, 255, 255);
-		app->render->DrawRectangle({ 125,80,64,10 }, 20, 20, 20);
-		app->render->DrawRectangle({ 125,80,app->audio->volume,10 }, 255, 255, 255);
-	}
-	if (option == SELECTED::BACK && options == true) {
-		app->font->BlitText(142, 60, GF, "music");
-		app->font->BlitText(145, 100, WF, "back");
-		app->render->DrawRectangle({ 125,80,64,10 }, 20, 20, 20);
-		app->render->DrawRectangle({ 125,80,app->audio->volume,10 }, 255, 255, 255);
-	}
+
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading);
 	app->render->DrawRectangle({ 0,0,1100,800 }, 0, 0, 0, fading2);
 

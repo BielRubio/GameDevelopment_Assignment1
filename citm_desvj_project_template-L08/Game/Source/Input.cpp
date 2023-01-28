@@ -153,6 +153,18 @@ void Input::GetMousePosition(int& x, int& y)
 	y = mouseY;
 }
 
+int Input::GetMousePositionX()
+{
+	int x = mouseX;
+	return x;
+}
+
+int Input::GetMousePositionY()
+{
+	int y = mouseY;
+	return y;
+}
+
 void Input::GetMouseMotion(int& x, int& y)
 {
 	x = mouseMotionX;

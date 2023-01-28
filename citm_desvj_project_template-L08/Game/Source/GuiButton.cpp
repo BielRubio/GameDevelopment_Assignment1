@@ -12,7 +12,8 @@ GuiButton::GuiButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(
 	canClick = true;
 	drawBasic = false;
 
-	audioFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	audioFxId = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
+	audioFxId1 = app->audio->LoadFx("Assets/Sounds/Select.wav");
 }
 
 GuiButton::~GuiButton()
@@ -36,11 +37,13 @@ bool GuiButton::Update(float dt)
 			state = GuiControlState::FOCUSED;
 			if (previousState != state) {
 				LOG("Change state from %d to %d",previousState,state);
-				app->audio->PlayFx(audioFxId);
+				//app->audio->PlayFx(audioFxId);
+				app->audio->PlayFxWithVolume(audioFxId,0,70);
 			}
 
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_REPEAT) {
 				state = GuiControlState::PRESSED;
+				app->audio->PlayFxWithVolume(audioFxId1, 0, 70);
 			}
 
 			//

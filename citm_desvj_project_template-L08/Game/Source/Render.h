@@ -54,7 +54,8 @@ public:
 	SDL_Rect camera;
 	SDL_Rect viewport;
 	SDL_Color background;
-	//TTF_Font* font;
+	Uint32 flags = SDL_RENDERER_ACCELERATED;
+
 };
 
 #endif // __RENDER_H__

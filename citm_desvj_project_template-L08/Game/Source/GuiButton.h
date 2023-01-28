@@ -23,6 +23,7 @@ public:
 	bool drawBasic = false;
 
 	uint audioFxId;
+	uint audioFxId1;
 };
 
 #endif // __GUIBUTTON_H__

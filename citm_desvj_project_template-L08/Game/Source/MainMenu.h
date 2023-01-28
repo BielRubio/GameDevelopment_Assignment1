@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
+#include "GuiButton.h"
 
 
 class MainMenu : public Module
@@ -39,13 +40,20 @@ public:
 		OPTIONS,
 		EXIT,
 		MUSIC,
-		BACK
+		FX,
+		FS,
+		VS,
+		BACK,
+		NONE
 	};
 
-	SELECTED option = SELECTED::PLAY;
+	SELECTED option = SELECTED::NONE;
 
-	int WF, GF, YF, change, select, fading = 255, fading2 = 0;
-	bool fadeIn = true, fadeOut = false, options = false;
+	int WF, GF, YF, change, select, fading = 255, fading2 = 0, MX,FX, RGB = 150, RGB1 = 150;
+	bool fadeIn = true, fadeOut = false, options = false, FS = false, VS = false;
+	//GuiButton* button1;
+	//GuiButton* button2;
+
 
 private:
 	//enum class SELECTED {

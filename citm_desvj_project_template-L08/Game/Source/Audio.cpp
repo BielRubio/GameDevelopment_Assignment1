@@ -29,6 +29,7 @@ bool Audio::Awake(pugi::xml_node& config)
 	bool ret = true;
 	SDL_Init(0);
 	volume = config.child("music").attribute("volume").as_int();
+	fxvolume = config.child("fx").attribute("volume").as_int();
 
 		if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
@@ -181,6 +182,7 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 bool Audio::PlayFxWithVolume(unsigned int id, int repeat, int volume)
 {
 	bool ret = false;
+	volume = fxvolume;
 
 	if (!active)
 		return false;
