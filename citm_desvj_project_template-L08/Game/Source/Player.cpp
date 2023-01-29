@@ -67,6 +67,11 @@ bool Player::Start() {
 	LFL = app->tex->Load("Assets/Textures/LOW.png");
 	LFE = app->tex->Load("Assets/Textures/EMPTY.png");
 
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789" };
+	WF = app->font->Load("Assets/Fonts/FontWhiteDef.png", lookupTable, 1);
+	YF = app->font->Load("Assets/Fonts/FontYellowDef.png", lookupTable, 1);
+
+
 
 	//Animations
 	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
@@ -114,6 +119,8 @@ bool Player::Update()
 	if (playerState != State::ATTACKING)
 		Move();
 
+	TotalTime = SDL_GetTicks();
+
 	if ((app->input->GetMouseButtonDown(1) && attackCD <= 0) || (attackFrames > 0 && playerState == State::ATTACKING)) {
 		playerState = State::ATTACKING;
 		app->audio->PlayFxWithVolume(Swing, 0, 25);
@@ -144,7 +151,6 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 
-
 	
 	//Player Health Damage
 	if ((lifeAux >= 1 && lifeAux <= 40) || (lifeAux >= 60 && lifeAux <= 100) || (lifeAux >= 120 && lifeAux <= 150)) {
@@ -166,6 +172,20 @@ bool Player::Update()
 		app->render->DrawTexture(LFE, position.x + 140, position.y + 70);
 	}
 
+	//Score Print
+	char ConvertAux[12];
+	sprintf_s(ConvertAux, "%d", score);
+	app->font->BlitText(x.x+1, x.y+170, WF, "score");
+	app->font->BlitText(x.x + 34, x.y + 170, WF, ConvertAux);
+
+	//Timer
+	if (TotalTime - Time >= 1000) {
+		Time = TotalTime;
+		timer++;
+	}
+	sprintf_s(ConvertAux, "%d", timer);
+	app->font->BlitText(x.x + 140, x.y+1, YF, "time");
+	app->font->BlitText(x.x + 167, x.y + 1, YF, ConvertAux);
 
 	return true;
 }

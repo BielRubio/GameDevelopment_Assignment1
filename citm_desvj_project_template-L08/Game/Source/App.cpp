@@ -31,7 +31,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	win = new Window();
 	render = new Render();
 	tex = new Textures();
-	font = new ModuleFonts();
 	audio = new Audio();
 	intro = new Intro();
 	scene = new Scene();
@@ -43,6 +42,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	deathmenu = new DeathMenu();
 	mainmenu = new MainMenu();
 	guiManager = new GuiManager();
+	font = new ModuleFonts();
 
 
 	// Ordered for awake / Start / Update

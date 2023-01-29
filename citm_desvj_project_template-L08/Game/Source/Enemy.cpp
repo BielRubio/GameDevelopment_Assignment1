@@ -188,6 +188,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER_ATTACK:
 		LOG("Enemy die");
 		Death();
+		app->scene->player->score += 100;
 		break;
 	case ColliderType::JUMPTERRAIN:
 		LOG("JUMP");

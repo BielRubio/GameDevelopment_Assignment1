@@ -63,9 +63,12 @@ public:
 
 	bool alive, invincible = false;
 
-	int life = 3, lifeAux = 0;
+	int life = 3, lifeAux = 0, WF, YF, score = 0, timer = 0;
 
-	
+	iPoint x;
+
+	Uint32 TotalTime, Time = 0;
+
 private:
 
 	SDL_Texture* texture;
