@@ -80,12 +80,14 @@ bool DeathMenu::Update(float dt)
 		if (continue1 == true) {
 			app->scene->player->active = true;
 			app->scene->player->alive = true;
+			app->scene->player->life = 3;
 			app->scene->player->pbody->body->SetActive(true);
 			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(500), PIXEL_TO_METERS(220) }, 0);
 			app->deathmenu->active = false;
 		}
 		if (continue1 == false) {
 			app->scene->player->alive = true;
+			app->scene->player->life = 3;
 			app->scene->player->pbody->body->SetActive(true);
 			app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(500), PIXEL_TO_METERS(220) }, 0);
 			app->entityManager->active = false;

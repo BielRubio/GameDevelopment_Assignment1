@@ -70,7 +70,7 @@ private:
 	//int WF, GF, change, select, fading = 255, fading2 = 0;
 	//bool fadeIn = true, fadeOut = false, options = false;
 	
-	SDL_Texture* BG;
+
 };
 
 #endif // __MAINMENU_H__

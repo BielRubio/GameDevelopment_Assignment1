@@ -44,7 +44,6 @@ bool MainMenu::Start()
 	YF = app->font->Load("Assets/Fonts/FontYellowDef.png", lookupTable, 1);
 	change = app->audio->LoadFx("Assets/Sounds/ChangeSelection.wav");
 	select = app->audio->LoadFx("Assets/Sounds/Select.wav");
-	BG = app->tex->Load("Assets/Textures/TitleScreen_BG.png");
 	MX = 125 + app->audio->volume;
 	FX = 125 + app->audio->fxvolume/2;
 
@@ -269,7 +268,6 @@ bool MainMenu::CleanUp()
 	LOG("Freeing main menu");
 	app->font->UnLoad(WF);
 	app->font->UnLoad(GF);
-	app->tex->UnLoad(BG);
 
 	return true;
 }

@@ -166,6 +166,13 @@ bool Scene::Update(float dt)
 		checked = false;
 	}
 
+	//Player Health
+	if (app->scene->player->lifeAux != 0) {
+		app->scene->player->lifeAux++;
+		if (app->scene->player->lifeAux >= 150) {
+			app->scene->player->lifeAux = 0;
+		}
+	}
 
 	return true;
 }

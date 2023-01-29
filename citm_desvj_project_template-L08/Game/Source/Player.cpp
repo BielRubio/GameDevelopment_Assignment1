@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Window.h"
 #include "DeathMenu.h"
+#include "ModuleFonts.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -35,6 +36,8 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	//initilize textures
+	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789" };
+	WF = app->font->Load("Assets/Fonts/FontWhiteDef.png", lookupTable, 1);
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-55, height-2, bodyType::DYNAMIC);
 	//pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
@@ -58,6 +61,14 @@ bool Player::Start() {
 	DeathSound = app->audio->LoadFx("Assets/Sounds/Player/Fire2.wav");
 	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
 	Swing = app->audio->LoadFx("Assets/Sounds/Player/Swing.wav");
+	DamageFx = app->audio->LoadFx("Assets/Sounds/Enemy/Dead2.wav");
+
+	//Textures
+	LFHH = app->tex->Load("Assets/Textures/FULL.png");
+	LFH = app->tex->Load("Assets/Textures/HALF.png");
+	LFL = app->tex->Load("Assets/Textures/LOW.png");
+	LFE = app->tex->Load("Assets/Textures/EMPTY.png");
+
 
 	//Animations
 	playerIdleR.PushBack({ 0 * width,0 * height,width,height });
@@ -134,8 +145,34 @@ bool Player::Update()
 	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
-	//app->render->DrawRectangle({ position.x, position.y, width, height }, 0,255,255);
 
+	//Timer
+	Time = SDL_GetTicks();
+	char AuxChar[20];
+	sprintf_s(AuxChar, "%d", Time);
+
+	
+	//Player Health Damage
+	if ((lifeAux >= 1 && lifeAux <= 40) || (lifeAux >= 60 && lifeAux <= 100) || (lifeAux >= 120 && lifeAux <= 150)) {
+		app->render->DrawRectangle({ position.x + 124, position.y + 69,32,18 }, 255, 255, 255);
+		app->render->DrawRectangle({ position.x + 156, position.y + 75,2,6 }, 255, 255, 255);
+	}
+
+	//Player Health Draw
+	if (life >= 3) {
+		app->render->DrawTexture(LFHH, position.x + 125, position.y + 70);
+	}
+	if (life == 2) {
+		app->render->DrawTexture(LFH, position.x + 125, position.y + 70);
+	}
+	if (life == 1) {
+		app->render->DrawTexture(LFL, position.x + 125, position.y + 70);
+	}
+	if (life == 0) {
+		app->render->DrawTexture(LFE, position.x + 125, position.y + 70);
+	}
+
+	app->font->BlitText(position.x, position.y, WF, AuxChar);
 
 	return true;
 }
@@ -164,7 +201,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::SPIKES:
 		LOG("Collision SPIKES");
 		if (invincible == false) {
-			alive = false;
+			if (life != 1 && lifeAux == 0) {
+				app->audio->PlayFxWithVolume(DamageFx, 0, 50);
+				life--;
+				lifeAux++;
+			}
+			else if (life == 1 && lifeAux == 0) {
+				life = 0;
+				alive = false;
+			}
 		}
 		break;
 	case ColliderType::WALL:
@@ -179,7 +224,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		LOG("Collision Enemy");
 		if (invincible == false) {
-			alive = false;
+			if (life != 1 && lifeAux == 0) {
+				app->audio->PlayFxWithVolume(DamageFx, 0, 50);
+				life--;
+				lifeAux++;
+			}
+			else if (life == 1 && lifeAux == 0) {
+				life = 0;
+				alive = false;
+			}
 		}
 	}
 	

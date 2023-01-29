@@ -62,6 +62,12 @@ public:
 	PhysBody* attackHitbox;
 
 	bool alive, invincible = false;
+
+	int life = 3, lifeAux = 0;
+
+	int Time;
+
+	int WF;
 	
 private:
 
@@ -69,7 +75,7 @@ private:
 	const char* texturePath;
 
 	//Fx
-	int Step1, Step2, StepMetalic1, StepMetalic2, Jump1, DeathSound, Swing, aux = -1;
+	int Step1, Step2, StepMetalic1, StepMetalic2, Jump1, DeathSound, Swing, DamageFx, aux = -1;
 
 	int width;
 	int height;
@@ -78,6 +84,7 @@ private:
 
 	int attackCD = 0;
 	int attackFrames = 10; 
+
 
 	State playerState; 
 
@@ -97,6 +104,11 @@ private:
 	Animation playerAttackR;
 	Animation playerAttackL;
 	Animation playerDie;
+
+	SDL_Texture* LFHH;
+	SDL_Texture* LFH;
+	SDL_Texture* LFL;
+	SDL_Texture* LFE;
 
 };
 
