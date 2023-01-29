@@ -35,7 +35,7 @@ Version 1.1:
 ## Debug Keys
 
  - F1: Avoid the initial transitions
- - F2: Show colliders
+ - F2: Show colliders and pathfinding
  - F3: Start from the beginning of the level
  - F4: Player death
  - F5: Save game state
@@ -53,7 +53,7 @@ Version 1.1:
  > https://github.com/BielRubio
  - Nacho Moreno - Player mechanics, collision detection and Load/Save game state 
  > https://github.com/NachoMoren
- - Maksym Polupan - Scenes and scenes transitions, audio and fx, fonts 
+ - Maksym Polupan - Scenes and scenes transitions, audio and fx, fonts, GUI
  > https://github.com/Maksym203
 
 ## License
