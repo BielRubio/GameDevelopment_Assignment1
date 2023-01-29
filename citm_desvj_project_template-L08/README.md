@@ -35,7 +35,7 @@ Version 1.1:
 ## Debug Keys
 
  - F1: Avoid the initial transitions
- - F2: Show colliders
+ - F2: Show colliders and pathfinding
  - F3: Start from the beginning of the level
  - F4: Player death
  - F5: Save game state
