@@ -36,8 +36,8 @@
 	
 	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  
-	<teleport x="2070" y="56" texturepath="Assets/Textures/trophy.png" id="1"/>
-	<teleport x="3449" y="391" texturepath="Assets/Textures/trophy.png" id ="2"/>
+	<teleport x="2070" y="56" texturepath="Assets/Textures/portal.png" id="1"/>
+	<teleport x="3449" y="391" texturepath="Assets/Textures/portal.png" id ="2"/>
 	  
 	<!--<saw x="856" y="144" noMove="true" texturepath="Assets/Textures/saw.png"/>
     <saw x="1000" y="192" noMove="true" texturepath="Assets/Textures/saw.png"/>
