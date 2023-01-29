@@ -39,6 +39,7 @@ bool Scene::Awake(pugi::xml_node& config)
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
 	}*/
+	
 
 	for (pugi::xml_node sawNode = config.child("saw"); sawNode; sawNode = sawNode.next_sibling("saw"))
 	{
@@ -61,6 +62,12 @@ bool Scene::Awake(pugi::xml_node& config)
 	for (pugi::xml_node en2Node = config.child("enemy2"); en2Node; en2Node = en2Node.next_sibling("enemy2")) {
 		Enemy2* flying_e = (Enemy2*)app->entityManager->CreateEntity(EntityType::ENEMY2);
 		flying_e->parameters = en2Node;
+	}
+
+	for (pugi::xml_node tpNode = config.child("teleport"); tpNode; tpNode = tpNode.next_sibling("teleport"))
+	{
+		Teleport* tp = (Teleport*)app->entityManager->CreateEntity(EntityType::TELEPORT);
+		tp->parameters = tpNode;
 	}
 
 	return ret;
@@ -88,7 +95,7 @@ bool Scene::Start()
 	app->win->SetTitle(title.GetString());
 
 	//Initialize trophy texture
-	//trophyTex = app->tex->Load("Assets/Textures/trophy.png");
+	trophyTex = app->tex->Load("Assets/Textures/trophy.png");
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 
 	// L12 Create walkability map

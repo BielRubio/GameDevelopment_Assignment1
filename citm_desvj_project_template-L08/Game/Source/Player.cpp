@@ -11,6 +11,7 @@
 #include "Window.h"
 #include "DeathMenu.h"
 #include "ModuleFonts.h"
+#include "EntityManager.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -112,7 +113,7 @@ bool Player::Start() {
 bool Player::Update()
 {
 	
-	LOG("Attack Cooldown: %i",attackCD);
+	//LOG("Attack Cooldown: %i",attackCD);
 
 	debugKeys();
 
@@ -142,9 +143,22 @@ bool Player::Update()
 	
 	SDL_Rect rect = currentAnim->GetCurrentFrame();
 	currentAnim->Update();
-
+	
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
+
+	if (tp1) {
+		position.x = 3440;
+		position.y = 391;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+		tp1 = false; 
+	}
+	if (tp2) {
+		position.x = 2100;
+		position.y = 56;
+		pbody->body->SetTransform({ PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y) }, 0);
+		tp2 = false;
+	}
 
 	app->render->camera.x = (-1 * (position.x * app->win->GetScale() - app->render->camera.w / 2))-60;
 	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
@@ -201,7 +215,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		alive = false;
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
@@ -231,6 +244,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			playerState = State::COLLIDING;
 		}
 		break; 
+	case ColliderType::TELEPORT:
+		if (physB->id == 1) {
+			tp1 = true; 
+		}
+		else if (physB->id == 2) {
+			tp2 = true; 
+		}
+		LOG("COLLISION TP: %i, position: %i, %i", physB->id);
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
@@ -400,3 +422,4 @@ void Player::Death() {
 		app->deathmenu->active = true;
 	}
 }
+

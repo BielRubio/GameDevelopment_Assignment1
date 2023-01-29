@@ -15,6 +15,7 @@ enum class EntityType
 	ENEMY2,
 	ITEM,
 	SAW,
+	TELEPORT,
 	UNKNOWN
 };
 

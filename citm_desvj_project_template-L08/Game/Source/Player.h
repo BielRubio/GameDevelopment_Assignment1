@@ -17,6 +17,7 @@ enum class State {
 	MOVING_RIGHT,
 	MOVING_LEFT,
 	ATTACKING,
+	TELEPORTING,
 	IDLE
 };
 
@@ -85,6 +86,8 @@ private:
 	int attackCD = 0;
 	int attackFrames = 10; 
 
+	bool tp1 = false;
+	bool tp2 = false;
 
 	State playerState; 
 

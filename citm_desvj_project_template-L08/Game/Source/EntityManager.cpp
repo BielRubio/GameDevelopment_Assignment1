@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Enemy2.h"
 #include "Item.h"
+#include "Teleport.h"
 #include "Saw.h"
 #include "App.h"
 #include "Textures.h"
@@ -105,7 +106,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::SAW:
 		entity = new Saw();
 		break;
-
+	case EntityType::TELEPORT:
+		entity = new Teleport();
+		break;
 	default: break;
 	}
 

@@ -29,6 +29,7 @@ enum bodyType {
 enum class ColliderType {
 	PLAYER,
 	ITEM,
+	TELEPORT,
 	PLATFORM,
 	FLOOR,
 	SPIKES,
@@ -58,6 +59,7 @@ public:
 	b2Body* body;
 	Entity* listener;
 	ColliderType ctype; 
+	int id;
 };
 
 // Module --------------------------------------
