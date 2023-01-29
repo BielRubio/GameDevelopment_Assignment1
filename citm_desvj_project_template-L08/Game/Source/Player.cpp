@@ -36,8 +36,6 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	//initilize textures
-	char lookupTable[] = { "abcdefghijklmnopqrstuvwxyz0123456789" };
-	WF = app->font->Load("Assets/Fonts/FontWhiteDef.png", lookupTable, 1);
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + width/2, position.y + height/2, width-55, height-2, bodyType::DYNAMIC);
 	//pbody = app->physics->CreateCircle(position.x + width / 2, position.y + height / 2,14/2, bodyType::DYNAMIC);
@@ -146,11 +144,6 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 
-	//Timer
-	//Time = SDL_GetTicks();
-	Time = 10;
-	char AuxChar[20];
-	sprintf_s(AuxChar, "%d", Time);
 
 	
 	//Player Health Damage
@@ -173,7 +166,6 @@ bool Player::Update()
 		app->render->DrawTexture(LFE, position.x + 140, position.y + 70);
 	}
 
-	app->font->BlitText(app->render->camera.x+10, app->render->camera.y+10, WF, AuxChar);
 
 	return true;
 }

@@ -65,9 +65,6 @@ public:
 
 	int life = 3, lifeAux = 0;
 
-	int Time;
-
-	int WF;
 	
 private:
 
