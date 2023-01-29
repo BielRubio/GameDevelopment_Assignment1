@@ -77,12 +77,13 @@ bool Scene::Start()
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
 	// L04: DONE 7: Set the window title with map/tileset info
-	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
+	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d FPS:%d",
 		app->map->mapData.width,
 		app->map->mapData.height,
 		app->map->mapData.tileWidth,
 		app->map->mapData.tileHeight,
-		app->map->mapData.tilesets.Count());
+		app->map->mapData.tilesets.Count(),
+		app->FPS);
 
 	app->win->SetTitle(title.GetString());
 

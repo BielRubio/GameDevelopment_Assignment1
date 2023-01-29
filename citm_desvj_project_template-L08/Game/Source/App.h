@@ -104,6 +104,9 @@ public:
 	PathFinding* pathfinding; 
 	GuiManager* guiManager;
 
+	int FPS = 60;
+	int frameDelay = 1000 / FPS;
+
 private:
 
 	int argc;

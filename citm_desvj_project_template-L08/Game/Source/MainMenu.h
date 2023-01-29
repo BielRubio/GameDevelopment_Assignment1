@@ -31,7 +31,7 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
-	void SaveSelection();
+	//void SaveSelection();
 
 	// Called before quitting
 	bool CleanUp();

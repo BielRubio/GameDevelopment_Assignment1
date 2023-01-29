@@ -35,8 +35,12 @@ int main(int argc, char* args[])
 
 	ReportMemoryLeaks();
 
+	Uint32 frameStart;
+	int frameTime;
+
 	while(state != EXIT)
 	{
+		frameStart = SDL_GetTicks();
 		switch(state)
 		{
 			// Allocate the engine --------------------------------------------
@@ -106,6 +110,14 @@ int main(int argc, char* args[])
 			result = EXIT_FAILURE;
 			state = EXIT;
 			break;
+		}
+
+		if (state != EXIT) {
+			frameTime = SDL_GetTicks() - frameStart;
+
+			if (app->frameDelay > frameTime) {
+				SDL_Delay(app->frameDelay - frameTime);
+			}
 		}
 	}
 
