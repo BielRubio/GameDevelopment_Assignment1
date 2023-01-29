@@ -34,11 +34,11 @@ bool Scene::Awake(pugi::xml_node& config)
 	// iterate all objects in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
 
-	/*for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
-	}*/
+	}
 	
 
 	for (pugi::xml_node sawNode = config.child("saw"); sawNode; sawNode = sawNode.next_sibling("saw"))
@@ -53,6 +53,7 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	Item* trophy =(Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 	trophy->parameters = config.child("trophy");
+	trophy->score = 200; 
 
 	for (pugi::xml_node en1Node = config.child("enemy"); en1Node; en1Node = en1Node.next_sibling("enemy")) {
 		Enemy* grounded_e = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
@@ -95,6 +96,7 @@ bool Scene::Start()
 	app->win->SetTitle(title.GetString());
 
 	//Initialize trophy texture
+	coinTex = app->tex->Load("Assets/Textures/goldCoin.png");
 	trophyTex = app->tex->Load("Assets/Textures/trophy.png");
 	BGtexture = app->tex->Load("Assets/Maps/parallax1.png");
 

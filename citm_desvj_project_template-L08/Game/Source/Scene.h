@@ -63,6 +63,7 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* MapAdjustment;
 
+	SDL_Texture* coinTex;
 	SDL_Texture* trophyTex;
 	SDL_Texture* BGtexture;
 

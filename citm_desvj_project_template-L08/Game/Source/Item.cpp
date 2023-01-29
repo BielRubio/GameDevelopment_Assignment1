@@ -34,6 +34,9 @@ bool Item::Start() {
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 8, bodyType::STATIC);
 
 	pbody->ctype = ColliderType::ITEM; 
+	pbody->listener = this;
+
+	score = 50; 
 
 	return true;
 }
@@ -52,4 +55,14 @@ bool Item::Update()
 bool Item::CleanUp()
 {
 	return true;
+}
+
+void Item::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		app->scene->player->score += score;
+		isPicked = true; 
+		break;
+	}
 }

@@ -22,9 +22,13 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
 	bool isPicked = false;
+
+	int score;
 
 private:
 
@@ -33,6 +37,8 @@ private:
 
 	//DONE 4: Add a physics to an item
 	PhysBody* pbody;
+	
+
 };
 
 #endif // __ITEM_H__

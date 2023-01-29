@@ -17,7 +17,7 @@
   </window>
 
   <audio>
-    <music volume="30"/>
+    <music volume="0"/>
     <fx volume="70"/>
   </audio> 
 
@@ -34,7 +34,7 @@
 	<enemy2 x="2040" y="315" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
 	<enemy2 x="2687" y="348" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
 	
-	<trophy x="2455" y="120" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
+	<trophy x="2180" y="56" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
 	  
 	<teleport x="2070" y="56" texturepath="Assets/Textures/trophy.png" id="1"/>
 	<teleport x="3449" y="391" texturepath="Assets/Textures/trophy.png" id ="2"/>
