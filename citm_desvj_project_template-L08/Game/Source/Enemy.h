@@ -52,7 +52,7 @@ public:
 
 	bool invincible = false;
 	bool alive = true;
-
+	int life = 2;
 	//Fx
 
 	int dedFx = -1;
