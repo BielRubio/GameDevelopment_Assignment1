@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Animation.h"
 
 Teleport::Teleport() : Entity(EntityType::TELEPORT)
 {
@@ -37,16 +38,32 @@ bool Teleport::Start() {
 	pbody->ctype = ColliderType::TELEPORT;
 	pbody->id = id; 
 
+	spinAnim.PushBack({ 0,0,32,32 });
+	spinAnim.PushBack({ 32,0,32,32 });
+	spinAnim.PushBack({ 64,0,32,32 });
+	spinAnim.PushBack({ 96,0,32,32 });
+	spinAnim.PushBack({ 128,0,32,32 });
+	spinAnim.PushBack({ 160,0,32,32 });
+	spinAnim.PushBack({ 192,0,32,32 });
+	spinAnim.PushBack({ 224,0,32,32 });
+	spinAnim.PushBack({ 256,0,32,32 });
+	spinAnim.speed = 0.3f;
+	spinAnim.loop = true;
+
+	currentAnimation = &spinAnim;
+
 	return true;
 }
 
 bool Teleport::Update()
 {
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	currentAnimation->Update();
 	
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	app->render->DrawTexture(texture, position.x + 8, position.y + 8);
+	app->render->DrawTexture(texture, position.x , position.y , &rect);
 
 	return true;
 }

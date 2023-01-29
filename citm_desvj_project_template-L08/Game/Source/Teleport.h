@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -36,6 +37,10 @@ private:
 	PhysBody* pbody;
 
 	int id; 
+
+	Animation* currentAnimation = nullptr;
+
+	Animation spinAnim;
 };
 
 #endif // __TELEPORT_H__
