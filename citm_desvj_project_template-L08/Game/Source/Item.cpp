@@ -32,11 +32,12 @@ bool Item::Start() {
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 8, bodyType::STATIC);
+	coinFX = app->audio->LoadFx("Assets/Sounds/CoinSoundEffect.wav");
 
 	pbody->ctype = ColliderType::ITEM; 
 	pbody->listener = this;
 
-	score = 50; 
+	score = 200; 
 
 	return true;
 }
@@ -48,6 +49,13 @@ bool Item::Update()
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	app->render->DrawTexture(texture, position.x + 8, position.y + 8);
+
+	if (isPicked) {
+		app->audio->PlayFxWithVolume(coinFX, 0, 50);
+		active = false; 
+		pbody->body->SetActive(false);
+		return true; 
+	}
 
 	return true;
 }

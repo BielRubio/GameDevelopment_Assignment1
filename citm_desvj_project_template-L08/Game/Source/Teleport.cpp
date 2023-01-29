@@ -52,6 +52,8 @@ bool Teleport::Start() {
 
 	currentAnimation = &spinAnim;
 
+	
+
 	return true;
 }
 

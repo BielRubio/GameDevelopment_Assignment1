@@ -17,13 +17,13 @@
   </window>
 
   <audio>
-    <music volume="0"/>
+    <music volume="30"/>
     <fx volume="70"/>
   </audio> 
 
   <scene>
 	 <!-- player Starting pos, x: 500 y: 220-->
-    <player x="3430" y="390" width="64" height="16" texturepath="Assets/Textures/player16_2.png"/>
+    <player x="500" y="220" width="64" height="16" texturepath="Assets/Textures/player16_2.png"/>
 
 	<enemy x="1270" y="190" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
 	<enemy x="2220" y="400" width="16" height="14" texturepath="Assets/Textures/grounded_enemy.png"/>
@@ -35,6 +35,9 @@
 	<enemy2 x="2687" y="348" width="16" height="16" texturepath="Assets/Textures/flying_enemy.png"/>
 	
 	<trophy x="2088" y="56" width="16" height="16" texturepath="Assets/Textures/trophy.png"/>
+
+	<item x="400" y="216" texturepath="Assets/Textures/trophy.png"/>
+	<item x="2055" y="264" texturepath="Assets/Textures/trophy.png"/>
 	  
 	<teleport x="2250" y="48" texturepath="Assets/Textures/portal.png" id="1"/>
 	<teleport x="3450" y="384" texturepath="Assets/Textures/portal.png" id ="2"/>
@@ -68,12 +71,7 @@
 	<saw x="2120" y="128" x1="2120" y1="128" x2="2416" y2="128" noMove="false" speed="7" texturepath="Assets/Textures/saw.png"/>
 	<saw x="2072" y="104" x1="2072" y1="104" x2="2416" y2="104" noMove="false" speed="3" texturepath="Assets/Textures/saw.png"/>-->
 	  
-	  
-	<item x="104" y="150" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+	
   </scene>
 
   <map>

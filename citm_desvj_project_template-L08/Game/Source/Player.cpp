@@ -61,6 +61,7 @@ bool Player::Start() {
 	Jump1 = app->audio->LoadFx("Assets/Sounds/Player/Jump1.wav");
 	Swing = app->audio->LoadFx("Assets/Sounds/Player/Swing.wav");
 	DamageFx = app->audio->LoadFx("Assets/Sounds/Enemy/Dead2.wav");
+	tpFX = app->audio->LoadFx("Assets/Sounds/TeleportSound.wav");
 
 	//Textures
 	LFHH = app->tex->Load("Assets/Textures/FULL.png");
@@ -251,6 +252,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		else if (physB->id == 2) {
 			tp2 = true; 
 		}
+		app->audio->PlayFxWithVolume(tpFX, 0, 50);
 		LOG("COLLISION TP: %i, position: %i, %i", physB->id);
 		break;
 	case ColliderType::UNKNOWN:
