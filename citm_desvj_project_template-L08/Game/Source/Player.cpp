@@ -141,38 +141,39 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS((pbody->body->GetTransform().p.x) - width / 2);
 	position.y = METERS_TO_PIXELS((pbody->body->GetTransform().p.y) - height / 2);
 
-	app->render->camera.x = -1 * (position.x * app->win->GetScale() - app->render->camera.w / 2);
+	app->render->camera.x = (-1 * (position.x * app->win->GetScale() - app->render->camera.w / 2))-60;
 	app->render->camera.y = -1 * (position.y * app->win->GetScale() - app->render->camera.h / 2);
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect);
 
 	//Timer
-	Time = SDL_GetTicks();
+	//Time = SDL_GetTicks();
+	Time = 10;
 	char AuxChar[20];
 	sprintf_s(AuxChar, "%d", Time);
 
 	
 	//Player Health Damage
 	if ((lifeAux >= 1 && lifeAux <= 40) || (lifeAux >= 60 && lifeAux <= 100) || (lifeAux >= 120 && lifeAux <= 150)) {
-		app->render->DrawRectangle({ position.x + 124, position.y + 69,32,18 }, 255, 255, 255);
-		app->render->DrawRectangle({ position.x + 156, position.y + 75,2,6 }, 255, 255, 255);
+		app->render->DrawRectangle({ position.x + 139, position.y + 69,32,18 }, 255, 255, 255);
+		app->render->DrawRectangle({ position.x + 171, position.y + 75,2,6 }, 255, 255, 255);
 	}
 
 	//Player Health Draw
 	if (life >= 3) {
-		app->render->DrawTexture(LFHH, position.x + 125, position.y + 70);
+		app->render->DrawTexture(LFHH, position.x + 140, position.y + 70);
 	}
 	if (life == 2) {
-		app->render->DrawTexture(LFH, position.x + 125, position.y + 70);
+		app->render->DrawTexture(LFH, position.x + 140, position.y + 70);
 	}
 	if (life == 1) {
-		app->render->DrawTexture(LFL, position.x + 125, position.y + 70);
+		app->render->DrawTexture(LFL, position.x + 140, position.y + 70);
 	}
 	if (life == 0) {
-		app->render->DrawTexture(LFE, position.x + 125, position.y + 70);
+		app->render->DrawTexture(LFE, position.x + 140, position.y + 70);
 	}
 
-	app->font->BlitText(position.x, position.y, WF, AuxChar);
+	app->font->BlitText(app->render->camera.x+10, app->render->camera.y+10, WF, AuxChar);
 
 	return true;
 }
